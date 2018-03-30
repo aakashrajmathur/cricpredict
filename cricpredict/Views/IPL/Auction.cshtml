@@ -1,0 +1,394 @@
+﻿
+@{
+    ViewBag.Title = "Auction";
+}
+
+<h2>Auction</h2>
+
+<div class="btn-group" style="margin-bottom:50px">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Standings", "IPL")'">Standings</button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Games", "IPL")'">Games</button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Graph", "IPL")'">Graph</button>
+    <button type="button" class="btn btn-primary">Auction</button>
+</div>
+
+<div class="container" >
+    <div class="row">        
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Kings XI Punjab.png")"  style="margin-right:5px" /><span style="font-weight:bold">Kings XI Punjab</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                            var players = ViewData["KP"] as string[];
+                            foreach (string player in players)
+                            {
+                                string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width:24px">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                            if (tokens[0] == "true")
+                                            {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                            }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                            }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Sunrisers Hyderabad.png")" style="margin-right:5px"/><span style="font-weight:bold">Sunrisers Hyderabad</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                                players = ViewData["SRH"] as string[];
+                                foreach (string player in players)
+                                {
+                                    string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                                if (tokens[0] == "true")
+                                                {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                                }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Kolkata Knight Riders.png")" style="margin-right:5px"/><span style="font-weight:bold">Kolkata Knight Riders</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                            players = ViewData["KKR"] as string[];
+                            foreach (string player in players)
+                            {
+                                string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                            if (tokens[0] == "true")
+                                            {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                            }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                            }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Mumbai Indians.png")"  style="margin-right:5px"/><span style="font-weight:bold">Mumbai Indians</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                            players = ViewData["MI"] as string[];
+                            foreach (string player in players)
+                            {
+                                string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                            if (tokens[0] == "true")
+                                            {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                            }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                            }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Rajasthan Royals.png")" style="margin-right:5px"/><span style="font-weight:bold">Rajasthan Royals</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                            players = ViewData["RR"] as string[];
+                            foreach (string player in players)
+                            {
+                                string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                            if (tokens[0] == "true")
+                                            {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                            }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Chennai Super Kings.png")" style="margin-right:5px" /><span style="font-weight:bold">Chennai Super Kings</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                                players = ViewData["CSK"] as string[];
+                                foreach (string player in players)
+                                {
+                                    string[] tokens = player.Split(',');
+                                    <tr style="border:none">
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                                if (tokens[0] == "true")
+                                                {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                                }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Delhi Daredevils.png")" style="margin-right:5px"/> <span style="font-weight:bold">Delhi Daredevils</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                                players = ViewData["DD"] as string[];
+                                foreach (string player in players)
+                                {
+                                    string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                                if (tokens[0] == "true")
+                                                {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                                }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><img height="32" src="@Url.Content("~/Content/IPL/Logos/Royal Challengers Bangalore.png")" style="margin-right:5px"/><span style="font-weight:bold">Royal Challengers Bangalore</span></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            @{
+                            players = ViewData["RCB"] as string[];
+                            foreach (string player in players)
+                            {
+                                string[] tokens = player.Split(',');
+                                    <tr>
+                                        <td style="width=24">
+                                            @{
+                                                if (@tokens[2].Trim().Length > 0)
+                                                {
+                                                    var imgPath = "~/Content/IPL/Logos/" + tokens[2].Trim() + ".png";
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title=@tokens[3]>
+                                                        <img height="24" src="@Url.Content(imgPath)" />
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @tokens[1]
+                                            @{
+                                            if (tokens[0] == "true")
+                                            {
+                                                    <img height="16" src="@Url.Content("~/Content/IPL/Logos/plane.png")" />
+                                            }
+                                            }
+                                        </td>
+                                        <td style="width:12px; vertical-align:central">
+                                            <img src="~/Content/IPL/Logos/UpDown.png" />
+                                        </td>
+                                    </tr>
+                                            }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        
+        $('tbody').sortable();
+
+        $(function () {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+            $("#sortable").sortable({
+                stop: function () {
+                    //alert("Hello from stop!");
+                }
+            });
+        });
+
+        </script>
+
+}
+
