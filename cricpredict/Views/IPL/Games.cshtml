@@ -2,11 +2,51 @@
 @{
     ViewBag.Title = "Games";
 }
+    <div class="header">
+        <div class="row" style="background:red; height:50px;z-index:1">
+            <div class="btn-group" style="padding-top:5px">
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Standings", "IPL")'">Standings</button>
+                <button type="button" class="btn btn-primary">Games</button>
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Graph", "IPL")'">Graph</button>
+            </div>
+            <div style="position:relative;height:100px; background-color:darkseagreen">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3">1</div>
+                            <div class="col-xs-3">2</div>
+                            <div class="col-xs-3">3</div>
+                            <div class="col-xs-3">4</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3">5</div>
+                            <div class="col-xs-3">6</div>
+                            <div class="col-xs-3">7</div>
+                            <div class="col-xs-3">8</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="background-color:lightyellow; z-index:0; top:255px">
+        @{
+            string[] upcomingGames = (string[])ViewData["UpcomingGames"];
+            foreach (string s in upcomingGames)
+            {
+                <p>@s</p>
+            }
+        }
 
-<h2>Games</h2>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Standings", "IPL")'">Standings</button>
-    <button type="button" class="btn btn-primary">Games</button>
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Graph", "IPL")'">Graph</button>
-</div>
+
+        @ViewData["DefaultWinners"]
+
+        @ViewData["Standings"]
+
+    </div>
+    @section Scripts{
+
+    }

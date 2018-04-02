@@ -150,7 +150,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Chennai Super Kings.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\IPL\Auction\Chennai Super Kings.txt" />
@@ -162,18 +161,12 @@
     <Content Include="Content\IPL\Auction\Royal Challengers Bangalore.txt" />
     <Content Include="Content\IPL\Auction\Sunrisers Hyderabad.txt" />
     <Content Include="Content\IPL\Data\BeforeGame1.txt" />
-    <Content Include="Delhi Daredevils.png" />
+    <Content Include="Content\IPL\Data\DefaultWinner.txt" />
+    <Content Include="Content\IPL\Data\UpcomingGames.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Gujarat Lions.png" />
-    <Content Include="Kings XI Punjab.png" />
-    <Content Include="Kolkatta Knight Riders.png" />
-    <Content Include="Mumbai Indians.png" />
-    <Content Include="Rajasthan Royals.png" />
-    <Content Include="Rising Pune SuperGiants.png" />
-    <Content Include="Royal Challengers Bangalore.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -190,7 +183,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SunRisers Hyderabad.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

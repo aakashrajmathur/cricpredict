@@ -29,6 +29,10 @@ namespace cricpredict.Controllers
 
         public ActionResult Games()
         {
+            ViewData["UpcomingGames"] = new string[] { "MI", "CSK", "DD", "KP", "KKR", "RCB", "SRH", "RR", "CSK", "KKR", "RR", "DD", "SRH", "MI", "RCB", "KP", "MI", "DD", "KKR", "SRH", "RCB", "RR", "KP", "CSK", "KKR", "DD", "MI", "RCB", "RR", "KKR", "KP", "SRH", "CSK", "RR", "KKR", "KP", "DD", "RCB", "SRH", "CSK", "RR", "MI", "DD", "KP", "MI", "SRH", "RCB", "CSK", "SRH", "KP", "DD", "KKR", "CSK", "MI", "RR", "SRH", "RCB", "KKR", "CSK", "DD", "RCB", "MI", "DD", "RR", "KKR", "CSK", "KP", "MI", "CSK", "RCB", "SRH", "DD", "MI", "KKR", "KP", "RR", "SRH", "RCB", "RR", "KP", "KKR", "MI", "DD", "SRH", "RR", "CSK", "KP", "KKR", "RCB", "DD", "CSK", "SRH", "MI", "RR", "KP", "RCB", "KKR", "RR", "MI", "KP", "RCB", "SRH", "DD", "CSK", "RR", "RCB", "SRH", "KKR", "DD", "MI", "CSK", "KP" };
+            ViewData["DefaultWinners"] = new string[] { "CSK", "KP", "RCB", "RR", "KKR", "DD", "MI", "KP", "DD", "SRH", "RR", "CSK", "DD", "RCB", "KKR", "SRH", "RR", "KP", "RCB", "CSK", "MI", "KP", "SRH", "CSK", "KP", "KKR", "MI", "SRH", "KKR", "DD", "MI", "RR", "CSK", "MI", "RCB", "DD", "KKR", "RR", "RCB", "KP", "MI", "SRH", "CSK", "KKR", "DD", "SRH", "RR", "RCB", "RR", "KP", "SRH", "CSK", "RCB", "KKR", "MI", "KP" };
+            ViewData["Standings"] = new string[] { "CSK", "0", "0", "0", "0", "0", "50", "DD", "0", "0", "0", "0", "0", "50", "MI", "0", "0", "0", "0", "0", "50", "KKR", "0", "0", "0", "0", "0", "50", "KP", "0", "0", "0", "0", "0", "50", "RCB", "0", "0", "0", "0", "0", "50", "RR", "0", "0", "0", "0", "0", "50", "SRH", "0", "0", "0", "0", "0", "50" };
+
             return View();
         }
 
