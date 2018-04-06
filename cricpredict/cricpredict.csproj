@@ -162,6 +162,7 @@
     <Content Include="Content\IPL\Auction\Sunrisers Hyderabad.txt" />
     <Content Include="Content\IPL\Data\BeforeGame1.txt" />
     <Content Include="Content\IPL\Data\DefaultWinner.txt" />
+    <Content Include="Content\IPL\Data\Standings.txt" />
     <Content Include="Content\IPL\Data\UpcomingGames.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -172,6 +173,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\cricpredict - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

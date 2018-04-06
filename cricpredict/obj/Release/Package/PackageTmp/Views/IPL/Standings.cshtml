@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "IPL Standings.";
+}
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- CricPredict -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2176788893488829"
+     data-ad-slot="9093449408"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<h2>IPL 2018 Standings</h2>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary" onload="init()">Standings</button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Projection", "IPL")'">Projection</button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Graph", "IPL")'">Graph</button>
+</div>
+
+<style>
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+    }
+</style>
+
+@{
+    string inputUpcomingGames = (string)ViewData["UpcomingGames"];
+    List<string> upcomingGames = new List<string>();
+    string[] tokens = inputUpcomingGames.Split(',');
+    foreach (string token in tokens)
+    {
+        upcomingGames.Add(token);
+    }
+
+    string inputWinners = (string)ViewData["Winners"];
+    List<string> winners = new List<string>();
+    tokens = inputWinners.Split(',');
+    foreach (string token in tokens)
+    {
+        winners.Add(token);
+    }
+
+    string inputStandings = (string)ViewData["Standings"];
+    List<string> standings = new List<string>();
+    tokens = inputStandings.Split(',');
+    foreach (string token in tokens)
+    {
+        standings.Add(token);
+    }
+}
+
+<div id="projectedStandings">
+
+</div>
+<br />
+<div id="upcomingGameCards">
+
+</div>
+
+<script type="text/javascript">
+
+    //alert("init called.");
+    @{ string gamesAsString = string.Join(",", upcomingGames.ToArray());}
+    var gamesJSTemp = '@gamesAsString';
+    var gamesJS = gamesJSTemp.split(",");
+    //for (i = 0; i < gamesJS.length; i++)
+    //    alert(gamesJS[i]);
+
+    @{ string winnerAsString = string.Join(",", winners.ToArray());}
+    var winnersJSTemp = '@winnerAsString';
+    var winnersJS = winnersJSTemp.split(",");
+    //for (i = 0; i < winnersJS.length; i++)
+    //    alert(winnersJS[i]);
+
+    @{ string standingsAsString = string.Join(",", standings.ToArray());}
+    var standingsJSTemp = '@standingsAsString';
+    var standingsJSTokens = standingsJSTemp.split(",");
+
+    //var standingsJS = new Map();
+    //for (i = 0; i < standingsJSTokens.length; i=i+6)
+    //{
+    //    standingsJS.set(standingsJSTokens[i], {"W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5] });
+    //}
+    var standingsJS = [];
+    for (i = 0; i < standingsJSTokens.length; i=i+7)
+    {
+        standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
+    }
+
+    for (i = 0; i < winnersJS.length; i++) {
+        var currItem = findObjectByKey(standingsJS, "TeamName", winnersJS[i]);
+        currItem.W = currItem.W * 1 + 1;
+        currItem.Pts = currItem.Pts * 1 + 2;
+    }
+
+
+    function GetCorrespondingId(inputId)
+    {
+        var res = inputId.split(',');
+        if (res[3] == "1") {
+            var toBeReturned = res[0] + "," + res[1] + "," + res[2] + "," + "2";
+            return toBeReturned;
+        }
+        else {
+            var toBeReturned = res[0] + "," + res[1] + "," + res[2] + "," + "1";
+            return toBeReturned;
+        }
+    }
+
+    function findObjectByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key].localeCompare(value) == 0) {
+                //alert("found!");
+                return array[i];
+            }
+            //alert("comparing " + array[i][key] +" to "+ value);
+            //if (array[i][key] == value) {
+            //    return array[i];
+            //}
+        }
+        alert("not found!");
+        return null;
+    }
+
+    function GetSortedStandings()
+    {
+        //Get updated winnersJS:
+        standingsJS.sort(function (a, b) {
+            if (a.pts != b.pts)
+                return b.pts - a.pts;
+            else if (a.W != b.W)
+                return b.W - a.W;
+            else if (a.NRR != b.NRR)
+                return b.NRR - a.NRR;
+            else {
+                if (a.TeamName == b.TeamName) return 0;
+                if (a.TeamName > b.TeamName) return 1;
+                if (a.TeamName < b.TeamName) return -1;
+            }
+        });
+
+        document.getElementById('projectedStandings').innerHTML = "";
+        for (i = 0; i < standingsJS.length; i++)
+        {
+            document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
+            //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
+        }
+    }
+
+    function ChangeSelection(id)
+    {
+        //3 things need to happen:
+        //1. Update check boxes (done)
+        //2. Update standings
+        //3. Update Projected standings based on new winners
+
+        //1. Update check boxes:
+        var corrId = GetCorrespondingId(id);
+        document.getElementById(corrId).checked = !document.getElementById(id).checked;
+
+
+        //2. update WinnersJS Array and standings:
+        //alert(id); //id is in the format: game,x,team,y
+        var tokens = id.split(',');
+        var index = tokens[1] * 4 + tokens[3] * 1;
+        //alert('New winner = ' + gamesJS[index]);
+        //alert('Old winner = ' + winnersJS[tokens[1]*1]);
+
+        var currItem = findObjectByKey(standingsJS, "TeamName", winnersJS[tokens[1] * 1]);
+        currItem.W = currItem.W * 1 - 1;
+        currItem.Pts = currItem.Pts * 1 - 2;
+
+
+        var currItem = findObjectByKey(standingsJS, "TeamName", gamesJS[index]);
+        currItem.W = currItem.W * 1 + 1;
+        currItem.Pts = currItem.Pts * 1 + 2;
+
+        //3. Projected standings need to be updated.
+        GetSortedStandings();
+    }
+
+
+    window.onload = function () {
+        //alert("Hello from onload event firing.");
+
+        GetSortedStandings();
+
+        document.getElementById('projectedStandings').innerHTML = "";
+        for (i = 0; i < standingsJS.length; i++) {
+            document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
+            //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
+        }
+
+        //Reset the check boxes to as original.
+        var content = "";
+
+        for (i = 0; i < gamesJS.length/4; i++)
+        {
+            content += "<div class=\"card\" >";
+            content += "<div class=\"container\" >";
+
+            if (winnersJS[i] == gamesJS[i * 4 + 1]) {
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,1\" onclick=\"ChangeSelection(id)\" checked \>";
+            }
+            else {
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,1\" onclick=\"ChangeSelection(id)\" \>";
+            }
+
+            content += gamesJS[i * 4 + 1] + " </label> ";
+
+            if (winnersJS[i] == gamesJS[i * 4 + 2]) {
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,2\" onclick=\"ChangeSelection(id)\" checked \>";
+            }
+            else {
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,2\" onclick=\"ChangeSelection(id)\" \>";
+            }
+            content +=  gamesJS[i * 4 + 2] + " </label> ";
+
+            content += "</div>";
+            content += "</div>";
+        }
+
+        document.getElementById('upcomingGameCards').innerHTML = content;
+    }
+
+</script>
