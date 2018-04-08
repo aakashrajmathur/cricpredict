@@ -122,8 +122,10 @@
         }
     }
 
-    function findObjectByKey(array, key, value) {
+    function findObjectByKey(array, key, value)
+    {        
         for (var i = 0; i < array.length; i++) {
+            alert(array[i].TeamName);
             if (array[i][key].localeCompare(value) == 0) {
                 //alert("found!");
                 return array[i];
@@ -133,7 +135,7 @@
             //    return array[i];
             //}
         }
-        alert("not found!");
+        alert( value + " not found!");
         return null;
     }
 
