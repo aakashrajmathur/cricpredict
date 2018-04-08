@@ -164,6 +164,19 @@
     <Content Include="Content\IPL\Data\DefaultWinner.txt" />
     <Content Include="Content\IPL\Data\Standings.txt" />
     <Content Include="Content\IPL\Data\UpcomingGames.txt" />
+    <Content Include="Content\IPL\Logos\Chennai Super Kings.png" />
+    <Content Include="Content\IPL\Logos\Delhi Daredevils.png" />
+    <Content Include="Content\IPL\Logos\Drag.png" />
+    <Content Include="Content\IPL\Logos\Gujarat Lions.png" />
+    <Content Include="Content\IPL\Logos\Kings XI Punjab.png" />
+    <Content Include="Content\IPL\Logos\Kolkata Knight Riders.png" />
+    <Content Include="Content\IPL\Logos\Mumbai Indians.png" />
+    <Content Include="Content\IPL\Logos\plane.png" />
+    <Content Include="Content\IPL\Logos\Rajasthan Royals.png" />
+    <Content Include="Content\IPL\Logos\Rising Pune SuperGiants.png" />
+    <Content Include="Content\IPL\Logos\Royal Challengers Bangalore.png" />
+    <Content Include="Content\IPL\Logos\SunRisers Hyderabad.png" />
+    <Content Include="Content\IPL\Logos\UpDown.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -211,7 +224,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\BBL\" />
-    <Folder Include="Content\IPL\Logos\" />
     <Folder Include="Content\Logos\" />
     <Folder Include="Models\" />
   </ItemGroup>

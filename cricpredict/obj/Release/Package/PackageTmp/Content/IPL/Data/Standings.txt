@@ -1,1 +1,1 @@
-﻿"Mumbai Indians",0,0,0,0,0.00,"Sunrisers Hyderabad",0,0,0,0,0.00,"Kolkata Knight Riders",0,0,0,0,0.00,"Kings XI Punjab",0,0,0,0,0.00,"Delhi Daredevils",0,0,0,0,0.00,"Royal Challengers Bangalore",0,0,0,0,0.00,"Chennai Super Kings",0,0,0,0,0.00,"Rajasthan Royals",0,0,0,0,0.00
+﻿"Mumbai Indians",0,1,0,0,-0.271,"Sunrisers Hyderabad",0,0,0,0,0.00,"Kolkata Knight Riders",0,0,0,0,0.00,"Kings XI Punjab",0,0,0,0,0.00,"Delhi Daredevils",0,0,0,0,0.00,"Royal Challengers Bangalore",0,0,0,0,0.00,"Chennai Super Kings",1,0,0,2,0.271,"Rajasthan Royals",0,0,0,0,0.00

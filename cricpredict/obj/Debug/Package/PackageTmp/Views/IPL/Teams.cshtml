@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Teams";
+}
+
+@{ string variableTesting = "Hello"; }
+
+<h2>Teams</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+    </tbody>
+</table>
+<button onclick="buttonClicked()">click me!</button>
+
+@section Scripts{
+   <link href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script src="//code.jquery.com/jquery-1.11.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    
+    <script type="text/javascript">
+        $('tbody').sortable();
+
+        function buttonClicked() {
+            var toDisplay =  '@(variableTesting)'; //"Static text";
+            alert("Button click detected." + toDisplay);
+        }
+
+    </script>
+
+    }
