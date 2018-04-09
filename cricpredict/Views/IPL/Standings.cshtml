@@ -90,25 +90,38 @@
     @{ string standingsAsString = string.Join(",", standings.ToArray());}
     var standingsJSTemp = '@standingsAsString';
     var standingsJSTokens = standingsJSTemp.split(",");
-
-    //var standingsJS = new Map();
-    //for (i = 0; i < standingsJSTokens.length; i=i+6)
-    //{
-    //    standingsJS.set(standingsJSTokens[i], {"W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5] });
-    //}
+    
     var standingsJS = [];
     for (i = 0; i < standingsJSTokens.length; i=i+7)
     {
         standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
     }
 
-    for (i = 0; i < winnersJS.length; i++) {
+    for (i = 0; i < winnersJS.length; i++)
+    {
+        var winner = winnersJS[i];
+        var team1 = gamesJS[i * 4 + 1];
+        var team2 = gamesJS[i * 4 + 2];
+
         var currItem = findObjectByKey(standingsJS, "TeamName", winnersJS[i]);
         currItem.W = currItem.W * 1 + 1;
         currItem.Pts = currItem.Pts * 1 + 2;
+
+        if (winner == team1)
+        {
+            var otherTeam = findObjectByKey(standingsJS, "TeamName", team2);
+            otherTeam.L = otherTeam.L * 1 + 1;
+        }
+        else if (winner == team2)
+        {
+            var otherTeam = findObjectByKey(standingsJS, "TeamName", team1);
+            otherTeam.L = otherTeam.L * 1 + 1;
+        }
+        else {
+            alert("Error. Could not determine the winner.");
+        }
     }
-
-
+    
     function GetCorrespondingId(inputId)
     {
         var res = inputId.split(',');
