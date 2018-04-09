@@ -236,7 +236,7 @@
                 var teamNameWithoutQuotes = standingsJS[i * 4 + j * 1].TeamName.substring(6, standingsJS[i * 4 + j * 1].TeamName.length - 6);
                 //alert(teamNameWithoutQuotes);
                 content += "<img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width: 100%\">";
-                content += "<br /><span>W-L-T</span>";
+                content += "<br /><span>" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + "</span>";
                 content += "";
                 content += "</div>";
                 //content += "<div>" + standingsJS[i * 4 + j * 1].TeamName + " , W = " + standingsJS[i * 4 + j * 1].W + " , Pts = " + standingsJS[i * 4 + j * 1].Pts + "</div>";
