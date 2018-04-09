@@ -65,7 +65,7 @@
 }
 
 <div id="projectedStandings">
-
+    
 </div>
 <br />
 <div id="upcomingGameCards">
@@ -156,12 +156,12 @@
             }
         });
 
-        document.getElementById('projectedStandings').innerHTML = "";
-        for (i = 0; i < standingsJS.length; i++)
-        {
-            document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
-            //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
-        }
+        document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();
+        //for (i = 0; i < standingsJS.length; i++)
+        //{
+        //    document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
+        //    //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
+        //}
     }
 
     function ChangeSelection(id)
@@ -220,18 +220,48 @@
         GetSortedStandings();
     }
 
+    function GetProjectedStandingsContent()
+    {
+        var content = "";
+        content += "<div class=\"row\">";
+
+        for (i = 0; i < 2; i++)
+        {
+            content += "<div class=\"col-xs-6\">";
+            content += "<div class=\"row\">";
+            for (j = 0; j < 4; j++)
+            {
+                content += "<div class=\"col-xs-3 center\">";
+                content += "<div class=\"example z-depth-5\">";
+                var teamNameWithoutQuotes = standingsJS[i * 4 + j * 1].TeamName.substring(6, standingsJS[i * 4 + j * 1].TeamName.length - 6);
+                //alert(teamNameWithoutQuotes);
+                content += "<img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width: 100%\">";
+                content += "<br /><span>W-L-T</span>";
+                content += "";
+                content += "</div>";
+                //content += "<div>" + standingsJS[i * 4 + j * 1].TeamName + " , W = " + standingsJS[i * 4 + j * 1].W + " , Pts = " + standingsJS[i * 4 + j * 1].Pts + "</div>";
+                content += i * 4 + j * 1 +1;
+                content += "</div>";
+            }
+            content += "</div>";
+            content += "</div>";
+        }
+        
+        //for (i = 0; i < standingsJS.length; i++) {
+        //    content += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
+        //    //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
+        //}
+        content += "</div>";
+        return content;
+    }
 
     window.onload = function () {
         //alert("Hello from onload event firing.");
 
         GetSortedStandings();
-
-        document.getElementById('projectedStandings').innerHTML = "";
-        for (i = 0; i < standingsJS.length; i++) {
-            document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
-            //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
-        }
-
+        
+        document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();
+        
         //Reset the check boxes to as original.
         var content = "";
 
