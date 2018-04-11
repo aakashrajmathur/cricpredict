@@ -14,3 +14,67 @@
         </div>
     </div>
 </nav>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- CricPredict -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2176788893488829"
+     data-ad-slot="9093449408"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+@{
+    string inputStandings = (string)ViewData["Standings"];
+    List<string> standings = new List<string>();
+    var tokens = inputStandings.Split(',');
+    foreach (string token in tokens)
+    {
+        standings.Add(token);
+    }
+}
+
+
+    <h5 style="padding-left:10px">Current Standings</h5>
+
+    <div id="projectedStandings">
+
+    </div>
+    
+
+
+
+<script type="text/javascript">
+    document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();
+    function GetProjectedStandingsContent() {
+        var content = "";
+        content += "<div class=\"row\">";
+
+        for (i = 0; i < 2; i++) {
+            content += "<div class=\"col s12 m6\">";
+            content += "<div class=\"row\">";
+            for (j = 0; j < 4; j++) {
+                content += "<div class=\"col s3 z-depth-2 center \">";
+
+                var teamNameWithoutQuotes = standingsJS[i * 4 + j * 1].TeamName.substring(6, standingsJS[i * 4 + j * 1].TeamName.length - 6);
+                //alert(teamNameWithoutQuotes);
+                if (i == 0)
+                    content += "<div style=\"padding-top:10px\"><i class=\"center tiny material-icons\" style=\"color:#ffab00 \">star</i></div>";
+                else
+                    content += "<div style=\"padding-top:10px\"><i class=\"center tiny material-icons\" style=\"color:#9e9e9e \">star_border</i></div>";
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width:100%\"> </div>";
+                content += "<div style=\"font-size:12px\">" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + "</div>";
+                content += "<div style=\"font-size:10px; padding-bottom:10px\">(" + origStandingsJS[i * 4 + j * 1].W + "-" + origStandingsJS[i * 4 + j * 1].L + "-" + origStandingsJS[i * 4 + j * 1].T + ")</div>";
+                content += "</div>";
+            }
+            content += "</div>";
+            content += "</div>";
+        }
+        content += "</div>";
+        return content;
+    }
+</script>
+
+
