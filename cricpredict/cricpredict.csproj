@@ -141,17 +141,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BBLController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IPLController.cs" />
+    <Compile Include="Controllers\IPL18Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\IPL\Auction\Chennai Super Kings.txt" />
     <Content Include="Content\IPL\Auction\Delhi Daredevils.txt" />
     <Content Include="Content\IPL\Auction\Kings XI Punjab.txt" />
@@ -177,12 +174,12 @@
     <Content Include="Content\IPL\Logos\Royal Challengers Bangalore.png" />
     <Content Include="Content\IPL\Logos\SunRisers Hyderabad.png" />
     <Content Include="Content\IPL\Logos\UpDown.png" />
+    <Content Include="css\materialize.css" />
+    <Content Include="css\materialize.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -195,6 +192,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\materialize.js" />
+    <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -210,16 +209,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\IPL\Standings.cshtml" />
-    <Content Include="Views\IPL\Games.cshtml" />
-    <Content Include="Views\IPL\Graph.cshtml" />
-    <Content Include="Views\IPL\Data.cshtml" />
-    <Content Include="Views\BBL\Standings.cshtml" />
-    <Content Include="Views\BBL\Games.cshtml" />
-    <Content Include="Views\BBL\Graph.cshtml" />
-    <Content Include="Views\BBL\Data.cshtml" />
-    <Content Include="Views\IPL\Auction.cshtml" />
-    <Content Include="Views\IPL\Teams.cshtml" />
+    <Content Include="Views\IPL18\Standings.cshtml" />
+    <Content Include="Views\IPL18\Games.cshtml" />
+    <Content Include="Views\IPL18\Graph.cshtml" />
+    <Content Include="Views\IPL18\Data.cshtml" />
+    <Content Include="Views\IPL18\Auction.cshtml" />
+    <Content Include="Views\IPL18\Teams.cshtml" />
+    <Content Include="Views\IPL18\SunrisersHyderabad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

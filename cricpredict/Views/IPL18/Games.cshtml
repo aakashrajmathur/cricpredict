@@ -1,42 +1,19 @@
-﻿@{
-    ViewBag.Title = "IPL Standings.";
+﻿
+@{
+    ViewBag.Title = "Games";
 }
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- CricPredict -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-2176788893488829"
-     data-ad-slot="9093449408"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
-
-<h2>IPL 2018 Standings</h2>
-
-<div class="btn-group">
-    <button type="button" class="btn btn-primary" onload="init()">Standings</button>
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Projection", "IPL")'">Projection</button>
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Graph", "IPL")'">Graph</button>
-</div>
-
-<style>
-    .card {
-        /* Add shadows to create the "card" effect */
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-    }
-
-        /* On mouse-over, add a deeper shadow */
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        }
-
-    /* Add some padding inside the card container */
-    .container {
-        padding: 2px 16px;
-    }
-</style>
+<nav class="teal">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a href='@Url.Action("Standings", "IPL18")'>Standings</a></li>
+                <li class="active"><a href='@Url.Action("Games", "IPL18")'>Upcoming Games</a></li>
+                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 @{
     string inputUpcomingGames = (string)ViewData["UpcomingGames"];
@@ -56,6 +33,7 @@
     }
 
     string inputStandings = (string)ViewData["Standings"];
+
     List<string> standings = new List<string>();
     tokens = inputStandings.Split(',');
     foreach (string token in tokens)
@@ -64,17 +42,19 @@
     }
 }
 
-<div id="projectedStandings">
-    
+<div class="container">
+    <h5 style="padding-left:10px">Projected Standings</h5>
+    <div id="projectedStandings">
+    </div>
+    <h5 style="padding-left:10px">Upcoming Games</h5>
+    <div id="upcomingGameCards">
+    </div>
 </div>
-<br />
-<div id="upcomingGameCards">
 
-</div>
+
 
 <script type="text/javascript">
 
-    //alert("init called.");
     @{ string gamesAsString = string.Join(",", upcomingGames.ToArray());}
     var gamesJSTemp = '@gamesAsString';
     var gamesJS = gamesJSTemp.split(",");
@@ -90,7 +70,7 @@
     @{ string standingsAsString = string.Join(",", standings.ToArray());}
     var standingsJSTemp = '@standingsAsString';
     var standingsJSTokens = standingsJSTemp.split(",");
-    
+
     var standingsJS = [];
     for (i = 0; i < standingsJSTokens.length; i=i+7)
     {
@@ -118,10 +98,10 @@
             otherTeam.L = otherTeam.L * 1 + 1;
         }
         else {
-            alert("Error. Could not determine the winner.");
+            alert("Error. Could not determine the winner. team1 = " + team1 + ", team2 = " + team2 + ", winner = "+ winner);
         }
     }
-    
+
     function GetCorrespondingId(inputId)
     {
         var res = inputId.split(',');
@@ -136,7 +116,7 @@
     }
 
     function findObjectByKey(array, key, value)
-    {        
+    {
         for (var i = 0; i < array.length; i++) {
             ///alert(array[i].TeamName);
             if (array[i][key].localeCompare(value) == 0) {
@@ -203,7 +183,7 @@
 
             //alert("winner = " + gamesJS[index] + " loser = " + gamesJS[otherIndex]);
             winner = gamesJS[index];
-            loser = gamesJS[otherIndex];            
+            loser = gamesJS[otherIndex];
         }
         else {
             var tokens = id.split(',');
@@ -240,30 +220,26 @@
 
         for (i = 0; i < 2; i++)
         {
-            content += "<div class=\"col-xs-6\">";
+            content += "<div class=\"col s12 m6\">";
             content += "<div class=\"row\">";
             for (j = 0; j < 4; j++)
             {
-                content += "<div class=\"col-xs-3 center\">";
-                content += "<div class=\"example z-depth-5\">";
+                content += "<div class=\"col s3 z-depth-2 center \">";
+
                 var teamNameWithoutQuotes = standingsJS[i * 4 + j * 1].TeamName.substring(6, standingsJS[i * 4 + j * 1].TeamName.length - 6);
                 //alert(teamNameWithoutQuotes);
-                content += "<img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width: 100%\">";
-                content += "<br /><span>" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + "</span>";
-                content += "";
-                content += "</div>";
-                //content += "<div>" + standingsJS[i * 4 + j * 1].TeamName + " , W = " + standingsJS[i * 4 + j * 1].W + " , Pts = " + standingsJS[i * 4 + j * 1].Pts + "</div>";
-                content += i * 4 + j * 1 +1;
+                if (i == 0)
+                    content += "<div style=\"padding-top:10px\"><i class=\"center tiny material-icons\" style=\"color:#ffab00 \">star</i></div>";
+                else
+                    content += "<div style=\"padding-top:10px\"><i class=\"center tiny material-icons\" style=\"color:#9e9e9e \">star_border</i></div>";
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width:100%\"> </div>";
+                content += "<div style=\"font-size:12px\">" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + "</div>";
+                content += "<div style=\"font-size:10px; padding-bottom:10px\">(" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + ")</div>";
                 content += "</div>";
             }
             content += "</div>";
             content += "</div>";
         }
-        
-        //for (i = 0; i < standingsJS.length; i++) {
-        //    content += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
-        //    //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
-        //}
         content += "</div>";
         return content;
     }
@@ -272,38 +248,45 @@
         //alert("Hello from onload event firing.");
 
         GetSortedStandings();
-        
+
         document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();
-        
+
         //Reset the check boxes to as original.
-        var content = "";
+        var content = "<div class=\"row\">";
 
         for (i = 0; i < gamesJS.length/4; i++)
         {
-            content += "<div class=\"card\" >";
-            content += "<div class=\"container\" >";
-
+            content += "<div class=\"col s12 m6 l4\">"
+            content += "<div class=\"card teal lighten-5 z-depth-2\" >";
+            content += "<div class=\"card-content black-text\" >";
             if (winnersJS[i] == gamesJS[i * 4 + 1]) {
-                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,1\" onclick=\"ChangeSelection(id)\" checked \>";
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,1\" onclick=\"ChangeSelection(id)\" checked=\"checked\" \>";
             }
             else {
                 content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,1\" onclick=\"ChangeSelection(id)\" \>";
             }
 
-            content += gamesJS[i * 4 + 1] + " </label> ";
+            var teamNameWithoutQuotes = gamesJS[i * 4 + 1].substring(6, gamesJS[i * 4 + 1].length - 6);
+            content += "<span class=\"black-text\">" + teamNameWithoutQuotes  + " </span> </label> <br />";
 
             if (winnersJS[i] == gamesJS[i * 4 + 2]) {
-                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,2\" onclick=\"ChangeSelection(id)\" checked \>";
+                content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,2\" onclick=\"ChangeSelection(id)\" checked=\"checked\" \>";
             }
             else {
                 content += "<label> <input type = \"checkbox\" id= \"game," + i + ",team,2\" onclick=\"ChangeSelection(id)\" \>";
             }
-            content +=  gamesJS[i * 4 + 2] + " </label> ";
+            teamNameWithoutQuotes = gamesJS[i * 4 + 2].substring(6, gamesJS[i * 4 + 2].length - 6);
+            content += "<span class=\"black-text\">" + teamNameWithoutQuotes + "</span> </label> <br />";
+            var when = gamesJS[i * 4].substring(6, gamesJS[i * 4].length - 6);
+            content += "<span class=\"left\" style=\"font-size:9px; padding-top:5px\">" + when + "</span>";
+            var where = gamesJS[i * 4 + 3].substring(6, gamesJS[i * 4 + 3].length - 6);
+            content += "<span class=\"right\" style=\"font-size:9px; padding-top:5px\">" + where + "</span> <br />";
 
+            content += "</div>";
             content += "</div>";
             content += "</div>";
         }
-
+        content += "</div>";
         document.getElementById('upcomingGameCards').innerHTML = content;
     }
 

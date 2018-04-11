@@ -10,7 +10,7 @@ namespace cricpredict.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }        
+            return RedirectToAction("Games", "IPL18");
+        }
     }
 }
