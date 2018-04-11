@@ -4884,7 +4884,9 @@ small {
 }
 
 .card .card-content {
-  padding: 24px;
+  padding: 12px;
+  padding-left:24px;
+  padding-right:24px;
   border-radius: 0 0 2px 2px;
 }
 
