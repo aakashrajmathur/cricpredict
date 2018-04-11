@@ -36,9 +36,12 @@
     }
 }
 
+
 <div class="container">
-    <h5 style="padding-left:10px">Current Standings</h5>
-    <div id="standings"></div>
+    <div class="container">
+        <h5 style="padding-left:10px">Current Standings</h5>
+        <div id="standings"></div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -62,13 +65,11 @@
 
     for (i = 0; i < standingsJS.length; i++)
     {
-
         content += "    <li class=\"collection-item avatar\">";
-
         var teamNameWithoutQuotes = standingsJS[i].TeamName.substring(6, standingsJS[i].TeamName.length - 6);
 
         content += "      <img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" alt=\"\" class=\"circle\">";
-        content += "      <span class=\"title\">" + teamNameWithoutQuotes + "</span>";
+        content += "      <span class=\"title\" style=\"font-weight: bold\" >" + teamNameWithoutQuotes + "</span>";
 
         content += "      <table class=\"centered\">";
         content += "        <tbody>";
@@ -101,111 +102,6 @@
         content += "    </li>";
     }   
     content += "  </ul>";
-
-
-
-
-
-
-    content += "  <ul class=\"collection\">";
-
-    for (i = 0; i < standingsJS.length; i++) {
-
-        content += "    <li class=\"collection-item avatar\">";
-
-        var teamNameWithoutQuotes = standingsJS[i].TeamName.substring(6, standingsJS[i].TeamName.length - 6);
-
-        content += "      <img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" alt=\"\" class=\"circle\">";
-        content += "      <span class=\"title\">" + teamNameWithoutQuotes + "</span>";
-
-        content += "      <table class=\"centered\">";
-        content += "        <tbody>";
-        content += "          <tr>";
-        content += "            <td class = \"hide-on-large-only\">W - L - T (Pts) NRR</td>";
-        content += "            <td class = \"hide-on-med-and-down\">P</td>";
-        content += "            <td class = \"hide-on-med-and-down\">W</td>";
-        content += "            <td class = \"hide-on-med-and-down\">L</td>";
-        content += "            <td class = \"hide-on-med-and-down\">T</td>";
-        content += "            <td class = \"hide-on-med-and-down\">Pts</td>";
-        content += "            <td class = \"hide-on-med-and-down\">NRR</td>";
-        content += "            <td>Playoff</td>";
-        content += "          </tr>";
-        content += "          <tr>";
-        content += "            <td class=\"hide-on-large-only\">" + standingsJS[i].W + " - " + standingsJS[i].L + " - " + standingsJS[i].T + " ( "+ standingsJS[i].Pts + " ) " + standingsJS[i].NRR + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].P + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].W + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].L + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].T + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].Pts + "</td>";
-        content += "            <td class = \"hide-on-med-and-down\">" + standingsJS[i].NRR + "</td>";
-        content += "            <td>" + standingsJS[i].PlayoffPercentage + "%</td>";
-        content += "          </tr>";
-        content += "        </tbody>";
-        content += "      </table>";
-
-        if (i < 4)
-            content += "<a class=\"secondary-content\"><i class=\"center small material-icons\" style=\"color:#ffab00 \">star</i></a>";
-        else
-            content += "<a class=\"secondary-content\"><i class=\"center small material-icons\" style=\"color:#9e9e9e \">star_border</i></a>";
-
-        content += "    </li>";
-    }
-    content += "  </ul>";
-
-
-
-
-
-
-
-
-
-    content += "  <ul class=\"collection\">";
-
-    for (i = 0; i < standingsJS.length; i++) {
-
-        content += "    <li class=\"collection-item avatar\">";
-
-        var teamNameWithoutQuotes = standingsJS[i].TeamName.substring(6, standingsJS[i].TeamName.length - 6);
-
-        content += "      <img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" alt=\"\" class=\"circle\">";
-        content += "      <span class=\"title\">" + teamNameWithoutQuotes + "</span>";
-        var stats = standingsJS[i].W + "-" + standingsJS[i].L + "-" + standingsJS[i].T + " (" + standingsJS[i].Pts + ") " + standingsJS[i].NRR;
-
-        content += "        <div class=\"row centered\">";
-        content += "        <div class=\"col s6 center-align\">"+ stats;
-        content += "        </div>";
-        content += "        <div class=\"col s3 center-align \" style=\"font-size:10px\">Playoffs Chance";
-        content += "        </div>";
-        content += "        <div class=\"col s3 center-align \"  style=\"font-size:14px\">" + standingsJS[i].PlayoffPercentage+" %";
-        content += "        </div>";
-        content += "        </div>";
-
-        if (i < 4)
-            content += "<a class=\"secondary-content\"><i class=\"center small material-icons\" style=\"color:#ffab00 \">star</i></a>";
-        else
-            content += "<a class=\"secondary-content\"><i class=\"center small material-icons\" style=\"color:#9e9e9e \">star_border</i></a>";
-
-        content += "    </li>";
-    }
-    content += "  </ul>";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     document.getElementById("standings").innerHTML = content;
 </script>
