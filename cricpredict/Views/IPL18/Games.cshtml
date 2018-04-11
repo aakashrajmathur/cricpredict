@@ -33,7 +33,6 @@
     }
 
     string inputStandings = (string)ViewData["Standings"];
-
     List<string> standings = new List<string>();
     tokens = inputStandings.Split(',');
     foreach (string token in tokens)
@@ -51,16 +50,13 @@
     </div>
 </div>
 
-
-
 <script type="text/javascript">
-
     @{ string gamesAsString = string.Join(",", upcomingGames.ToArray());}
     var gamesJSTemp = '@gamesAsString';
     var gamesJS = gamesJSTemp.split(",");
     //for (i = 0; i < gamesJS.length; i++)
     //    alert(gamesJS[i]);
-
+    
     @{ string winnerAsString = string.Join(",", winners.ToArray());}
     var winnersJSTemp = '@winnerAsString';
     var winnersJS = winnersJSTemp.split(",");
@@ -71,12 +67,15 @@
     var standingsJSTemp = '@standingsAsString';
     var standingsJSTokens = standingsJSTemp.split(",");
 
+    //alert(standingsJSTokens.length);
+    var origStandingsJS = [];
     var standingsJS = [];
     for (i = 0; i < standingsJSTokens.length; i=i+7)
     {
         standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
+        origStandingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
     }
-
+    
     for (i = 0; i < winnersJS.length; i++)
     {
         var winner = winnersJS[i];
@@ -149,12 +148,7 @@
             }
         });
 
-        document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();
-        //for (i = 0; i < standingsJS.length; i++)
-        //{
-        //    document.getElementById('projectedStandings').innerHTML += "<div>" + standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts + "</div>";
-        //    //alert(standingsJS[i].TeamName + " , W = " + standingsJS[i].W + " , Pts = " + standingsJS[i].Pts);
-        //}
+        document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();        
     }
 
     function ChangeSelection(id)
@@ -234,7 +228,7 @@
                     content += "<div style=\"padding-top:10px\"><i class=\"center tiny material-icons\" style=\"color:#9e9e9e \">star_border</i></div>";
                 content += "<div><img src=\"/Content/IPL/Logos/" + teamNameWithoutQuotes + ".png\" style=\"max-width:100%\"> </div>";
                 content += "<div style=\"font-size:12px\">" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + "</div>";
-                content += "<div style=\"font-size:10px; padding-bottom:10px\">(" + standingsJS[i * 4 + j * 1].W + "-" + standingsJS[i * 4 + j * 1].L + "-" + standingsJS[i * 4 + j * 1].T + ")</div>";
+                content += "<div style=\"font-size:10px; padding-bottom:10px\">(" + origStandingsJS[i * 4 + j * 1].W + "-" + origStandingsJS[i * 4 + j * 1].L + "-" + origStandingsJS[i * 4 + j * 1].T + ")</div>";
                 content += "</div>";
             }
             content += "</div>";
@@ -245,8 +239,7 @@
     }
 
     window.onload = function () {
-        //alert("Hello from onload event firing.");
-
+        
         GetSortedStandings();
 
         document.getElementById('projectedStandings').innerHTML = GetProjectedStandingsContent();

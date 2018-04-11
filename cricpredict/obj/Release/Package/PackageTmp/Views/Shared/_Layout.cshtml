@@ -2,36 +2,56 @@
 <html>
 <head>
     <meta charset="utf-8" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/css/materialize.min.css" media="screen,projection" />
+
+    <script type="text/javascript" src="~/Scripts/materialize.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricPredict @ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <style type="text/css">
+        nav {
+            height: 40px;
+            line-height: 40px;
+        }
+
+            nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+                height: 40px;
+                line-height: 40px;
+            }
+
+            nav .button-collapse i {
+                height: 40px;
+                line-height: 40px;
+            }
+
+            nav .brand-logo {
+                font-size: 1.6rem;
+            }
+    </style>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="blue-grey darken-1">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Indian Premier League", "Index", "IPL")</li>
-                    <li>@Html.ActionLink("Big Bash League", "Index", "BBL")</li>
+            <div class="nav-wrapper">
+                @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
+                <ul class="left">
+                    <li class="active">@Html.ActionLink("Indian Premier League", "Games", "IPL18", new { area = "" }, new { })</li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()        
+    </nav>
+    <div class="body-content">
+        @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
