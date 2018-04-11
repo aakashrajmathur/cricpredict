@@ -67,13 +67,12 @@
     var standingsJSTemp = '@standingsAsString';
     var standingsJSTokens = standingsJSTemp.split(",");
 
-    //alert(standingsJSTokens.length);
     var origStandingsJS = [];
     var standingsJS = [];
-    for (i = 0; i < standingsJSTokens.length; i=i+7)
+    for (i = 0; i < standingsJSTokens.length; i=i+8)
     {
-        standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
-        origStandingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 1], "L": standingsJSTokens[i + 2], "T": standingsJSTokens[i + 3], "Pts": standingsJSTokens[i + 4], "NRR": standingsJSTokens[i + 5], "PlayoffPercentage": standingsJSTokens[i + 6] });
+        standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": standingsJSTokens[i + 7] });
+        origStandingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": standingsJSTokens[i + 7] });
     }
     
     for (i = 0; i < winnersJS.length; i++)
@@ -81,6 +80,10 @@
         var winner = winnersJS[i];
         var team1 = gamesJS[i * 4 + 1];
         var team2 = gamesJS[i * 4 + 2];
+        //alert(team1 + ", " + team2 + ", " + winner);
+
+        //for (i = 0; i < standingsJS.length; i++)
+        //    alert(standingsJS[i].TeamName);
 
         var currItem = findObjectByKey(standingsJS, "TeamName", winnersJS[i]);
         currItem.W = currItem.W * 1 + 1;
@@ -117,7 +120,7 @@
     function findObjectByKey(array, key, value)
     {
         for (var i = 0; i < array.length; i++) {
-            ///alert(array[i].TeamName);
+            //alert(array[i].TeamName);
             if (array[i][key].localeCompare(value) == 0) {
                 //alert("found!");
                 return array[i];
