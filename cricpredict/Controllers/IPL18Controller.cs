@@ -28,6 +28,8 @@ namespace cricpredict.Controllers
         }
         public ActionResult Standings()
         {
+            ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt")); //"Chennai Super Kings,0,0,0,0,0,50,Delhi Daredevils,0,0,0,0,0,50,Mumbai Indians,0,0,0,0,0,50,Kolkata Knight Riders,0,0,0,0,0,50,Kings XI Punjab,0,0,0,0,0,50,Royal Challengers Bangalore,0,0,0,0,0,50,Rajasthan Royals,0,0,0,0,0,50,Sunrisers Hyderabad,0,0,0,0,0,50";
+
             return View();
         }
         public ActionResult Teams()

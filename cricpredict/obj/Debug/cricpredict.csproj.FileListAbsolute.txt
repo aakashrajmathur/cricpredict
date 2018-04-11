@@ -64,3 +64,4 @@ C:\src\cricpredict\cricpredict\bin\Microsoft.AI.WindowsServer.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AI.Web.xml
 C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.dll
 C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.pdb
+C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.csprojResolveAssemblyReference.cache
