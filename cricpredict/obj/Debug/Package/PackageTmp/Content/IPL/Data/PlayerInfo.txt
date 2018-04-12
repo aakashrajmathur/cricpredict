@@ -1,0 +1,181 @@
+﻿Royal Challengers Bangalore|batsman|Brendon McCullum|New Zealand|Right-handed|Right-arm medium|₹3.6 crore (US$551,000)|true
+Royal Challengers Bangalore|batsman|Virat Kohli(C)|India|Right-handed|Right-arm medium|₹17 crore (US$2.6 million)|false
+Royal Challengers Bangalore|batsman|AB de Villiers|South Africa|Right-handed|Right-arm medium|₹11 crore (US$1.7 million)|true
+Royal Challengers Bangalore|batsman|Mandeep Singh|India|Right-handed|Right-arm medium|₹1.4 crore (US$214,000)|false
+Royal Challengers Bangalore|batsman|Sarfaraz Khan|India|Right-handed|Right-arm off break|₹1.75 crore (US$268,000)|false
+Royal Challengers Bangalore|batsman|Manan Vohra|India|Right-handed|Right-arm medium|₹1.1 crore (US$168,000)|false
+Royal Challengers Bangalore|allrounder|Chris Woakes|England|Right-handed|Right-arm fast-medium|₹7.4 crore (US$1.1 million)|true
+Royal Challengers Bangalore|allrounder|Washington Sundar|India|Left-handed|Right-arm off break|₹3.2 crore (US$490,000)|false
+Royal Challengers Bangalore|allrounder|Colin de Grandhomme|New Zealand|Right-handed|Right-arm medium-fast|₹2.2 crore (US$337,000)|true
+Royal Challengers Bangalore|allrounder|Moeen Ali|England|Left-handed|Right-arm off break|₹1.7 crore (US$260,000)|true
+Royal Challengers Bangalore|allrounder|Corey Anderson|New Zealand|Left-handed|Left-arm fast-medium|₹2 crore (US$310,000)|true
+Royal Challengers Bangalore|allrounder|Pawan Negi|India|Left-handed|Slow left-arm orthodox|₹1 crore (US$153,000)|false
+Royal Challengers Bangalore|allrounder|Pavan Deshpande|India|Left-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Royal Challengers Bangalore|allrounder|Aniruddha Joshi|India|Right-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Royal Challengers Bangalore|wicketkeeper|Quinton de Kock|South Africa|Left-handed||₹2.8 crore (US$429,000)|true
+Royal Challengers Bangalore|wicketkeeper|Parthiv Patel|India|Left-handed||₹1.7 crore (US$260,000)|false
+Royal Challengers Bangalore|bowler|Yuzvendra Chahal|India|Right-handed|Right-arm leg break googly|₹6 crore (US$919,000)|false
+Royal Challengers Bangalore|bowler|Kulwant Khejroliya|India|Left-handed|Left-arm medium-fast|₹85 lakh (US$130,000)|false
+Royal Challengers Bangalore|bowler|Umesh Yadav|India|Right-handed|Right-arm fast-medium|₹4.2 crore (US$643,000)|false
+Royal Challengers Bangalore|bowler|Tim Southee|New Zealand|Right-handed|Right-arm fast-medium|₹1 crore (US$153,000)|true
+Royal Challengers Bangalore|bowler|Mohammed Siraj|India|Right-handed|Right-arm fast-medium|₹2.6 crore (US$398,000)|false
+Royal Challengers Bangalore|bowler|Navdeep Saini|India|Right-handed|Right-arm medium-fast|₹3 crore (US$459,000)|false
+Royal Challengers Bangalore|bowler|Aniket Choudhary|India|Right-handed|Left-arm medium-fast|₹30 lakh (US$46,000)|false
+Royal Challengers Bangalore|bowler|Murugan Ashwin|India|Right-handed|Right-arm leg break googly|₹2.2 crore (US$337,000)|false
+Delhi Daredevils|batsman|Gautam Gambhir(C)|India|Left-handed|Right-arm leg break|₹2.8 crore (US$429,000)|false
+Delhi Daredevils|batsman|Jason Roy|England|Right-handed||₹1.5 crore (US$230,000)|true
+Delhi Daredevils|batsman|Shreyas Iyer|India|Right-handed|Right-arm leg break|₹7 crore (US$1.1 million)|false
+Delhi Daredevils|batsman|Prithvi Shaw|India|Right-handed|Right-arm off break|₹1.2 crore (US$184,000)|false
+Delhi Daredevils|batsman|Gurkeerat Singh|India|Right-handed|Right-arm off break|₹75 lakh (US$115,000)|false
+Delhi Daredevils|batsman|Manjot Kalra|India|Left-handed||₹20 lakh (US$31,000)|false
+Delhi Daredevils|allrounder|Glenn Maxwell|Australia|Right-handed|Right-arm off break|₹9 crore (US$1.4 million)|true
+Delhi Daredevils|allrounder|Colin Munro|New Zealand|Left-handed|Right-arm medium-fast|₹1.9 crore (US$291,000)|true
+Delhi Daredevils|allrounder|Vijay Shankar|India|Right-handed|Right-arm medium-fast|₹3.2 crore (US$490,000)|false
+Delhi Daredevils|allrounder|Rahul Tewatia|India|Left-handed|Right-arm leg break|₹3 crore (US$459,000)|false
+Delhi Daredevils|allrounder|Jayant Yadav|India|Right-handed|Right-arm off break|₹50 lakh (US$77,000)|false
+Delhi Daredevils|allrounder|Abhishek Sharma|India|Left-handed|Slow left-arm orthodox|₹55 lakh (US$84,000)|false
+Delhi Daredevils|wicketkeeper|Rishabh Pant|India|Left-handed|Right-arm medium|₹8 crore (US$1.2 million)|false
+Delhi Daredevils|wicketkeeper|Naman Ojha|India|Right-handed|Right-arm medium|₹1.4 crore (US$214,000)|false
+Delhi Daredevils|bowler|Mohammed Shami|India|Right-handed|Right-arm fast-medium|₹3 crore (US$459,000)|false
+Delhi Daredevils|bowler|Chris Morris|South Africa|Right-handed|Right-arm fast-medium|₹7.1 crore (US$1.1 million)|true
+Delhi Daredevils|bowler|Amit Mishra|India|Right-handed|Right-arm leg break|₹4 crore (US$613,000)|false
+Delhi Daredevils|bowler|Daniel Christian|Australia|Right-handed|Right-arm medium-fast|₹1.5 crore (US$230,000)|true
+Delhi Daredevils|bowler|Trent Boult|New Zealand|Right-handed|Left-arm fast-medium|₹2.2 crore (US$337,000)|true
+Delhi Daredevils|bowler|Harshal Patel|India|Right-handed|Right-arm medium-fast|₹20 lakh (US$31,000)|false
+Delhi Daredevils|bowler|Avesh Khan|India|Right-handed|Right-arm medium-fast|₹70 lakh (US$107,000)|false
+Delhi Daredevils|bowler|Shahbaz Nadeem|India|Right-handed|Slow left-arm orthodox|₹3.2 crore (US$490,000)|false
+Delhi Daredevils|bowler|Sayan Ghosh|India|Right-handed|Right-arm medium|₹20 lakh (US$31,000)|false
+Delhi Daredevils|bowler|Sandeep Lamichhane|Nepal|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|true
+Sunrisers Hyderabad|batsman|Shikhar Dhawan|India|Left-handed|Right-arm off break|₹5.2 crore (US$796,000)|false
+Sunrisers Hyderabad|batsman|Alex Hales|England|Right-handed|Right-arm medium|₹1 crore (US$153,000)|true
+Sunrisers Hyderabad|batsman|Manish Pandey|India|Right-handed|Right-arm off break|₹11 crore (US$1.7 million)|false
+Sunrisers Hyderabad|batsman|Kane Williamson(C)|New Zealand|Right-handed|Right-arm off break|₹3 crore (US$459,000)|true
+Sunrisers Hyderabad|batsman|Sachin Baby|India|Left-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Sunrisers Hyderabad|batsman|Tanmay Agarwal|India|Left-handed|Right-arm leg break googly|₹20 lakh (US$31,000)|false
+Sunrisers Hyderabad|batsman|Ricky Bhui|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Sunrisers Hyderabad|allrounder|Yusuf Pathan|India|Right-handed|Right-arm off break|₹1.9 crore (US$291,000)|false
+Sunrisers Hyderabad|allrounder|Mohammad Nabi|Afghanistan|Right-handed|Right-arm off break|₹1 crore (US$150,000)|true
+Sunrisers Hyderabad|allrounder|Chris Jordan|England|Right-handed|Right-arm fast-medium|₹1 crore (US$150,000)|true
+Sunrisers Hyderabad|allrounder|Shakib Al Hasan|Bangladesh|Left-handed|Slow left-arm orthodox|₹2 crore (US$306,000)|true
+Sunrisers Hyderabad|allrounder|Carlos Brathwaite|Barbados|Right-handed|Right-arm fast-medium|₹2 crore (US$306,000)|true
+Sunrisers Hyderabad|allrounder|Deepak Hooda|India|Right-handed|Right-arm off break|₹3.6 crore (US$551,000)|false
+Sunrisers Hyderabad|allrounder|Bipul Sharma|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Sunrisers Hyderabad|allrounder|Mehdi Hasan|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Sunrisers Hyderabad|wicketkeeper|Wriddhiman Saha|India|Right-handed||₹5 crore (US$766,000)|false
+Sunrisers Hyderabad|wicketkeeper|Shreevats Goswami|India|Left-handed||₹1 crore (US$150,000)|false
+Sunrisers Hyderabad|bowler|Bhuvneshwar Kumar|India|Right-handed|Right-arm medium-fast|₹8.5 crore (US$1.3 million)|false
+Sunrisers Hyderabad|bowler|Rashid Khan|Afghanistan|Right-handed|Right-arm leg break googly|₹9 crore (US$1.4 million)|true
+Sunrisers Hyderabad|bowler|Sandeep Sharma|India|Right-handed|Right-arm medium-fast|₹3 crore (US$460,000)|false
+Sunrisers Hyderabad|bowler|Billy Stanlake|Australia|Left-handed|Right-arm fast|₹50 lakh (US$77,000)|true
+Sunrisers Hyderabad|bowler|Siddarth Kaul|India|Right-handed|Right-arm fast-medium|₹3.8 crore (US$582,000)|false
+Sunrisers Hyderabad|bowler|Basil Thampi|India|Right-handed|Right-arm fast-medium|₹95 lakh (US$146,000)|false
+Sunrisers Hyderabad|bowler|T Natarajan|India|Left-handed|Left-arm fast-medium|₹40 lakh (US$61,000)|false
+Sunrisers Hyderabad|bowler|Syed Khaleel Ahmed|India|Right-handed|Left-arm medium-fast|₹3 crore (US$459,000)|false
+Kings XI Punjab|batsman|David Miller|South Africa|Left-handed|Right-arm off break|₹3 crore (US$459,000)|true
+Kings XI Punjab|batsman|Karun Nair|India|Right-handed|Right-arm off break|₹5.6 crore (US$858,000)|false
+Kings XI Punjab|batsman|Chris Gayle|Jamaica|Left-handed|Right-arm off break|₹2 crore (US$306,000)|true
+Kings XI Punjab|batsman|Mayank Agarwal|India|Right-handed||₹1 crore (US$153,000)|false
+Kings XI Punjab|batsman|Manoj Tiwary|India|Right-handed|Right arm leg break|₹1 crore (US$153,000)|false
+Kings XI Punjab|batsman|Akshdeep Nath|India|Right-handed|Right-arm medium-fast|₹1 crore (US$153,000)|false
+Kings XI Punjab|allrounder|Yuvraj Singh|India|Left-handed|Slow left-arm orthodox|₹2 crore (US$306,000)|false
+Kings XI Punjab|allrounder|Axar Patel|India|Left-handed|Slow left-arm orthodox|₹6.75 crore (US$1.0 million)|false
+Kings XI Punjab|allrounder|Marcus Stoinis|Australia|Right-handed|Right-arm medium-fast|₹6.2 crore (US$950,000)|true
+Kings XI Punjab|allrounder|Pardeep Sahu|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Kings XI Punjab|allrounder|Mayank Dagar|India|Right-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Kings XI Punjab|allrounder|Manzoor Dar|India|Right-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Kings XI Punjab|wicketkeeper|KL Rahul|India|Right-handed||₹11 crore (US$1.7 million)|false
+Kings XI Punjab|bowler|Ravichandran Ashwin(C)|India|Right-handed|Right-arm off break|₹7.6 crore (US$1.2 million)|false
+Kings XI Punjab|bowler|Mohit Sharma|India|Right-handed|Right-arm medium-fast|₹2.4 crore (US$368,000)|false
+Kings XI Punjab|bowler|Andrew Tye|Australia|Right-handed|Right-arm medium-fast|₹7.2 crore (US$1.1 million)|true
+Kings XI Punjab|bowler|Ankit Rajpoot|India|Right-handed|Right-arm medium-fast|₹2.2 crore (US$337,000)|false
+Kings XI Punjab|bowler|Ben Dwarshuis|Australia|Left-handed|Left-arm fast-medium|₹1.4 crore (US$214,000)|true
+Kings XI Punjab|bowler|Barinder Sran|India|Left-handed|Left-arm medium-fast|₹3 crore (US$459,000)|false
+Kings XI Punjab|bowler|Mujeeb Zadran|Afghanistan|Right-handed|Right-arm off break|₹4 crore (US$613,000)|true
+Rajasthan Royals|batsman|Ajinkya Rahane(C)|India|Right-handed|Right-arm medium|₹4 crore (US$613,000)|false
+Rajasthan Royals|batsman|Rahul Tripathi|India|Right-handed|Right-arm medium|₹3.4 crore (US$521,000)|false
+Rajasthan Royals|batsman|Prashant Chopra|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Rajasthan Royals|batsman|Aryaman Birla|India|Left-handed|Slow left-arm orthodox|₹30 lakh (US$46,000)|false
+Rajasthan Royals|allrounder|Ben Stokes|England|Left-handed|Right-arm fast-medium|₹12.5 crore (US$1.9 million)|true
+Rajasthan Royals|allrounder|Stuart Binny|India|Right-handed|Right-arm medium|₹50 lakh (US$77,000)|false
+Rajasthan Royals|allrounder|D'Arcy Short|Australia|Left-handed|Slow left-arm orthodox|₹4 crore (US$613,000)|true
+Rajasthan Royals|allrounder|Jofra Archer|England|Right-handed|Right-arm fast-medium|₹7.2 crore (US$1.1 million)|true
+Rajasthan Royals|allrounder|Ankit Sharma|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Rajasthan Royals|allrounder|Shreyas Gopal|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Rajasthan Royals|allrounder|Mahipal Lomror|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Rajasthan Royals|allrounder|Jatin Saxena|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Rajasthan Royals|wicketkeeper|Sanju Samson|India|Right-handed||₹8 crore (US$1.2 million)|false
+Rajasthan Royals|wicketkeeper|Jos Buttler|England|Right-handed||₹4.4 crore (US$674,000)|true
+Rajasthan Royals|wicketkeeper|Heinrich Klaasen|South Africa|Right-handed||₹50 lakh (US$77,000)|true
+Rajasthan Royals|bowler|Jaydev Unadkat|India|Right-handed|Left-arm medium|₹11.5 crore (US$1.8 million)|false
+Rajasthan Royals|bowler|Dhawal Kulkarni|India|Right-handed|Right-arm medium|₹75 lakh (US$115,000)|false
+Rajasthan Royals|bowler|Ben Laughlin|Australia|Right-handed|Right-arm fast-medium|₹50 lakh (US$77,000)|true
+Rajasthan Royals|bowler|Krishnappa Gowtham|India|Right-handed|Right-arm off break|₹6.2 crore (US$950,000)|false
+Rajasthan Royals|bowler|Anureet Singh|India|Right-handed|Right-arm medium|₹30 lakh (US$46,000)|false
+Rajasthan Royals|bowler|Sudhesan Midhun|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Rajasthan Royals|bowler|Ish Sodhi|New Zealand|Right-handed|Right-arm leg break|₹50 lakh (US$77,000)|true
+Kolkata Knight Riders|batsman|Nitish Rana|India|Left-handed|Right-arm off break|₹3.4 crore (US$521,000)|false
+Kolkata Knight Riders|batsman|Robin Uthappa|India|Right-handed|Right-arm medium|₹6.4 crore (US$980,000)|false
+Kolkata Knight Riders|batsman|Chris Lynn|Australia|Right-handed|Slow left-arm orthodox|₹9.6 crore (US$1.5 million)|true
+Kolkata Knight Riders|batsman|Ishank Jaggi|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Kolkata Knight Riders|batsman|Shubman Gill|India|Right-handed|Right-arm off break|₹1.8 crore (US$276,000)|false
+Kolkata Knight Riders|batsman|Rinku Singh|India|Left-handed|Right-arm off break|₹80 lakh (US$123,000)|false
+Kolkata Knight Riders|batsman|Cameron Delport|South Africa|Left-handed|Right-arm medium|₹30 lakh (US$46,000)|true
+Kolkata Knight Riders|batsman|Apoorv Wankhade|India|Right-handed||₹20 lakh (US$31,000)|false
+Kolkata Knight Riders|allrounder|Sunil Narine|Trinidad and Tobago|Left-handed|Right-arm off break|₹8.5 crore (US$1.3 million)|true
+Kolkata Knight Riders|allrounder|Andre Russell|Jamaica|Right-handed|Right-arm fast-medium|₹7 crore (US$1.1 million)|true
+Kolkata Knight Riders|allrounder|Kamlesh Nagarkoti|India|Right-handed|Right-arm fast|₹3.2 crore (US$490,000)|false
+Kolkata Knight Riders|allrounder|Javon Searles|Barbados|Right-handed|Right-arm fast-medium|₹30 lakh (US$46,000)|true
+Kolkata Knight Riders|wicketkeeper|Dinesh Karthik(C)|India|Right-handed|Right-arm off break|₹7.4 crore (US$1.1 million)|false
+Kolkata Knight Riders|bowler|Piyush Chawla|India|Left-handed|Right-arm leg break|₹4.2 crore (US$643,000)|false
+Kolkata Knight Riders|bowler|Kuldeep Yadav|India|Left-handed|Slow left-arm chinaman|₹5.8 crore (US$888,000)|false
+Kolkata Knight Riders|bowler|Mitchell Johnson|Australia|Left-handed|Left-arm fast-medium|₹2 crore (US$306,000)|true
+Kolkata Knight Riders|bowler|Vinay Kumar|India|Right-handed|Right-arm medium-fast|₹1 crore (US$153,000)|false
+Kolkata Knight Riders|bowler|Tom Curran|England|Right-handed|Right-arm fast-medium|₹1 crore (US$153,000)|true
+Kolkata Knight Riders|bowler|Shivam Mavi|India|Right-handed|Right-arm fast-medium|₹3 crore (US$459,000)|false
+Mumbai Indians|batsman|Rohit Sharma(C)|India|Right-handed|Right-arm off break|₹15 crore (US$2.3 million)|false
+Mumbai Indians|batsman|JP Duminy|South Africa|Left-handed|Right-arm off break|₹1 crore (US$153,000)|true
+Mumbai Indians|batsman|Evin Lewis|Trinidad and Tobago|Left-handed|Right-arm medium|₹3.8 crore (US$582,000)|true
+Mumbai Indians|batsman|Suryakumar Yadav|India|Right-handed|Right-arm medium|₹3.2 crore (US$490,000)|false
+Mumbai Indians|batsman|Siddhesh Lad|India|Right-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Mumbai Indians|batsman|Sharad Lumba|India|Right-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Mumbai Indians|batsman|Saurabh Tiwary|India|Left-handed|Right-arm off break|₹80 lakh (US$123,000)|false
+Mumbai Indians|allrounder|Hardik Pandya|India|Right-handed|Right-arm medium-fast|₹11 crore (US$1.7 million)|false
+Mumbai Indians|allrounder|Krunal Pandya|India|Left-handed|Slow left-arm orthodox|₹8.8 crore (US$1.3 million)|false
+Mumbai Indians|allrounder|Kieron Pollard|Trinidad and Tobago|Right-handed|Right-arm medium-fast|₹5.4 crore (US$827,000)|true
+Mumbai Indians|allrounder|Ben Cutting|Australia|Right-handed|Right-arm medium|₹2.2 crore (US$337,000)|true
+Mumbai Indians|allrounder|Akila Dananjaya|Sri Lanka|Left-handed|Right-arm off break|₹50 lakh (US$77,000)|true
+Mumbai Indians|allrounder|Tajinder Dhillon|India|Right-handed|Right-arm off break|₹55 lakh (US$84,000)|false
+Mumbai Indians|allrounder|Anukul Roy|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Mumbai Indians|wicketkeeper|Ishan Kishan|India|Left-handed|Left-arm medium|₹6.2 crore (US$950,000)|false
+Mumbai Indians|wicketkeeper|Aditya Tare|India|Right-handed||₹20 lakh (US$31,000)|false
+Mumbai Indians|bowler|Jasprit Bumrah|India|Right-handed|Right-arm fast-medium|₹7 crore (US$1.1 million)|false
+Mumbai Indians|bowler|Mustafizur Rahman|Bangladesh|Left-handed|Left-arm fast-medium|₹2.2 crore (US$337,000)|true
+Mumbai Indians|bowler|Mitchell McClenaghan|New Zealand|Left-handed|Left-arm fast-medium|₹1 crore (US$153,000)|true
+Mumbai Indians|bowler|Rahul Chahar|India|Right-handed|Right-arm leg spin|₹1.9 crore (US$291,000)|false
+Mumbai Indians|bowler|Mayank Markande|India|Right-handed|Right-arm leg break|₹20 lakh (US$31,000)|false
+Mumbai Indians|bowler|Mohsin Khan|India|Left-handed|Left-arm medium-fast|₹20 lakh (US$31,000)|false
+Mumbai Indians|bowler|M. D. Nidheesh|India|||₹20 lakh (US$31,000)|false
+Mumbai Indians|bowler|Pradeep Sangwan|India|Right-handed|Left-arm fast-medium|₹1.5 crore (US$230,000)|false
+Chennai Super Kings|batsman|Suresh Raina|India|Left-handed|Right-arm off break|₹11 crore (US$1.7 million)|false
+Chennai Super Kings|batsman|Ambati Rayudu|India|Right-handed|Right-arm off break|₹2.2 crore (US$337,000)|false
+Chennai Super Kings|batsman|Dhruv Shorey|India|Right-handed|Right-arm off break|₹20 lakh (US$31,000)|false
+Chennai Super Kings|batsman|Murali Vijay|India|Right-handed|Right-arm off break|₹2 crore (US$306,000)|false
+Chennai Super Kings|allrounder|Dwayne Bravo|Trinidad and Tobago|Right-handed|Right-arm medium fast|₹6.4 crore (US$980,000)|true
+Chennai Super Kings|allrounder|Ravindra Jadeja|India|Left-handed|Slow left-arm orthodox|₹7 crore (US$1.1 million)|false
+Chennai Super Kings|allrounder|Karn Sharma|India|Left-handed|Right-arm leg break|₹5 crore (US$766,000)|false
+Chennai Super Kings|allrounder|Kshitiz Sharma|India|Right-handed|Right-arm medium|₹20 lakh (US$31,000)|false
+Chennai Super Kings|allrounder|Shane Watson|Australia|Right-handed|Right-arm fast medium|₹4 crore (US$613,000)|true
+Chennai Super Kings|allrounder|David Willey|England|Left-handed|Right-arm fast|NA|true
+Chennai Super Kings|wicketkeeper|Sam Billings|England|Right-handed||₹1 crore (US$153,000)|true
+Chennai Super Kings|wicketkeeper|MS Dhoni(C)|India|Right-handed|Right-arm medium|₹15 crore (US$2.3 million)|false
+Chennai Super Kings|wicketkeeper|Narayan Jagadeesan|India|Right-handed||₹20 lakh (US$31,000)|false
+Chennai Super Kings|bowler|Harbhajan Singh|India|Right-handed|Right-arm off break|₹2 crore (US$306,000)|false
+Chennai Super Kings|bowler|Imran Tahir|South Africa|Right-handed|Right-arm leg break|₹1 crore (US$153,000)|true
+Chennai Super Kings|bowler|Shardul Thakur|India|Right-handed|Right-arm medium fast|₹2.6 crore (US$398,000)|false
+Chennai Super Kings|bowler|Mark Wood|England|Right-handed|Right-arm fast|₹1.5 crore (US$230,000)|true
+Chennai Super Kings|bowler|Lungi Ngidi|South Africa|Right-handed|Right-arm fast|₹50 lakh (US$77,000)|true
+Chennai Super Kings|bowler|KM Asif|India|Right-handed|Right-arm fast medium|₹40 lakh (US$61,000)|false
+Chennai Super Kings|bowler|Chaitanya Bishnoi|India|Left-handed|Slow left-arm orthodox|₹20 lakh (US$31,000)|false
+Chennai Super Kings|bowler|Deepak Chahar|India|Right-handed|Right-arm medium fast|₹80 lakh (US$123,000)|false
+Chennai Super Kings|bowler|Monu Kumar|India|Right-handed|Right-arm medium|₹20 lakh (US$31,000)|false
+Chennai Super Kings|bowler|Kanishk Seth|India|Right-handed|Left-arm medium|₹20 lakh (US$31,000)|false
