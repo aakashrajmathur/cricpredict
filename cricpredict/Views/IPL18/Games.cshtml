@@ -191,19 +191,21 @@
 
             //alert("winner = " + gamesJS[otherIndex] + " loser = " + gamesJS[index]);
             winner = gamesJS[otherIndex];
-            loser = gamesJS[index];
-
-            //alert('old winner = ' + gamesJS[index] + 'new winner = ' + winnersJS[tokens[1] * 1]);
+            loser = gamesJS[index];            
         }
+
+        //alert('winner = ' + winner + 'loser = ' + loser);
 
         //Loser:
         var currItem = findObjectByKey(standingsJS, "TeamName", loser);
         currItem.W = currItem.W * 1 - 1;
+        currItem.L = currItem.L * 1 + 1;
         currItem.Pts = currItem.Pts * 1 - 2;
 
         //Winner:
         var currItem = findObjectByKey(standingsJS, "TeamName", winner);
         currItem.W = currItem.W * 1 + 1;
+        currItem.L = currItem.L * 1 - 1;
         currItem.Pts = currItem.Pts * 1 + 2;
 
         //3. Projected standings need to be updated.
