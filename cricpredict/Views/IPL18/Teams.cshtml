@@ -15,349 +15,89 @@
     </div>
 </nav>
 
-<br />
-<div class="container">
-    <div id="teamsLogos">
+@{
+    //Royal Challengers Bangalore|batsman|Brendon McCullum|New Zealand|Right-handed|Right-arm medium|₹3.6 crore (US$551,000)|true
+    string playerInfo = (string)ViewData["PlayerInfo"];
+}
 
+
+<div class="container">
+    <p class="left-align teal-text">Click on a team to select</p>
+    <div id="teamsLogos">
     </div>
     <div class="row" id="players">
-        <div class="col s12 m6 l3">
-            <h5><img src="~/Content/IPL/Logos/plane.png" height="16" />  Batsmen</h5>
-            <ul class="collapsible expandable batsmen">
-                <li>
-                    <div class="collapsible-header">
-                        <label><input type="checkbox" onchange="PlayerSelectionChanged()" /><span></span></label>
-                        <span style="font-size:16px"> Select me(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                        <span class="right-align"><i class="large material-icons">keyboard_arrow_down</i></span>
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name slightly different </span>
-                        <i class="large material-icons right-align">keyboard_arrow_down</i>
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-            </ul>
-        </div>
-        <div class="col s12 m6 l3">
-            <h5><img src="~/Content/IPL/Logos/plane.png" height="16" />  Wicket Keepers</h5>
-            <ul class="collapsible expandable wicketkeepers">
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-            </ul>
-        </div>
-        <div class="col s12 m6 l3">
-            <h5><img src="~/Content/IPL/Logos/plane.png" height="16" />  All Rounders</h5>
-
-            <ul class="collapsible expandable allrounders">
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-            </ul>
-        </div>
-        <div class="col s12 m6 l3">
-            <h5><img src="~/Content/IPL/Logos/plane.png" height="16" />  Bowlers</h5>
-
-            <ul class="collapsible expandable bowlers">
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header">
-                        <label>
-                            <input type="checkbox" onchange="PlayerSelectionChanged()" /> <span></span>
-                        </label>
-                        <span style="font-size:16px"> Name of the player(c) </span>
-                        <img src="~/Content/IPL/Logos/plane.png" height="18" style="margin-top:5px; padding-left:10px" />
-                    </div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-            </ul>
-        </div>
     </div>
 </div>
 <script type="text/javascript">
+    //Global constants
+    var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
+    var currentTeamIndex = [0]; //for it to be accessable inside functions, this needs to be a list and cannot be just an integer.
 
-    document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+    window.onload = function () {
+        document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+        document.getElementById('players').innerHTML = GetPlayersContent(); 
+    }
 
+    function GetPlayersContent() {
+        var content = "";
+        content += "<div class=\"col s12 m6 l3\">";
+        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Batsmen</h5>";
+        content += "    <ul class=\"collapsible expandable batsmen\">";
+        content += "        <li>";
+        content += "            <div class=\"collapsible-header\">";
+        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
+        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
+        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
+        content += "            </div>";
+        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
+        content += "        </li>";
+        content += "    </ul>";
+        content += "</div>";
+        content += "<div class=\"col s12 m6 l3\">";
+        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  All-Rounders</h5>";
+        content += "    <ul class=\"collapsible expandable allrounders\">";
+        content += "        <li>";
+        content += "            <div class=\"collapsible-header\">";
+        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
+        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
+        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
+        content += "            </div>";
+        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
+        content += "        </li>";
+        content += "    </ul>";
+        content += "</div>";
+        content += "<div class=\"col s12 m6 l3\">";
+        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Wicket-Keepers</h5>";
+        content += "    <ul class=\"collapsible expandable wicketkeepers\">";
+        content += "        <li>";
+        content += "            <div class=\"collapsible-header\">";
+        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
+        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
+        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
+        content += "            </div>";
+        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
+        content += "        </li>";
+        content += "    </ul>";
+        content += "</div>";
+        content += "<div class=\"col s12 m6 l3\">";
+        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Bowlers</h5>";
+        content += "    <ul class=\"collapsible expandable bowlers\">";
+        content += "        <li>";
+        content += "            <div class=\"collapsible-header\">";
+        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
+        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
+        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
+        content += "            </div>";
+        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
+        content += "        </li>";
+        content += "    </ul>";
+        content += "</div>";
+        return content;
+    }    
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');
     var instance = M.Collapsible.init(elem, {
@@ -378,18 +118,15 @@
     var instance = M.Collapsible.init(elem, {
         accordion: false
     });
-
-    var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
-
+    
     function PlayerSelectionChanged() {
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
         //alert(total);
         M.toast({ html: total + ' players selected.', displayLength: 2000 });
     }
-
+    
     function TeamSelectionChanged(id) {
-        var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
-
+        
         alert(teamNames[id] + " selected");
     }
 
@@ -413,8 +150,6 @@
     }
 
     function GetTeamsLogosContent() {
-        var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
-
         var content = "";
         content += "<div class=\"row\">";
 
@@ -422,8 +157,9 @@
             content += "<div class=\"col s12 m6\">";
             content += "<div class=\"row\">";
             for (j = 0; j < 4; j++) {
-                content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:100px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                content += "<div class=\"col s3 z-depth-5 center hoverable " + GetColor(i, j) + " \" style=\"height:100px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
                 content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> </div>";
+                //content += "<div>" + teamNames[i * 4 + j * 1] + "</div>";
                 content += "</div>";
             }
             content += "</div>";
