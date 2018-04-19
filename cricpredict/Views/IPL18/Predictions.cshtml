@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Predictions";
+}
+
+<nav class="teal">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a href='@Url.Action("Standings", "IPL18")'>Standings</a></li>
+                <li class="active"><a href='@Url.Action("Games", "IPL18")'>Upcoming Games</a></li>
+                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@{
+    //Input from controller
+
+    string inputUpcomingGames = (string)ViewData["UpcomingGames"];
+    List<string> upcomingGames = new List<string>();
+    string[] tokens = inputUpcomingGames.Split(',');
+    foreach (string token in tokens)
+    {
+        upcomingGames.Add(token);
+    }
+
+    string inputWinners = (string)ViewData["Winners"];
+    List<string> winners = new List<string>();
+    tokens = inputWinners.Split(',');
+    foreach (string token in tokens)
+    {
+        winners.Add(token);
+    }
+
+    string inputStandings = (string)ViewData["Standings"];
+    List<string> standings = new List<string>();
+    tokens = inputStandings.Split(',');
+    foreach (string token in tokens)
+    {
+        standings.Add(token);
+    }
+}
+
+<div>
+
+</div>
+
