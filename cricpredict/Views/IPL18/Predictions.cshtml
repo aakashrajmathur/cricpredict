@@ -18,21 +18,16 @@
 @{
     //Input from controller
 
-    string inputUpcomingGames = (string)ViewData["UpcomingGames"];
-    List<string> upcomingGames = new List<string>();
-    string[] tokens = inputUpcomingGames.Split(',');
+    string inputResults = (string)ViewData["Results"];
+    List<string> results = new List<string>();
+    string[] tokens = inputResults.Split(',');
+    <p>@tokens.Length</p>
     foreach (string token in tokens)
     {
-        upcomingGames.Add(token);
+        results.Add(token);
     }
 
-    string inputWinners = (string)ViewData["Winners"];
-    List<string> winners = new List<string>();
-    tokens = inputWinners.Split(',');
-    foreach (string token in tokens)
-    {
-        winners.Add(token);
-    }
+
 
     string inputStandings = (string)ViewData["Standings"];
     List<string> standings = new List<string>();
@@ -46,4 +41,9 @@
 <div>
 
 </div>
+
+
+<script type="text/javascript">
+
+</script>
 
