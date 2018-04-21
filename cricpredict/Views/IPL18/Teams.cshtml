@@ -16,11 +16,10 @@
 <br />
 
 <div class="container">
-    <p class="center-align grey-text" style="font-size:10px">Click on logo to view player info</p>
-    <div id="teamsLogos">
+    <div id="teamsLogos" >
 
     </div>
-    <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info</p>
+    <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
     <p class="center-align grey-text" style="font-size:14px" id="playerCountLabel">0 players selected</p>
     <div class="row">
         <div class="s12 center-align" id="teamName"></div>
@@ -447,52 +446,28 @@
         var content = "";
 
         if (teamShortName == "CSK") {
-            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
-            var arJS = '@string.Join("|", CSK_AR.ToArray())';
             var wkJS = '@string.Join("|", CSK_WK.ToArray())';
-            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
         }
         else if (teamShortName == "DD") {
-            var batJS = '@string.Join("|", DD_Bat.ToArray())';
-            var arJS = '@string.Join("|", DD_AR.ToArray())';
             var wkJS = '@string.Join("|", DD_WK.ToArray())';
-            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
         }
         else if (teamShortName == "KP") {
-            var batJS = '@string.Join("|", KP_Bat.ToArray())';
-            var arJS = '@string.Join("|", KP_AR.ToArray())';
             var wkJS = '@string.Join("|", KP_WK.ToArray())';
-            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
         }
         else if (teamShortName == "KKR") {
-            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
-            var arJS = '@string.Join("|", KKR_AR.ToArray())';
             var wkJS = '@string.Join("|", KKR_WK.ToArray())';
-            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
         }
         else if (teamShortName == "MI") {
-            var batJS = '@string.Join("|", MI_Bat.ToArray())';
-            var arJS = '@string.Join("|", MI_AR.ToArray())';
             var wkJS = '@string.Join("|", MI_WK.ToArray())';
-            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
         }
         else if (teamShortName == "RR") {
-            var batJS = '@string.Join("|", RR_Bat.ToArray())';
-            var arJS = '@string.Join("|", RR_AR.ToArray())';
             var wkJS = '@string.Join("|", RR_WK.ToArray())';
-            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
         }
         else if (teamShortName == "RCB") {
-            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
-            var arJS = '@string.Join("|", RCB_AR.ToArray())';
             var wkJS = '@string.Join("|", RCB_WK.ToArray())';
-            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
         }
         else if (teamShortName == "SRH") {
-            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
-            var arJS = '@string.Join("|", SRH_AR.ToArray())';
             var wkJS = '@string.Join("|", SRH_WK.ToArray())';
-            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
         }
 
         var players = wkJS.split('|');
@@ -523,51 +498,27 @@
         var content = "";
 
         if (teamShortName == "CSK") {
-            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
-            var arJS = '@string.Join("|", CSK_AR.ToArray())';
-            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
             var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
         }
         else if (teamShortName == "DD") {
-            var batJS = '@string.Join("|", DD_Bat.ToArray())';
-            var arJS = '@string.Join("|", DD_AR.ToArray())';
-            var wkJS = '@string.Join("|", DD_WK.ToArray())';
             var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
         }
         else if (teamShortName == "KP") {
-            var batJS = '@string.Join("|", KP_Bat.ToArray())';
-            var arJS = '@string.Join("|", KP_AR.ToArray())';
-            var wkJS = '@string.Join("|", KP_WK.ToArray())';
             var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
         }
         else if (teamShortName == "KKR") {
-            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
-            var arJS = '@string.Join("|", KKR_AR.ToArray())';
-            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
             var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
         }
         else if (teamShortName == "MI") {
-            var batJS = '@string.Join("|", MI_Bat.ToArray())';
-            var arJS = '@string.Join("|", MI_AR.ToArray())';
-            var wkJS = '@string.Join("|", MI_WK.ToArray())';
             var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
         }
         else if (teamShortName == "RR") {
-            var batJS = '@string.Join("|", RR_Bat.ToArray())';
-            var arJS = '@string.Join("|", RR_AR.ToArray())';
-            var wkJS = '@string.Join("|", RR_WK.ToArray())';
             var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
         }
         else if (teamShortName == "RCB") {
-            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
-            var arJS = '@string.Join("|", RCB_AR.ToArray())';
-            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
             var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
         }
         else if (teamShortName == "SRH") {
-            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
-            var arJS = '@string.Join("|", SRH_AR.ToArray())';
-            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
             var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
         }
 
@@ -637,25 +588,7 @@
         return content;
     }
 
-
-    //var elem = document.querySelector('.collapsible.expandable.batsmen');
-    //var instance = M.Collapsible.init(elem, {accordion: false});
-
-    //var elem = document.querySelector('.collapsible.expandable.wicketkeepers');
-    //var instance = M.Collapsible.init(elem, {
-    //    accordion: false
-    //});
-
-    //var elem = document.querySelector('.collapsible.expandable.allrounders');
-    //var instance = M.Collapsible.init(elem, {
-    //    accordion: false
-    //});
-
-    //var elem = document.querySelector('.collapsible.expandable.bowlers');
-    //var instance = M.Collapsible.init(elem, {
-    //    accordion: false
-    //});
-
+    //to start out with the first team.
     TeamSelectionChanged("0");
 
 </script>
