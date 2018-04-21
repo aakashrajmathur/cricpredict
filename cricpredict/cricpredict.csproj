@@ -167,6 +167,8 @@
     <Content Include="Content\IPL\Data\Standings.txt" />
     <Content Include="Content\IPL\Data\Results.txt" />
     <Content Include="Content\IPL\Data\UpcomingGames.txt" />
+    <Content Include="Content\IPL\Logos\ball.png" />
+    <Content Include="Content\IPL\Logos\bat.png" />
     <Content Include="Content\IPL\Logos\Chennai Super Kings.png" />
     <Content Include="Content\IPL\Logos\Delhi Daredevils.png" />
     <Content Include="Content\IPL\Logos\Drag.png" />
@@ -180,6 +182,7 @@
     <Content Include="Content\IPL\Logos\Royal Challengers Bangalore.png" />
     <Content Include="Content\IPL\Logos\SunRisers Hyderabad.png" />
     <Content Include="Content\IPL\Logos\UpDown.png" />
+    <Content Include="Content\IPL\Logos\wk.png" />
     <Content Include="css\materialize.css" />
     <Content Include="css\materialize.min.css" />
     <Content Include="favicon.ico" />
