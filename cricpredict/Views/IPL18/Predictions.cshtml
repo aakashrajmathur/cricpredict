@@ -7,43 +7,240 @@
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
-                <li><a href='@Url.Action("Standings", "IPL18")'>Standings</a></li>
-                <li class="active"><a href='@Url.Action("Games", "IPL18")'>Upcoming Games</a></li>
+                <li class="active"><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
                 <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- cricpredict -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2176788893488829"
+     data-ad-slot="5404357502"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 @{
     //Input from controller
 
     string inputResults = (string)ViewData["Results"];
-    List<string> results = new List<string>();
-    string[] tokens = inputResults.Split(',');
-    <p>@tokens.Length</p>
-    foreach (string token in tokens)
-    {
-        results.Add(token);
-    }
-
-
-
     string inputStandings = (string)ViewData["Standings"];
-    List<string> standings = new List<string>();
-    tokens = inputStandings.Split(',');
-    foreach (string token in tokens)
-    {
-        standings.Add(token);
-    }
+    string inputWeek = (string)ViewData["Defaults"];
 }
 
-<div>
-
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card grey lighten-5 z-depth-2">
+                <h5 class="center-align teal-text text" style="padding-top:10px">STANDINGS</h5>
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th></th> <th>P</th> <th>W</th> <th>L</th> <th>Pts</th> <th>NRR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standingsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div id="predictions">
+                <div class="card grey lighten-5 z-depth-2">
+                    <h5 class="center-align teal-text" style="padding-top:10px">PREDICTIONS</h5>
+                    <table class="centered">
+                        <thead>
+                            <tr>
+                                <th></th> <th>P</th> <th>W</th> <th>L</th> <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody id="predictionsTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
 <script type="text/javascript">
+    var currentWeek = [0];
+
+    var origStandingsJS = [];   //ShortTeamName, LongTeamName, P, W, L, T, Pts, NRR
+    var predictStandingJS = []; //ShortTeamName, LongTeamName, P, W, L, T, Pts, %
+    var gameInfoJS = [];        //homeTeamLongName, AwayTeamLongName, where, when, week, completed, winnerLongTeamName, winnerNotes, homeScore, awayScore
+
+    function GetLongTeamName(shortTeamName) {
+        if (shortTeamName == "KXIP") return "Kings XI Punjab";
+        if (shortTeamName == "CSK") return "Chennai Super Kings";
+        if (shortTeamName == "KKR") return "Kolkata Knight Riders";
+        if (shortTeamName == "SRH") return "Sunrisers Hyderabad";
+        if (shortTeamName == "RCB") return "Royal Challengers Bangalore";
+        if (shortTeamName == "RR") return "Rajasthan Royals";
+        if (shortTeamName == "MI") return "Mumbai Indians";
+        if (shortTeamName == "DD") return "Delhi Daredevils";
+    }
+
+    function GetShortTeamName(longTeamName) {
+        if (longTeamName == "Kings XI Punjab") return "KXIP";
+        if (longTeamName == "Chennai Super Kings") return "CSK";
+        if (longTeamName == "Kolkata Knight Riders") return "KKR";
+        if (longTeamName == "Sunrisers Hyderabad") return "SRH";
+        if (longTeamName == "Royal Challengers Bangalore") return "RCB";
+        if (longTeamName == "Rajasthan Royals") return "RR";
+        if (longTeamName == "Mumbai Indians") return "MI";
+        if (longTeamName == "Delhi Daredevils") return "DD";
+    }
+
+    window.onload = function () {
+        currentWeek[0] = '@inputWeek';
+
+        var standingsTokens = '@inputStandings'.split(',');
+        for (i = 0; i < standingsTokens.length; i = i + 8) {
+            origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7] });
+            predictStandingJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": 0, "W": 0, "L": 0, "T": 0, "Pts": 0,"NRR": standingsTokens[i + 7], "PlayoffPerc": 50.0 });
+        }
+        var resultsTokens = '@inputResults'.split('|');
+        for (i = 0; i < resultsTokens.length; i = i + 10) {
+            gameInfoJS.push({ "HomeTeamName": resultsTokens[i], "AwayTeamName": resultsTokens[i + 1], "Where": resultsTokens[i + 2], "When": resultsTokens[i + 3], "Week": resultsTokens[i + 4], "Completed": resultsTokens[i + 5], "WinnerTeamName": resultsTokens[i + 6], "WinnerScore": resultsTokens[i + 7], "HomeScore": resultsTokens[i + 8], "AwayScore": resultsTokens[i + 9] });
+        }
+
+        for (i = 0; i < gameInfoJS.length; i++) {
+            var homeTeamObj = FindObjectByKey(predictStandingJS, "LongTeamName", gameInfoJS[i].HomeTeamName);
+            homeTeamObj.P++;
+            var awayTeamObj = FindObjectByKey(predictStandingJS, "LongTeamName", gameInfoJS[i].AwayTeamName);
+            awayTeamObj.P++;
+            //alert("Comparing " + gameInfoJS[i].HomeTeamName +" to " + gameInfoJS[i].WinnerTeamName)
+            if (gameInfoJS[i].HomeTeamName == gameInfoJS[i].WinnerTeamName) {
+                homeTeamObj.W++;
+                homeTeamObj.Pts += 2;
+                awayTeamObj.L++;
+            } else {
+                awayTeamObj.W++;
+                awayTeamObj.Pts += 2;
+                homeTeamObj.L++;
+            }
+        }
+        //Sort the predictStandingJS on pts, w, current RR
+        SortStandings(predictStandingJS);
+
+        //for (i = 0; i < predictStandingJS.length; i++) {
+        //    alert(predictStandingJS[i].LongTeamName + " " + predictStandingJS[i].W + " " + predictStandingJS[i].L + " " + predictStandingJS[i].NRR);
+            //}
+        document.getElementById("standingsTableBody").innerHTML = GetStandingsTableBody();
+        document.getElementById("predictionsTableBody").innerHTML = GetPredictionsTableBody();
+    }
+
+    function GetStandingsTableBody() {
+        var content = "";
+
+        for (i = 0; i < origStandingsJS.length; i++) {
+            content += "<tr> <td> <div class=\"clearfix float-my-children\" > ";
+            content += "<img src=\"/Content/IPL/Logos/" + origStandingsJS[i].LongTeamName + ".png\" height=\"22\" style=\"padding-left:20px\" >";
+            //content += "<div class=\"hide-on-med-and-up\">" + origStandingsJS[i].ShortTeamName + "</div>";
+            //content += "<div class=\"hide-on-small-only\">" + origStandingsJS[i].LongTeamName + "</div>";
+            content += "<div style=\" padding-left:20px\">" + origStandingsJS[i].ShortTeamName + "</div>";
+            content += "</div> </td> <td>" + origStandingsJS[i].P + "</td>";
+            content += "<td>" + origStandingsJS[i].W + "</td>";
+            content += "<td>" + origStandingsJS[i].L + "</td>";
+            content += "<td>" + origStandingsJS[i].Pts + "</td>";
+            content += "<td>" + origStandingsJS[i].NRR + "</td>";
+            content += "</tr> ";
+        }
+        return content;
+    }
+
+    function GetPredictionsTableBody() {
+        var content = "";
+
+        for (i = 0; i < origStandingsJS.length; i++) {
+
+            content += "<tr> <td> <div class=\"clearfix float-my-children\"> ";
+            content += "<img src=\"/Content/IPL/Logos/" + predictStandingJS[i].LongTeamName + ".png\" height=\"22\" style=\"padding-left:20px\" > ";
+            //content += "<div class=\"hide-on-med-and-up\">" + predictStandingJS[i].ShortTeamName + "</div>";
+            //content += "<div class=\"hide-on-small-only\">" + predictStandingJS[i].LongTeamName + "</div>";
+            content += "<div style=\" padding-left:20px\">" + predictStandingJS[i].ShortTeamName + "</div>";
+            content += "</div> </td> <td>" + predictStandingJS[i].P + "</td>";
+            content += "<td>" + predictStandingJS[i].W + "</td>";
+            content += "<td>" + predictStandingJS[i].L + "</td>";
+            content += "<td>" + predictStandingJS[i].PlayoffPerc + "</td>";
+            content += "</tr> ";
+        }
+        return content;
+    }
+
+    function SortStandings(standings) {
+        standings.sort(function (a, b) {
+            if (a.pts != b.pts)
+                return b.pts - a.pts;
+            else if (a.W != b.W)
+                return b.W - a.W;
+            else if (a.NRR != b.NRR)
+                return b.NRR - a.NRR;
+            else {
+                if (a.TeamName == b.TeamName) return 0;
+                if (a.TeamName > b.TeamName) return 1;
+                if (a.TeamName < b.TeamName) return -1;
+            }
+        });     
+    }
+
+    function FindObjectByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key].localeCompare(value) == 0) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value + " not found!");
+        return null;
+    }
+
 
 </script>
 
+
+
+<style type="text/css">
+    td {
+        padding: 5px;
+        margin: 0px;
+    }
+
+    th {
+        padding: 5px;
+        margin: 0px;
+    }
+
+    /* tell the container's children to float left: */
+    .float-my-children > * {
+        float: left;
+        margin-right: 5px;
+    }
+
+    /* this is called a clearfix. it makes sure that the container's children floats are cleared, without using extra markup */
+
+    .clearfix {
+        *zoom: 1 /* for IE */
+    }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+    .card-panel {
+        padding: 5px;
+    }
+
+    .table {
+        margin: 0px;
+    }
+</style>

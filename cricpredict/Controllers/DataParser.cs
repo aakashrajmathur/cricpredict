@@ -124,7 +124,7 @@ namespace cricpredict.Controllers
 
                         // when is in line: results[i + 2];         
                         //- May 5, 2018
-                        string when = results[i + 2].Substring(2);
+                        string when = results[i + 2].Substring(2, results[i+2].Length-8);
                         string week = GetWeek(when);
 
                         // IsGameComplete, Result, winner is in line: results[i + 3];  
@@ -179,8 +179,12 @@ namespace cricpredict.Controllers
                     }
                 }
 
-                string newResults = string.Join(",", toBeWritten.ToArray());
+                string newResults = string.Join("|", toBeWritten.ToArray());
                 System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"), newResults);
+
+                //Write CurrentWeek to Defaults.txt
+                string toBeWrittenDefaults = GetWeek(DateTime.Now.ToShortDateString());
+                System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Defaults.txt"), toBeWrittenDefaults);
             }
         }
     }
