@@ -138,13 +138,10 @@
                 homeTeamObj.L++;
             }
         }
+        document.getElementById("standingsTableBody").innerHTML = GetStandingsTableBody();
+
         //Sort the predictStandingJS on pts, w, current RR
         SortStandings(predictStandingJS);
-
-        //for (i = 0; i < predictStandingJS.length; i++) {
-        //    alert(predictStandingJS[i].LongTeamName + " " + predictStandingJS[i].W + " " + predictStandingJS[i].L + " " + predictStandingJS[i].NRR);
-            //}
-        document.getElementById("standingsTableBody").innerHTML = GetStandingsTableBody();
         document.getElementById("predictionsTableBody").innerHTML = GetPredictionsTableBody();
 
         UpdateGamesAndResults();
@@ -208,7 +205,70 @@
     }
 
     function ChangeSelection(id) {
-        alert("Received event from id = " + id);
+
+        //3 things need to happen:
+        //1. Update check boxes (done)
+        //2. Update standings
+        //3. Update Projected standings based on new winners
+
+        //1. Update check boxes:
+        var tokens = id.split('_');
+
+        //determine if the id was checked or unchecked:
+        var checked = false;
+        if (document.getElementById(id).checked)
+            checked = true;
+
+        var corrId = "";
+        if (tokens.length > 2) {
+            if (tokens[2] == "Home") 
+                corrId = tokens[0] + '_' + tokens[1] + '_' + "Away";            
+            else
+                corrId = tokens[0] + '_' + tokens[1] + '_' + "Home";
+        }    
+        document.getElementById(corrId).checked = !document.getElementById(id).checked;
+        
+        var homeTeamLongName = gameInfoJS[tokens[1] * 1 - 1].HomeTeamName;
+        var awayTeamLongName = gameInfoJS[tokens[1] * 1 - 1].AwayTeamName;
+        
+        var winner = "";
+        var loser = "";
+        if (document.getElementById(id).checked == true) {
+            if (id.includes("Home")) {
+                winner = homeTeamLongName;
+                loser = awayTeamLongName;
+            } else {
+                winner = awayTeamLongName;
+                loser = homeTeamLongName;
+            }            
+        }
+        else {
+            if (id.includes("Home")) {
+                winner = awayTeamLongName;
+                loser = homeTeamLongName;
+            } else {
+                winner = homeTeamLongName;
+                loser = awayTeamLongName;
+            }
+        }
+        
+        alert("Win = " + winner + ", lose = " + loser);
+        //update winner in gameInfo.
+        gameInfoJS[tokens[1] * 1 - 1].WinnerTeamName = winner;
+        
+        //
+        var winnerObj = FindObjectByKey(predictStandingJS, "LongTeamName", winner);
+        winnerObj.W++;
+        winnerObj.L--;
+        winnerObj.Pts += 2;
+        var loserObj = FindObjectByKey(predictStandingJS, "LongTeamName", loser);
+        loserObj.W--;
+        loserObj.L++;
+        loserObj.Pts -= 2;
+
+        //Sort and Redraw standings
+        SortStandings(predictStandingJS);
+        document.getElementById("predictionsTableBody").innerHTML = GetPredictionsTableBody();
     }
 
     function GetGamesContent() {
@@ -222,7 +282,7 @@
                 if (gameInfoJS[i].Week == currentWeek[0]) {
                     if (gameInfoJS[i].Completed == "true") {
 
-                        content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
+                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
                         //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
                             content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
                         //}
@@ -274,10 +334,11 @@
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text\">" + gameInfoJS[i].When + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text\">" + gameInfoJS[i].Where + "</p>";
-                        content += "    ";
+
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";                        
                     }
                 }
@@ -288,7 +349,7 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if ((gameInfoJS[i].HomeTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]]) || (gameInfoJS[i].AwayTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]])) {
                     if (gameInfoJS[i].Completed == "true") {
-                        content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
+                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
                        // if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
                             content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
                         //}
@@ -307,7 +368,7 @@
                             content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Home\" checked=\"checked\" onclick=\"ChangeSelection(id)\" />";
                         }
                         else {
-                            content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Home\" />";
+                            content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Home\" onclick=\"ChangeSelection(id)\" />";
                         }
                         content += "                    <span></span>";
                         content += "                </label>";
@@ -329,7 +390,7 @@
                             content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Away\" checked=\"checked\" onclick=\"ChangeSelection(id)\" />";
                         }
                         else {
-                            content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Away\" />";
+                            content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Away\" onclick=\"ChangeSelection(id)\" />";
                         }
                         content += "                    <span></span>";
                         content += "                </label>";
@@ -340,10 +401,11 @@
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text\">" + gameInfoJS[i].When + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text\">" + gameInfoJS[i].Where + "</p>";
-                        content += "    ";
+
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
                 }
@@ -362,7 +424,7 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if (gameInfoJS[i].Week == currentWeek[0]) {
                     if (gameInfoJS[i].Completed == "false") {
-                        content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
+                       // content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
                         //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
                         //}
@@ -414,13 +476,13 @@
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text; padding:bottom:0px\" >" + gameInfoJS[i].When + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text; padding:bottom:0px\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text; padding:bottom:0px\">" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text; padding-top:5px\" >" + gameInfoJS[i].HomeScore + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text; padding-top:5px\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text; padding-top:5px\">" + gameInfoJS[i].AwayScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\">" + gameInfoJS[i].AwayScore + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";                        
                     }
@@ -432,7 +494,7 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if ((gameInfoJS[i].HomeTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]]) || (gameInfoJS[i].AwayTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]])) {
                     if (gameInfoJS[i].Completed == "false") {
-                        content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
+                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
                         // if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
                         //}
@@ -484,14 +546,15 @@
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text\">" + gameInfoJS[i].When + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text\">" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"right-align teal-text\">" + gameInfoJS[i].HomeScore + "</p>";
-                        content += "    <p style=\"float:left; width:5%\" class=\"right-align teal-text\"></p>";
-                        content += "    <p style=\"float:left; width:47.5%\" class=\"left-align teal-text\">" + gameInfoJS[i].AwayScore + "</p>";
-                        
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\">" + gameInfoJS[i].AwayScore + "</p>";
+
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
                 }
