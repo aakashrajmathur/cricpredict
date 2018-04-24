@@ -1,1 +1,0 @@
-﻿"Sunrisers Hyderabad",3,3,0,0,6,0.772,50,"Chennai Super Kings",2,2,0,0,4,0.254,50,"Kings XI Punjab",2,1,1,0,2,0.064,50,"Kolkata Knight Riders",3,1,2,0,2,-0.051,50,"Royal Challengers Bangalore",2,1,1,0,2,-0.068,50,"Delhi Daredevils",3,1,2,0,2,-0.461,50,"Rajasthan Royals",2,1,1,0,2,-1.065,50,"Mumbai Indians",3,0,3,0,0,-0.174,50

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Team";
 }
 
@@ -7,127 +6,544 @@
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
-                <li><a href='@Url.Action("Standings", "IPL18")'>Standings</a></li>
-                <li><a href='@Url.Action("Games", "IPL18")'>Upcoming Games</a></li>
-                <li class="active"><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+                <li class="active"><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
+                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
+<br />
+
+<div class="container">
+    <div id="teamsLogos" >
+
+    </div>
+    <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
+    <p class="center-align grey-text" style="font-size:14px" id="playerCountLabel">0 players selected</p>
+    <div class="row">
+        <div class="s12 center-align" id="teamName"></div>
+    </div>
+    <div class="row" id="players">
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" style="margin-top:-335px"/>  Batsmen</h5>
+            <ul class="collapsible expandable batsmen" id="batsmen"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" /><img src="~/Content/IPL/Logos/ball.png" height="24" />  All Rounders</h5>
+            <ul class="collapsible expandable allrounders" id="allrounders"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/wk.png" height="24" />  Wicket Keepers</h5>
+            <ul class="collapsible expandable wicketkeepers" id="wicketkeepers"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/ball.png" height="24" />  Bowlers</h5>
+            <ul class="collapsible expandable bowlers" id="bowlers"></ul>
+        </div>
+    </div>
+</div>
+
 @{
-    //Royal Challengers Bangalore|batsman|Brendon McCullum|New Zealand|Right-handed|Right-arm medium|₹3.6 crore (US$551,000)|true
     string playerInfo = (string)ViewData["PlayerInfo"];
+
+    List<string> CSK_Bat = new List<string>();
+    List<string> CSK_AR = new List<string>();
+    List<string> CSK_WK = new List<string>();
+    List<string> CSK_Bowl = new List<string>();
+
+    List<string> KP_Bat = new List<string>();
+    List<string> KP_AR = new List<string>();
+    List<string> KP_WK = new List<string>();
+    List<string> KP_Bowl = new List<string>();
+
+    List<string> KKR_Bat = new List<string>();
+    List<string> KKR_AR = new List<string>();
+    List<string> KKR_WK = new List<string>();
+    List<string> KKR_Bowl = new List<string>();
+
+    List<string> MI_Bat = new List<string>();
+    List<string> MI_AR = new List<string>();
+    List<string> MI_WK = new List<string>();
+    List<string> MI_Bowl = new List<string>();
+
+    List<string> DD_Bat = new List<string>();
+    List<string> DD_AR = new List<string>();
+    List<string> DD_WK = new List<string>();
+    List<string> DD_Bowl = new List<string>();
+
+    List<string> SRH_Bat = new List<string>();
+    List<string> SRH_AR = new List<string>();
+    List<string> SRH_WK = new List<string>();
+    List<string> SRH_Bowl = new List<string>();
+
+    List<string> RR_Bat = new List<string>();
+    List<string> RR_AR = new List<string>();
+    List<string> RR_WK = new List<string>();
+    List<string> RR_Bowl = new List<string>();
+
+    List<string> RCB_Bat = new List<string>();
+    List<string> RCB_AR = new List<string>();
+    List<string> RCB_WK = new List<string>();
+    List<string> RCB_Bowl = new List<string>();
+
+    string[] tokens = playerInfo.Split('|');
+    for (int i = 0; i < tokens.Length; i = i + 8)
+    {
+        if (tokens[i] == "Royal Challengers Bangalore")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                RCB_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                RCB_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                RCB_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                RCB_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Delhi Daredevils")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                DD_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                DD_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                DD_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                DD_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Sunrisers Hyderabad")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                SRH_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                SRH_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                SRH_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                SRH_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Kings XI Punjab")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                KP_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                KP_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                KP_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                KP_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Rajasthan Royals")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                RR_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                RR_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                RR_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                RR_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Kolkata Knight Riders")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                KKR_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                KKR_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                KKR_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                KKR_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Mumbai Indians")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                MI_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                MI_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                MI_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                MI_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Chennai Super Kings")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                CSK_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                CSK_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                CSK_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                CSK_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+    }
 }
 
 
-<div class="container">
-    <p class="left-align teal-text">Click on a team to select</p>
-    <div id="teamsLogos">
-    </div>
-    <div class="row" id="players">
-    </div>
-</div>
 <script type="text/javascript">
-    //Global constants
-    var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
-    var currentTeamIndex = [0]; //for it to be accessable inside functions, this needs to be a list and cannot be just an integer.
 
-    window.onload = function () {
-        document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
-        document.getElementById('players').innerHTML = GetPlayersContent(); 
-    }
 
-    function GetPlayersContent() {
-        var content = "";
-        content += "<div class=\"col s12 m6 l3\">";
-        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Batsmen</h5>";
-        content += "    <ul class=\"collapsible expandable batsmen\">";
-        content += "        <li>";
-        content += "            <div class=\"collapsible-header\">";
-        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
-        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
-        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
-        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
-        content += "            </div>";
-        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
-        content += "        </li>";
-        content += "    </ul>";
-        content += "</div>";
-        content += "<div class=\"col s12 m6 l3\">";
-        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  All-Rounders</h5>";
-        content += "    <ul class=\"collapsible expandable allrounders\">";
-        content += "        <li>";
-        content += "            <div class=\"collapsible-header\">";
-        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
-        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
-        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
-        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
-        content += "            </div>";
-        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
-        content += "        </li>";
-        content += "    </ul>";
-        content += "</div>";
-        content += "<div class=\"col s12 m6 l3\">";
-        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Wicket-Keepers</h5>";
-        content += "    <ul class=\"collapsible expandable wicketkeepers\">";
-        content += "        <li>";
-        content += "            <div class=\"collapsible-header\">";
-        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
-        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
-        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
-        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
-        content += "            </div>";
-        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
-        content += "        </li>";
-        content += "    </ul>";
-        content += "</div>";
-        content += "<div class=\"col s12 m6 l3\">";
-        content += "    <h5><img src=\"~/Content/IPL/Logos/plane.png\" height=\"16\" />  Bowlers</h5>";
-        content += "    <ul class=\"collapsible expandable bowlers\">";
-        content += "        <li>";
-        content += "            <div class=\"collapsible-header\">";
-        content += "                <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
-        content += "                <span style=\"font-size:16px\"> Select me(c) </span>";
-        content += "                <img src=\"~/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\" />";
-        content += "                <span class=\"right-align\"><i class=\"large material-icons\">keyboard_arrow_down</i></span>";
-        content += "            </div>";
-        content += "            <div class=\"collapsible-body\"><span>Lorem ipsum dolor sit amet.</span></div>";
-        content += "        </li>";
-        content += "    </ul>";
-        content += "</div>";
-        return content;
-    }    
+    var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad"];
+    var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');
     var instance = M.Collapsible.init(elem, {
         accordion: false
     });
-
-    var elem = document.querySelector('.collapsible.expandable.wicketkeepers');
-    var instance = M.Collapsible.init(elem, {
-        accordion: false
-    });
-
     var elem = document.querySelector('.collapsible.expandable.allrounders');
     var instance = M.Collapsible.init(elem, {
         accordion: false
     });
-
+    var elem = document.querySelector('.collapsible.expandable.wicketkeepers');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
     var elem = document.querySelector('.collapsible.expandable.bowlers');
     var instance = M.Collapsible.init(elem, {
         accordion: false
     });
-    
+
+    document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+
+
     function PlayerSelectionChanged() {
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
-        //alert(total);
         M.toast({ html: total + ' players selected.', displayLength: 2000 });
+        if(total == 1)
+            document.getElementById("playerCountLabel").innerHTML = total + " player selected";
+        else
+            document.getElementById("playerCountLabel").innerHTML = total + " players selected";
     }
-    
+
     function TeamSelectionChanged(id) {
-        
-        alert(teamNames[id] + " selected");
+        document.getElementById("teamName").innerHTML = "<h5 class=\"teal-text\">" + teamNames[id] + "</h5>";
+        document.getElementById("batsmen").innerHTML = GetBatsmenInnerHTML(teamShortNames[id]);
+        document.getElementById("allrounders").innerHTML = GetAllRoundersInnerHTML(teamShortNames[id]);
+        document.getElementById("wicketkeepers").innerHTML = GetWicketKeepersInnerHTML(teamShortNames[id]);
+        document.getElementById("bowlers").innerHTML = GetBowlersInnerHTML(teamShortNames[id]);
+
+    }
+
+    function GetBatsmenInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
+            var arJS = '@string.Join("|", CSK_AR.ToArray())';
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var batJS = '@string.Join("|", DD_Bat.ToArray())';
+            var arJS = '@string.Join("|", DD_AR.ToArray())';
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var batJS = '@string.Join("|", KP_Bat.ToArray())';
+            var arJS = '@string.Join("|", KP_AR.ToArray())';
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
+            var arJS = '@string.Join("|", KKR_AR.ToArray())';
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var batJS = '@string.Join("|", MI_Bat.ToArray())';
+            var arJS = '@string.Join("|", MI_AR.ToArray())';
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var batJS = '@string.Join("|", RR_Bat.ToArray())';
+            var arJS = '@string.Join("|", RR_AR.ToArray())';
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
+            var arJS = '@string.Join("|", RCB_AR.ToArray())';
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
+            var arJS = '@string.Join("|", SRH_AR.ToArray())';
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var batsmen = batJS.split('|');
+        for (i = 0; i < batsmen.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + batsmen[i] + "</span>";
+            if (batsmen[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetAllRoundersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
+            var arJS = '@string.Join("|", CSK_AR.ToArray())';
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var batJS = '@string.Join("|", DD_Bat.ToArray())';
+            var arJS = '@string.Join("|", DD_AR.ToArray())';
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var batJS = '@string.Join("|", KP_Bat.ToArray())';
+            var arJS = '@string.Join("|", KP_AR.ToArray())';
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
+            var arJS = '@string.Join("|", KKR_AR.ToArray())';
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var batJS = '@string.Join("|", MI_Bat.ToArray())';
+            var arJS = '@string.Join("|", MI_AR.ToArray())';
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var batJS = '@string.Join("|", RR_Bat.ToArray())';
+            var arJS = '@string.Join("|", RR_AR.ToArray())';
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
+            var arJS = '@string.Join("|", RCB_AR.ToArray())';
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
+            var arJS = '@string.Join("|", SRH_AR.ToArray())';
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var players = arJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetWicketKeepersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+        }
+
+        var players = wkJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetBowlersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var players = bowlJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
     }
 
     function GetColor(i, j) {
@@ -149,17 +565,20 @@
             return "deep orange";
     }
 
-    function GetTeamsLogosContent() {
+    function GetTeamsLogosContent()
+    {
+        //var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
+
         var content = "";
         content += "<div class=\"row\">";
 
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < 2; i++)
+        {
             content += "<div class=\"col s12 m6\">";
             content += "<div class=\"row\">";
             for (j = 0; j < 4; j++) {
-                content += "<div class=\"col s3 z-depth-5 center hoverable " + GetColor(i, j) + " \" style=\"height:100px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
-                content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> </div>";
-                //content += "<div>" + teamNames[i * 4 + j * 1] + "</div>";
+                content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";                
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
                 content += "</div>";
             }
             content += "</div>";
@@ -167,8 +586,11 @@
         }
         content += "</div>";
         return content;
-
     }
 
+    //to start out with the first team.
+    TeamSelectionChanged("0");
 
 </script>
+
+

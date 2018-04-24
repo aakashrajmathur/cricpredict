@@ -71,8 +71,8 @@
     var standingsJS = [];
     for (i = 0; i < standingsJSTokens.length; i=i+8)
     {
-        standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": standingsJSTokens[i + 7] });
-        origStandingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": standingsJSTokens[i + 7] });
+        standingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": 50 });
+        origStandingsJS.push({ "TeamName": standingsJSTokens[i], "W": standingsJSTokens[i + 2], "L": standingsJSTokens[i + 3], "T": standingsJSTokens[i + 4], "Pts": standingsJSTokens[i + 5], "NRR": standingsJSTokens[i + 6], "PlayoffPercentage": 50 });
     }
     
     for (i = 0; i < winnersJS.length; i++)
@@ -191,19 +191,21 @@
 
             //alert("winner = " + gamesJS[otherIndex] + " loser = " + gamesJS[index]);
             winner = gamesJS[otherIndex];
-            loser = gamesJS[index];
-
-            //alert('old winner = ' + gamesJS[index] + 'new winner = ' + winnersJS[tokens[1] * 1]);
+            loser = gamesJS[index];            
         }
+
+        //alert('winner = ' + winner + 'loser = ' + loser);
 
         //Loser:
         var currItem = findObjectByKey(standingsJS, "TeamName", loser);
         currItem.W = currItem.W * 1 - 1;
+        currItem.L = currItem.L * 1 + 1;
         currItem.Pts = currItem.Pts * 1 - 2;
 
         //Winner:
         var currItem = findObjectByKey(standingsJS, "TeamName", winner);
         currItem.W = currItem.W * 1 + 1;
+        currItem.L = currItem.L * 1 - 1;
         currItem.Pts = currItem.Pts * 1 + 2;
 
         //3. Projected standings need to be updated.

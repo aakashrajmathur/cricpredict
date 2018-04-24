@@ -1,51 +1,4 @@
-﻿@{
-    ViewBag.Title = "Standings";
-}
-
-<style type="text/css">
-    td {
-        padding: 5px;
-        margin: 0px;
-    }
-
-    th {
-        padding: 5px;
-        margin: 0px;
-    }
-
-
-    /* tell the container's children to float left: */
-    .float-my-children > * {
-        float: center;
-        margin-right: 5px;
-    }
-
-    /* this is called a clearfix. it makes sure that the container's children floats are cleared, without using extra markup */
-
-    .clearfix {
-        *zoom: 1 /* for IE */
-    }
-
-        .clearfix:before,
-        .clearfix:after {
-            content: " ";
-            display: table;
-        }
-
-        .clearfix:after {
-            clear: both;
-        }
-
-    .card-panel {
-        padding: 5px;
-    }
-
-    .table {
-        margin: 0px;
-    }
-</style>
-
-<nav class="teal">
+﻿<nav class="teal">
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
@@ -57,101 +10,23 @@
     </div>
 </nav>
 
-<div class="container">
-    <div id="standings">
-        <div class="row">
-            <div class="col s6">
-                <div class="card grey lighten-5 z-depth-2">
-                    <p class="center-align teal-text" style="padding-top:10px">STANDINGS</p>
-                    <table class="centered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>P</th>
-                                <th>W</th>
-                                <th>L</th>
-                                <th>RR</th>
-                            </tr>
-                        </thead>
+<h2>Data</h2>
 
-                        <tbody>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>2</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>2</td><td>4</td><td>23</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col s6">
-                <div class="card grey lighten-5 z-depth-2">
-                    <p class="center-align teal-text" style="padding-top:10px">PREDICTIONS</p>
-                    <table class="centered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>W</th>
-                                <th>L</th>
-                                <th>%</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr> <td> <div class="clearfix float-my-children"> <div class="red"><img class="yellow" src="~/Content/IPL/Logos/Chennai Super Kings.png" height="24" style="margin:0px; padding:0px;"><h6 >CSK</h6></div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                            <tr> <td> <div class="clearfix float-my-children"> <img src="~/Content/IPL/Logos/Chennai Super Kings.png" height="18"> <div>CSK</div> </div> </td><td>2</td><td>4</td><td>23</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<form method="post">
+    <fieldset>
+        <div>
+            <input type="password" name="Password" value="" />
         </div>
-    </div>
-    <div id="games">
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Submit" class="submit" />
+        </div>
+    </fieldset>
+</form>
 
-    </div>
-</div>
-
-
-
-<script type="text/javascript">
-    var currentWeekIndex = [1];     //can be 1 to 6.
-    var viewPrefence = ["date"];    //can be "date" or "team"
-    var standingsJS = [];
-    var gamesJS = []
-
-    function GetStandingsContent() {
-        var content = "";
-
-
-
-        return content;
+@{
+    if (IsPost)
+    {
+        @ViewData["status"]
     }
-
-    function GetGamesContent() {
-        var content = "";
-
-        return content;
-    }
-
-    function UpdateUI() {
-        document.getElementById("standings").innerHTML = GetStandingsContent();
-        document.getElementById("games").innerHTML = GetGamesContent();
-    }
-
-    window.onload = function () {
-        //Get the data from ViewData[] and populate global variables.
-
-
-        alert("from onload event.");
-        //UpdateUI();
-    }
-
-</script>
+}
