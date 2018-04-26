@@ -1,0 +1,24 @@
+false,Rohit Sharma (c), Mumbai Indians,Mumbai
+false,Hardik Pandya, Mumbai Indians,Mumbai
+false,Jasprit Bumrah, Mumbai Indians,Mumbai
+false,Krunal Pandya, Mumbai Indians,Mumbai
+false,Saurabh Tiwary, Mumbai Indians,Mumbai
+true,Ben Cutting, Sunrisers Hyderabad,Hyderabad
+true,Mustafizur Rahman, Sunrisers Hyderabad,Hyderabad
+false,Rahul Chahar, Rising Pune Supergiants,Pune
+false,Suryakumar Yadav, Kolkata Knight Riders,Kolkata
+false,Pradeep Sangwan, Gujarat Lions,Gujarat
+false,Ishan Kishan, Gujarat Lions,Gujarat
+true,JP Duminy, Delhi Daredevils,Delhi
+false,Aditya Tare, Delhi Daredevils,Delhi
+true,Pat Cummins, Delhi Daredevils,Delhi
+true,Jason Behrendorff,
+false,T N Dhillon, 
+false,Mohsin Khan, 
+true,Evin Lewis, 
+false,Sharad Lumba, 
+false,Mayank Markande, 
+true,Keiron Pollard, 
+true,Akila Dananjaya, 
+false,Anukul Sudhakar Roy, 
+false,MD Nidheesh, 

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="~/css/materialize.min.css" media="screen,projection" />
+
+    <script type="text/javascript" src="~/Scripts/materialize.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CricPredict</title>
+    
+    <style type="text/css">
+        nav {
+            height: 40px;
+            line-height: 40px;
+        }
+
+            nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+                height: 40px;
+                line-height: 40px;
+            }
+
+            nav .button-collapse i {
+                height: 40px;
+                line-height: 40px;
+            }
+
+            nav .brand-logo {
+                font-size: 1.6rem;
+            }
+    </style>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="blue-grey darken-1">
+        <div class="container">
+            <div class="nav-wrapper">
+                @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
+                <ul class="left">
+                    <li class="active">@Html.ActionLink("Indian Premier League", "Predictions", "IPL18", new { area = "" }, new { })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

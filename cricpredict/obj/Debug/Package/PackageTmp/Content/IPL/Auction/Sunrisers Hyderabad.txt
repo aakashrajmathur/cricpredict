@@ -1,0 +1,24 @@
+true,David Warner (c), Sunrisers Hyderabad,Hyderabad
+false,Siddarth Kaul, Sunrisers Hyderabad,Hyderabad
+false,Bhuvneshwar Kumar, Sunrisers Hyderabad,Hyderabad
+false,Shikhar Dhawan, Sunrisers Hyderabad,Hyderabad
+true,Kane Williamson, Sunrisers Hyderabad,Hyderabad
+true,Rashid Khan, Sunrisers Hyderabad,Hyderabad
+false,Ricky Bhui, Sunrisers Hyderabad,Hyderabad
+false,Bipul Sharma, Sunrisers Hyderabad,Hyderabad
+false,Deepak Hooda, Sunrisers Hyderabad,Hyderabad
+true,Mohammad Nabi, Sunrisers Hyderabad,Hyderabad
+true,Chris Jordan, Sunrisers Hyderabad,Hyderabad
+false,Tanmay Agarwal, Sunrisers Hyderabad,Hyderabad
+false,Sachin Baby, Royal Challengers Bangalore,Bangalore
+true,Billy Stanlake, Royal Challengers Bangalore,Bangalore
+false,Yusuf Pathan, Kolkata Knight Riders,Kolkata
+false,Manish Pandey, Kolkata Knight Riders,Kolkata
+true,Shakib Al Hasan, Kolkata Knight Riders,Kolkata
+false,T Natarajan, Kings XI Punjab,Punjab
+false,Sandeep Sharma, Kings XI Punjab,Punjab
+false,Wriddhiman Saha, Kings XI Punjab,Punjab
+true,Carlos Brathwaite, Delhi Daredevils,Delhi
+false,Khaleel Ahmed, 
+false,Shreevats Goswami, 
+false,Mehdi Hasan, 
