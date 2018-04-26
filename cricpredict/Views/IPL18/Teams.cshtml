@@ -6,8 +6,8 @@
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
-                <li class="active"><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
-                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+                <li><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
+                <li class="active"><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
             </ul>
         </div>
     </div>
@@ -247,10 +247,11 @@
 
 
 <script type="text/javascript">
-
-
-    var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad"];
+    //ab CDe fgh i j K l M n opq rst uvw xyz
+    var teamNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "MUMBAI INDIANS", "RAJASTHAN ROYALS", "ROYAL CHALLENGERS BANGALORE", "SUNRISERS HYDERABAD"];
+    //var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad"];
     var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
+    var currentTeamIndex = [0];
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');
     var instance = M.Collapsible.init(elem, {
@@ -281,13 +282,15 @@
             document.getElementById("playerCountLabel").innerHTML = total + " players selected";
     }
 
-    function TeamSelectionChanged(id) {
-        document.getElementById("teamName").innerHTML = "<h5 class=\"teal-text\">" + teamNames[id] + "</h5>";
+    function TeamSelectionChanged(id) {        
+        currentTeamIndex[0] = id;
+        document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+
+        document.getElementById("teamName").innerHTML = "<h5 class=\"black-text\">" + teamNames[id] + "</h5>";
         document.getElementById("batsmen").innerHTML = GetBatsmenInnerHTML(teamShortNames[id]);
         document.getElementById("allrounders").innerHTML = GetAllRoundersInnerHTML(teamShortNames[id]);
         document.getElementById("wicketkeepers").innerHTML = GetWicketKeepersInnerHTML(teamShortNames[id]);
         document.getElementById("bowlers").innerHTML = GetBowlersInnerHTML(teamShortNames[id]);
-
     }
 
     function GetBatsmenInnerHTML(teamShortName) {
@@ -550,7 +553,7 @@
         if (i * 4 + j * 1 == 0)
             return "yellow";
         else if (i * 4 + j * 1 == 1)
-            return "red lighten-4";
+            return "red lighten-2";
         else if (i * 4 + j * 1 == 2)
             return "red";
         else if (i * 4 + j * 1 == 3)
@@ -577,7 +580,11 @@
             content += "<div class=\"col s12 m6\">";
             content += "<div class=\"row\">";
             for (j = 0; j < 4; j++) {
-                content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";                
+                if (currentTeamIndex[0]*1 == i*4+j*1) {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                } else {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                }
                 content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
                 content += "</div>";
             }

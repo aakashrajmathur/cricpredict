@@ -63,13 +63,14 @@
             </div>
         </div>
         <div class="col s12 teal-text card grey lighten-5 z-depth-2">
-            <a class="col s2 center-align" href="#"> <i class="center-align medium material-icons blue-grey-text" onclick="PrevClicked()">chevron_left</i></a>
-            <div class="col s8 center-align hide-on-med-and-up"><h5 id="TitleSmall">Apr 16 - Apr 23</h5></div>
-            <div class="col m8 center-align hide-on-small-and-down"><h5 id="TitleFull">Week 1 (Apr 16 - Apr 23)</h5></div>
-            <a href="#" class="col s2 center-align"> <i class="medium material-icons center-align blue-grey-text" onclick="NextClicked()">chevron_right</i></a>
+            <div id="weeklySelection">
+                
+            </div>
+            <div id="teamsLogos">
 
-            <p class="col s6 m8 l8 small left-align grey-text"></p>
-            <p class="col s6 m4 l4">
+            </div>
+            <p class="col s4 m8 l8 small left-align grey-text"></p>
+            <p class="col s8 m4 l4">
                 <label style="padding-right:20px">
                     <input name="group1" type="radio" class="with-gap" id="radioButtonViewByDate" checked onchange="ViewByChanged(id)" />
                     <span>Date</span>
@@ -86,7 +87,7 @@
             </div>
             <h5 class="col s12 center-align teal-text" style="padding-top:10px">RESULTS</h5>
             <div id="results">
-                Results
+                
             </div>
         </div>
     </div>
@@ -101,15 +102,20 @@
     var predictStandingJS = []; //ShortTeamName, LongTeamName, P, W, L, T, Pts, %
     var gameInfoJS = [];        //homeTeamLongName, AwayTeamLongName, where, when, week, completed, winnerLongTeamName, winnerNotes, homeScore, awayScore
     
-    var teamFullNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "MUMBAI INDIANS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "ROYAL CHALLENGERS BANGALORE", "RAJASTHAN ROYALS", "SUNRISERS HYDERABAD"];
-    var teamShortNames = ["CSK", "DD", "MI", "KXIP", "KKR", "RCB", "RR", "SRH"];
+    var teamFullNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "MUMBAI INDIANS", "RAJASTHAN ROYALS", "ROYAL CHALLENGERS BANGALORE", "SUNRISERS HYDERABAD"];
+    var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
     var weekShortTitle = ["Apr 7 - Apr 15","Apr 16 - Apr 22","Apr 23 - Apr 29","Apr 30 - May 6","May 7 - May 13","May 14 - May 20"];
     var weekFullTitle = ["WEEK 1 (Apr 7 - Apr 15)","WEEK 2 (Apr 16 - Apr 22)","WEEK 3 (Apr 23 - Apr 29)","WEEK 4 (Apr 30 - May 6)","WEEK 5 (May 7 - May 13)","WEEK 6 (May 14 - May 20)"];
+    var backgroundColor = ["yellow", "red lighten-2", "red", "deep purple lighten-1", "light blue", "indigo lighten-2", "red accent-4", "deep orange"];
 
     window.onload = function () {
         currentWeek[0] = '@inputWeek';
-        document.getElementById('radioButtonViewByDate').checked = true;
 
+        document.getElementById('weeklySelection').innerHTML = GetWeeklySelectionContent();
+        document.getElementById('teamsLogos').innerHTML = "";
+
+        document.getElementById('radioButtonViewByDate').checked = true;
+        
         var standingsTokens = '@inputStandings'.split(',');
         for (i = 0; i < standingsTokens.length; i = i + 8) {
             origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7], "PlayoffPerc":50.0 });
@@ -175,33 +181,83 @@
         UpdateGamesAndResults();
     }
 
+    function GetWeeklySelectionContent() {
+        var content = ""; 
+        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons blue-grey-text\" onclick=\"PrevClicked()\">chevron_left</i></a>";
+        content += "<div class=\"col s8 center-align hide-on-med-and-up\"><h5 id=\"TitleSmall\">Apr 16 - Apr 23</h5></div>";
+        content += "<div class=\"col m8 center-align hide-on-small-and-down\"><h5 id=\"TitleFull\">Week 1 (Apr 16 - Apr 23)</h5></div>";
+        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align blue-grey-text\" onclick=\"NextClicked()\">chevron_right</i></a>";
+        return content;
+    }
+        
+    function TeamSelectionChanged(id) {
+        currentTeamIndex[0] = id;
+        document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+
+        UpdateGamesAndResults();
+    }
+
+    function GetTeamsLogosContent() {
+        var content = "";
+        content += "<div class=\"row\">";
+
+        for (i = 0; i < 2; i++) {
+            content += "<div class=\"col s12 m6\">";
+            content += "<div class=\"row\">";
+            for (j = 0; j < 4; j++) {
+                if (currentTeamIndex[0] * 1 == i * 4 + j * 1) {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable " + backgroundColor[ i*4+ j*1] + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                } else {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                }
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamFullNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
+                content += "</div>";
+            }
+            content += "</div>";
+            content += "</div>";
+        }
+        content += "</div>";
+        content += "<div class=\"col s12 center-align hide-on-med-and-up\"><h5 id=\"TitleSmall\" class=\"black-text\" >Apr 16 - Apr 23</h5></div>";
+        content += "<div class=\"col m12 center-align hide-on-small-and-down\"><h5 id=\"TitleFull\" class=\"black-text\">Week 1 (Apr 16 - Apr 23)</h5></div>";
+
+        return content;
+    }
+
     function ViewByChanged(id) {
         if (id == "radioButtonViewByDate") {
             viewType[0] = "Date";
+
+            document.getElementById('weeklySelection').innerHTML = GetWeeklySelectionContent();
+            document.getElementById('teamsLogos').innerHTML = "";
         } else if (id == "radioButtonViewByTeam") {
             viewType[0] = "Team";
+
+            document.getElementById('weeklySelection').innerHTML = "";
+            document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
         }
+
+
         UpdateGamesAndResults();
     }
 
     function GetBackgroundColor(team) {
         
         if (team.toUpperCase() == "CHENNAI SUPER KINGS")
-            return "yellow"; //verified
+            return backgroundColor[0];
         else if (team.toUpperCase() == "DELHI DAREDEVILS")
-            return "red lighten-4"; //verified
-        else if (team.toUpperCase() == "MUMBAI INDIANS")
-            return "light blue lighten-4"; //verified
+            return backgroundColor[1];
         else if (team.toUpperCase() == "KINGS XI PUNJAB")
-            return "red lighten-3";
+            return backgroundColor[2];
         else if (team.toUpperCase() == "KOLKATA KNIGHT RIDERS")
-            return "deep purple lighten-4";
-        else if (team.toUpperCase() == "ROYAL CHALLENGERS BANGALORE")
-            return "red accent-1"; //verified
+            return backgroundColor[3];
+        else if (team.toUpperCase() == "MUMBAI INDIANS")
+            return backgroundColor[4];
         else if (team.toUpperCase() == "RAJASTHAN ROYALS")
-            return "indigo lighten-4"; //verified
+            return backgroundColor[5];
+        else if (team.toUpperCase() == "ROYAL CHALLENGERS BANGALORE")
+            return backgroundColor[6];
         else if (team.toUpperCase() == "SUNRISERS HYDERABAD")
-            return "deep orange"; //correct
+            return backgroundColor[7];
     }
 
     function ChangeSelection(id) {
@@ -281,19 +337,12 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if (gameInfoJS[i].Week == currentWeek[0]) {
                     if (gameInfoJS[i].Completed == "true") {
-
-                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
-                            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
-                        //}
-                        //else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";                    
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
                         content += "            </div>";
-                        content += "            <div class=\"col s6 right-align blue-grey-text\" style=\"font-weight: bold\">" + GetShortTeamName( gameInfoJS[i].HomeTeamName) + "</div>";
+                        content += "            <div class=\"col s6 right-align black-text\" style=\"font-weight: bold\">" + GetShortTeamName( gameInfoJS[i].HomeTeamName) + "</div>";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
 
@@ -310,12 +359,8 @@
                         content += "    </a>";
 
                         content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
-
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].AwayTeamName) {
-                            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].AwayTeamName)+" \">";
-                        //} else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
+                        
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].AwayTeamName)+" \">";
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
@@ -328,16 +373,16 @@
                         content += "                    <span></span>";
                         content += "                </label>";
                         content += "            </div>";
-                        content += "            <div class=\"col s6 left-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
+                        content += "            <div class=\"col s6 left-align black-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].AwayTeamName + ".png\" height=\"50\">";
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";                        
                     }
@@ -348,19 +393,14 @@
 
             for (i = 0; i < gameInfoJS.length; i++) {
                 if ((gameInfoJS[i].HomeTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]]) || (gameInfoJS[i].AwayTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]])) {
-                    if (gameInfoJS[i].Completed == "true") {
-                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
-                       // if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
-                            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
-                        //}
-                        //else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
+                    if (gameInfoJS[i].Completed == "true")
+                    {
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";                
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
                         content += "            </div>";
-                        content += "            <div class=\"col s6 right-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
+                        content += "            <div class=\"col s6 right-align black-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
 
@@ -377,12 +417,8 @@
                         content += "    </a>";
 
                         content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
-
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].AwayTeamName) {
-                            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
-                        //} else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                       // }
+                        
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";                        
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
@@ -395,16 +431,16 @@
                         content += "                    <span></span>";
                         content += "                </label>";
                         content += "            </div>";
-                        content += "            <div class=\"col s6 left-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
+                        content += "            <div class=\"col s6 left-align black-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].AwayTeamName + ".png\" height=\"50\">";
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -424,13 +460,8 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if (gameInfoJS[i].Week == currentWeek[0]) {
                     if (gameInfoJS[i].Completed == "false") {
-                       // content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
-                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
-                        //}
-                        //else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
+                       
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";                       
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
@@ -453,11 +484,8 @@
 
                         content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
 
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].AwayTeamName) {
-                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
-                        //} else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
+                        
+                        content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";                        
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
@@ -476,13 +504,13 @@
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\">" + gameInfoJS[i].HomeScore + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\">" + gameInfoJS[i].AwayScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\">" + gameInfoJS[i].AwayScore + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";                        
                     }
@@ -494,13 +522,7 @@
             for (i = 0; i < gameInfoJS.length; i++) {
                 if ((gameInfoJS[i].HomeTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]]) || (gameInfoJS[i].AwayTeamName.toUpperCase() == teamFullNames[currentTeamIndex[0]])) {
                     if (gameInfoJS[i].Completed == "false") {
-                        //content += "    <p style=\"float:left; width:100%\" class=\"center-align teal-text\">Game " + gameInfoJS[i].GameNo + "</p>";
-                        // if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
-                        //}
-                        //else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        //}
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col m4 hide-on-small-only center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
@@ -523,11 +545,7 @@
 
                         content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
 
-                        //if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].AwayTeamName) {
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
-                        //} else {
-                        //    content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 teal lighten-5\">";
-                        // }
                         content += "        <div class=\"row\">";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
@@ -547,13 +565,13 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align teal-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\">" + gameInfoJS[i].HomeScore + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align teal-text\">" + gameInfoJS[i].AwayScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\">" + gameInfoJS[i].AwayScore + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -570,7 +588,7 @@
             document.getElementById("TitleSmall").innerHTML = weekShortTitle[currentWeek[0]-1];
             document.getElementById("TitleFull").innerHTML = weekFullTitle[currentWeek[0]-1];
         } else if (viewType[0] == "Team") {
-            document.getElementById("TitleSmall").innerHTML = teamShortNames[currentTeamIndex[0]];
+            document.getElementById("TitleSmall").innerHTML = teamFullNames[currentTeamIndex[0]];
             document.getElementById("TitleFull").innerHTML = teamFullNames[currentTeamIndex[0]];
         }
         //Update Games
