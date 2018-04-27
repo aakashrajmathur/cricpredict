@@ -33,14 +33,16 @@ namespace cricpredict.Controllers
             ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt")); //"Chennai Super Kings,0,0,0,0,0,50,Delhi Daredevils,0,0,0,0,0,50,Mumbai Indians,0,0,0,0,0,50,Kolkata Knight Riders,0,0,0,0,0,50,Kings XI Punjab,0,0,0,0,0,50,Royal Challengers Bangalore,0,0,0,0,0,50,Rajasthan Royals,0,0,0,0,0,50,Sunrisers Hyderabad,0,0,0,0,0,50";
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
             return View();
-        }       
+        }
 
         public ActionResult Teams()
         {
+            if (RouteData.Values["id"] != null) { ViewData["id"] = RouteData.Values["id"].ToString(); } else { ViewData["id"] = -1; }
             ViewData["PlayerInfo"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayerInfo.txt"));
             return View();
         }
-       
+
+
         public ActionResult Auction()
         {
 

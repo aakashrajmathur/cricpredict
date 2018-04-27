@@ -151,7 +151,7 @@
         document.getElementById("predictionsTableBody").innerHTML = GetPredictionsTableBody();
 
         UpdateGamesAndResults();
-    }
+    }    
 
     function PrevClicked() {
         if (viewType[0] == "Date") {
@@ -210,7 +210,7 @@
                 } else {
                     content += "<div class=\"col s3 z-depth-2 center hoverable \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
                 }
-                content += "<div><img src=\"/Content/IPL/Logos/" + teamFullNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamFullNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\" style=\"font-weight: bold\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
                 content += "</div>";
             }
             content += "</div>";
@@ -625,9 +625,10 @@
         for (i = 0; i < origStandingsJS.length; i++) {
             content += "<tr> <td> <div class=\"clearfix float-my-children\" > ";
             content += "<img src=\"/Content/IPL/Logos/" + origStandingsJS[i].LongTeamName + ".png\" height=\"22\" style=\"padding-left:20px\" >";
-            //content += "<div class=\"hide-on-med-and-up\">" + origStandingsJS[i].ShortTeamName + "</div>";
-            //content += "<div class=\"hide-on-small-only\">" + origStandingsJS[i].LongTeamName + "</div>";
-            content += "<div style=\" padding-left:20px\">" + origStandingsJS[i].ShortTeamName + "</div>";
+            if(i < 4)
+                content += "<div style=\"padding-left:20px; font-weight: bold\">" + origStandingsJS[i].ShortTeamName + "</div>";
+            else
+                content += "<div style=\"padding-left:20px\">" + origStandingsJS[i].ShortTeamName + "</div>";
             content += "</div> </td> <td>" + origStandingsJS[i].P + "</td>";
             content += "<td>" + origStandingsJS[i].W + "</td>";
             content += "<td>" + origStandingsJS[i].L + "</td>";
@@ -646,9 +647,10 @@
 
             content += "<tr> <td> <div class=\"clearfix float-my-children\"> ";
             content += "<img src=\"/Content/IPL/Logos/" + predictStandingJS[i].LongTeamName + ".png\" height=\"22\" style=\"padding-left:20px\" > ";
-            //content += "<div class=\"hide-on-med-and-up\">" + predictStandingJS[i].ShortTeamName + "</div>";
-            //content += "<div class=\"hide-on-small-only-only\">" + predictStandingJS[i].LongTeamName + "</div>";
-            content += "<div style=\" padding-left:20px\">" + predictStandingJS[i].ShortTeamName + "</div>";
+            if(i < 4)
+                content += "<div style=\" padding-left:20px; font-weight: bold\">" + predictStandingJS[i].ShortTeamName + "</div>";
+            else 
+                content += "<div style=\" padding-left:20px\">" + predictStandingJS[i].ShortTeamName + "</div>";
             content += "</div> </td> <td>" + predictStandingJS[i].P + "</td>";
             content += "<td>" + predictStandingJS[i].W + "</td>";
             content += "<td>" + predictStandingJS[i].L + "</td>";

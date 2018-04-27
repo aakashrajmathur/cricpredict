@@ -16,17 +16,22 @@
 <br />
 
 <div class="container">
-    <div id="teamsLogos" >
+    <div id="teamsLogos">
 
     </div>
-    <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
-    <p class="center-align grey-text" style="font-size:14px" id="playerCountLabel">0 players selected</p>
+   
     <div class="row">
-        <div class="s12 center-align" id="teamName"></div>
+        <div class="col s4">
+            <p class="left-align black-text" id="playerCountLabel"><h6>0 players selected</h6></p>
+        </div>
+        <div class="col s8">
+            <a class="waves-effect waves-light btn right" onclick="ShareClicked()"><i class="material-icons left">share</i>Share your playing 11 </a>
+        </div>
     </div>
+    <div class="center-align" id="teamName"></div>
     <div class="row" id="players">
         <div class="col s12 m6 l3">
-            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" style="margin-top:-335px"/>  Batsmen</h5>
+            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" style="margin-top:-335px" />  Batsmen</h5>
             <ul class="collapsible expandable batsmen" id="batsmen"></ul>
         </div>
         <div class="col s12 m6 l3">
@@ -44,7 +49,17 @@
     </div>
 </div>
 
+<div class="fixed-action-btn direction-top" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large waves-effect waves-light red" onclick="ShareClicked()">
+        <i class="material-icons right">share</i>
+    </a>
+</div>
+
+<p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
+<input type="text" value="" id="inputCopyText" style="height:0px; border:0px">
+
 @{
+    string id = ViewData["id"].ToString();
     string playerInfo = (string)ViewData["PlayerInfo"];
 
     List<string> CSK_Bat = new List<string>();
@@ -246,12 +261,22 @@
 }
 
 
+
 <script type="text/javascript">
+
+
     //ab CDe fgh i j K l M n opq rst uvw xyz
     var teamNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "MUMBAI INDIANS", "RAJASTHAN ROYALS", "ROYAL CHALLENGERS BANGALORE", "SUNRISERS HYDERABAD"];
     //var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad"];
     var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
     var currentTeamIndex = [0];
+
+    var counter = 0;
+
+   // var elem = document.querySelector('.fixed-action-btn');
+    //var instance = M.FloatingActionButton.init(elem, {});
+
+    //var instance = M.FloatingActionButton.getInstance(elem);
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');
     var instance = M.Collapsible.init(elem, {
@@ -277,12 +302,12 @@
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
         M.toast({ html: total + ' players selected.', displayLength: 2000 });
         if(total == 1)
-            document.getElementById("playerCountLabel").innerHTML = total + " player selected";
+            document.getElementById("playerCountLabel").innerHTML = "<h6>" + total + " player selected</h6>";
         else
-            document.getElementById("playerCountLabel").innerHTML = total + " players selected";
+            document.getElementById("playerCountLabel").innerHTML = "<h6>" + total + " players selected</h6>";
     }
 
-    function TeamSelectionChanged(id) {        
+    function TeamSelectionChanged(id) {
         currentTeamIndex[0] = id;
         document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
 
@@ -294,6 +319,7 @@
     }
 
     function GetBatsmenInnerHTML(teamShortName) {
+        counter = 0;
         var content = "";
 
         if (teamShortName == "CSK") {
@@ -349,7 +375,7 @@
         for (i = 0; i < batsmen.length; i = i + 6) {
             content += "	    <li>";
             content += "	        <div class=\"collapsible-header\">";
-            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
             content += "	            <span style=\"font-size:16px\">" + batsmen[i] + "</span>";
             if (batsmen[i + 5] == "true") {
                 content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
@@ -425,7 +451,7 @@
         for (i = 0; i < players.length; i = i + 6) {
             content += "	    <li>";
             content += "	        <div class=\"collapsible-header\">";
-            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
             content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
             if (players[i + 5] == "true") {
                 content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
@@ -477,7 +503,7 @@
         for (i = 0; i < players.length; i = i + 6) {
             content += "	    <li>";
             content += "	        <div class=\"collapsible-header\">";
-            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
             content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
             if (players[i + 5] == "true") {
                 content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
@@ -529,7 +555,7 @@
         for (i = 0; i < players.length; i = i + 6) {
             content += "	    <li>";
             content += "	        <div class=\"collapsible-header\">";
-            content += "	            <label><input type=\"checkbox\" onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
             content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
             if (players[i + 5] == "true") {
                 content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
@@ -547,6 +573,11 @@
         }
 
         return content;
+    }
+
+    function GetPlayerId(digit) {
+        var paddedNumber = ("0" + digit).slice(-2);
+        return paddedNumber;
     }
 
     function GetColor(i, j) {
@@ -596,8 +627,55 @@
     }
 
     //to start out with the first team.
-    TeamSelectionChanged("0");
+
+    if (@id  == -1) {
+        TeamSelectionChanged("0");
+    }
+    else {
+        
+        var id = '@id';
+
+        TeamSelectionChanged(id.substr(0, 1));
+
+        for (i = 1; i < id.length; i = i + 2) {
+            var token = id.substr(i, 2);
+            document.getElementById(token).checked = true;
+        }
+
+    }
+
+    function ShareClicked() {        
+        //Generate the URL 
+        var link = "cricpredict.online/ipl18/teams/";
+        link += currentTeamIndex; 
+
+        for (i = 0; i < 99; i++) {
+            if (document.getElementById(GetPlayerId(i))) {
+                if (document.getElementById(GetPlayerId(i)).checked) {
+                    //alert(GetPlayerId(i) + " being added.");
+                    link += GetPlayerId(i);
+                }
+            }
+                //alert(GetPlayerId(i));
+        }
+
+        //alert(link);
+        //Copy into Clipboard
+        CopyToClipBoard(link);
+
+        //Display a toast 
+        M.toast({ html: 'Sharable link copied into clipboard.', displayLength: 4000 });
+    }
+
+    function CopyToClipBoard(link) {        
+        var copyText = document.getElementById("inputCopyText");
+        copyText.value = link;
+        /* Select the text field */
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("Copy");        
+    }
 
 </script>
-
 
