@@ -22,7 +22,7 @@
    
     <div class="row">
         <div class="col s4">
-            <p class="left-align black-text" id="playerCountLabel"><h6>0 players selected</h6></p>
+            <h6 class="left-align black-text" id="playerCountLabel">0 players selected</h6>
         </div>
         <div class="col s8">
             <a class="waves-effect waves-light btn right" onclick="ShareClicked()"><i class="material-icons left">share</i>Share your playing 11 </a>
@@ -302,9 +302,9 @@
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
         M.toast({ html: total + ' players selected.', displayLength: 2000 });
         if(total == 1)
-            document.getElementById("playerCountLabel").innerHTML = "<h6>" + total + " player selected</h6>";
+            document.getElementById("playerCountLabel").innerHTML = total + " player selected";
         else
-            document.getElementById("playerCountLabel").innerHTML = "<h6>" + total + " players selected</h6>";
+            document.getElementById("playerCountLabel").innerHTML = total + " players selected";
     }
 
     function TeamSelectionChanged(id) {
