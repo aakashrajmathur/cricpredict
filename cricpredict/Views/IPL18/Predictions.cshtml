@@ -657,11 +657,13 @@
                 return b.pts - a.pts;
             else if (a.W != b.W)
                 return b.W - a.W;
-            else if (a.NRR != b.NRR) {                
-                if (((a.NRR > 0) && (b.NRR > 0)) || ((a.NRR < 0) && (b.NRR < 0)))
-                    return (a.NRR - b.NRR);
-                else
-                    return (b.NRR - a.NRR) * -1;
+            else if (a.NRR != b.NRR) { 
+                //A tweek, is to add a large constant such that the negative values become positive, preserving the absolute difference.
+
+                var tempA = a.NRR*1 + 10.0; 
+                var tempB = b.NRR*1 + 10.0;
+                //alert(a.NRR + " = " + tempA + " compared to " + b.NRR + " = " + tempB);
+                return tempB - tempA;                
             }
             else {
                 if (a.TeamName == b.TeamName) return 0;
