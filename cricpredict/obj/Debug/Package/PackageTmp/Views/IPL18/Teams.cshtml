@@ -56,13 +56,30 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>Shareable link to Your Playing Eleven</h4>
-        <p id="sharableLink"></p>
+        <div class="container">
+            <h5>SHARE WITH OTHERS</h5>
+            <br />
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input value="" id="sharableLink" type="text" readonly>
+                    <label class="active" for="first_name2">Sharable Link</label>
+                </div>
 
-        <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+
+                <div class="col s12 center">
+                    <a id="facebookButton" class="btn-small" style="margin:10px" href="" target="_blank">Share via Facebook</a>
+                    <a id="twitterButton" class="btn-small" style="margin:10px" href="" target="_blank">Share via Twitter</a>
+                    <a id="whatsappButton" class="btn-small" style="margin:10px" href="" data-action="share/whatsapp/share" target="_blank" >Share via Whatsapp</a>
+                    
+                </div>
+            </div>
+            <span class="helper-text blue-grey-text">Our app never tracks or saves your social media account information.</span>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">DONE</a>
+        </div>
     </div>
 </div>
 
@@ -311,6 +328,12 @@
 
     document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
 
+    function GenerateLinks() {
+        document.getElementById("sharableLink").value = GetLink();
+        document.getElementById("whatsappButton").setAttribute("href", "whatsapp://send?text=CricPredict - Check out my IPL playing eleven http%3A%2F%2Fcricpredict.online%2FIPL18%2FTeams%2F" + GetTeamAndPlayerSelection());
+        document.getElementById("twitterButton").setAttribute("href", "http://twitter.com/share?text=CricPredict - Check out my IPL playing eleven&url=" + GetLink() + "&hashtags=CricPredict,IPL,IPLCricket");
+        document.getElementById("facebookButton").setAttribute("href", "https://www.facebook.com/sharer/sharer.php?quote=CricPredict - Check out my IPL playing eleven&u=" + GetLink());
+    }
 
     function PlayerSelectionChanged() {
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
@@ -320,7 +343,7 @@
         else
             document.getElementById("playerCountLabel").innerHTML = total + " players selected";
 
-        document.getElementById("sharableLink").innerHTML = GetLink();
+        GenerateLinks();
     }
 
     function TeamSelectionChanged(id) {
@@ -333,7 +356,7 @@
         document.getElementById("wicketkeepers").innerHTML = GetWicketKeepersInnerHTML(teamShortNames[id]);
         document.getElementById("bowlers").innerHTML = GetBowlersInnerHTML(teamShortNames[id]);
 
-        document.getElementById("sharableLink").innerHTML = GetLink();
+        GenerateLinks();
     }
 
     function GetBatsmenInnerHTML(teamShortName) {
@@ -661,17 +684,21 @@
         }
     }
 
-    function GetLink() {        
-        var link = "cricpredict.online/ipl18/teams/";
-        link += currentTeamIndex;
-
+    function GetTeamAndPlayerSelection() {
+        var selection = currentTeamIndex;
         for (i = 0; i < 99; i++) {
             if (document.getElementById(GetPlayerId(i))) {
-                if (document.getElementById(GetPlayerId(i)).checked) {             
-                    link += GetPlayerId(i);
+                if (document.getElementById(GetPlayerId(i)).checked) {
+                    selection += GetPlayerId(i);
                 }
-            }        
+            }
         }
+        return selection;
+    }
+
+    function GetLink() {        
+        var link = "http://cricpredict.online/ipl18/teams/";
+        link += GetTeamAndPlayerSelection();
         return link;
     }
 
