@@ -184,6 +184,10 @@
     <Content Include="Content\IPL\Logos\SunRisers Hyderabad.png" />
     <Content Include="Content\IPL\Logos\UpDown.png" />
     <Content Include="Content\IPL\Logos\wk.png" />
+    <Content Include="Content\Logos\CricPredictLogo128.png" />
+    <Content Include="Content\Logos\CricPredictLogo24.png" />
+    <Content Include="Content\Logos\CricPredictLogo32.png" />
+    <Content Include="Content\Logos\CricPredictLogo48.png" />
     <Content Include="css\materialize.css" />
     <Content Include="css\materialize.min.css" />
     <Content Include="favicon.ico" />
@@ -230,7 +234,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\BBL\" />
-    <Folder Include="Content\Logos\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

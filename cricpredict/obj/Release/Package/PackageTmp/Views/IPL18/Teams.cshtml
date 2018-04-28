@@ -24,8 +24,8 @@
         <div class="col s4">
             <h6 class="left-align black-text" id="playerCountLabel">0 players selected</h6>
         </div>
-        <div class="col s8">
-            <a class="waves-effect waves-light btn right" onclick="ShareClicked()"><i class="material-icons left">share</i>Share your team </a>
+        <div class="col s8 right-align">
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">share</i>Share your team</a>
         </div>
     </div>
     <div class="center-align" id="teamName"></div>
@@ -50,9 +50,37 @@
 </div>
 
 <div class="fixed-action-btn direction-top" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large waves-effect waves-light red" onclick="ShareClicked()">
-        <i class="material-icons right">share</i>
-    </a>
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons right">share</i></a>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="container">
+            <h5>SHARE WITH OTHERS</h5>
+            <br />
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input value="" id="sharableLink" type="text" readonly>
+                    <label class="active" for="first_name2">Sharable Link</label>
+                </div>
+
+
+                <div class="col s12 center">
+                    <a id="facebookButton" class="btn-small" style="margin:10px" href="" target="_blank">Share via Facebook</a>
+                    <a id="twitterButton" class="btn-small" style="margin:10px" href="" target="_blank">Share via Twitter</a>
+                    <a id="whatsappButton" class="btn-small" style="margin:10px" href="" data-action="share/whatsapp/share" target="_blank" >Share via Whatsapp</a>
+                    
+                </div>
+            </div>
+            <span class="helper-text blue-grey-text">Our app never tracks or saves your social media account information.</span>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">DONE</a>
+        </div>
+    </div>
 </div>
 
 <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
@@ -277,6 +305,9 @@
     //var instance = M.FloatingActionButton.init(elem, {});
 
     //var instance = M.FloatingActionButton.getInstance(elem);
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.init(elem, {});
+
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');
     var instance = M.Collapsible.init(elem, {
@@ -297,6 +328,12 @@
 
     document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
 
+    function GenerateLinks() {
+        document.getElementById("sharableLink").value = GetLink();
+        document.getElementById("whatsappButton").setAttribute("href", "whatsapp://send?text=CricPredict - Check out my IPL playing eleven http%3A%2F%2Fcricpredict.online%2FIPL18%2FTeams%2F" + GetTeamAndPlayerSelection());
+        document.getElementById("twitterButton").setAttribute("href", "http://twitter.com/share?text=CricPredict - Check out my IPL playing eleven&url=" + GetLink() + "&hashtags=CricPredict,IPL,IPLCricket");
+        document.getElementById("facebookButton").setAttribute("href", "https://www.facebook.com/sharer/sharer.php?quote=CricPredict - Check out my IPL playing eleven&u=" + GetLink());
+    }
 
     function PlayerSelectionChanged() {
         var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
@@ -305,6 +342,8 @@
             document.getElementById("playerCountLabel").innerHTML = total + " player selected";
         else
             document.getElementById("playerCountLabel").innerHTML = total + " players selected";
+
+        GenerateLinks();
     }
 
     function TeamSelectionChanged(id) {
@@ -316,6 +355,8 @@
         document.getElementById("allrounders").innerHTML = GetAllRoundersInnerHTML(teamShortNames[id]);
         document.getElementById("wicketkeepers").innerHTML = GetWicketKeepersInnerHTML(teamShortNames[id]);
         document.getElementById("bowlers").innerHTML = GetBowlersInnerHTML(teamShortNames[id]);
+
+        GenerateLinks();
     }
 
     function GetBatsmenInnerHTML(teamShortName) {
@@ -641,26 +682,30 @@
             var token = id.substr(i, 2);
             document.getElementById(token).checked = true;
         }
+    }
 
+    function GetTeamAndPlayerSelection() {
+        var selection = currentTeamIndex;
+        for (i = 0; i < 99; i++) {
+            if (document.getElementById(GetPlayerId(i))) {
+                if (document.getElementById(GetPlayerId(i)).checked) {
+                    selection += GetPlayerId(i);
+                }
+            }
+        }
+        return selection;
+    }
+
+    function GetLink() {        
+        var link = "http://cricpredict.online/ipl18/teams/";
+        link += GetTeamAndPlayerSelection();
+        return link;
     }
 
     function ShareClicked() {        
         //Generate the URL 
-        var link = "cricpredict.online/ipl18/teams/";
-        link += currentTeamIndex; 
+        var link = GetLink();
 
-        for (i = 0; i < 99; i++) {
-            if (document.getElementById(GetPlayerId(i))) {
-                if (document.getElementById(GetPlayerId(i)).checked) {
-                    //alert(GetPlayerId(i) + " being added.");
-                    link += GetPlayerId(i);
-                }
-            }
-                //alert(GetPlayerId(i));
-        }
-
-        //alert(link);
-        //Copy into Clipboard
         CopyToClipBoard(link);
 
         //Display a toast 
