@@ -39,7 +39,7 @@
         <div class="col s12 m6">
             <div id="predictions">
                 <div class="card grey lighten-5 z-depth-5">
-                    <h5 class="center-align teal-text" style="padding-top:10px">PREDICTIONS</h5>
+                    <h5 class="center-align teal-text" style="padding-top:10px">PLAYOFF CHANCES</h5>
                     <table class="centered">
                         <thead>
                             <tr>
@@ -71,6 +71,7 @@
                     <span>Team</span>
                 </label>
             </p>
+            <p class="col s12 center-align">Pick your IPL Winners in Future Games and check out their Playoff Chances</p>
 
             <h5 class="col s12 center-align teal-text" style="padding-top:10px">FUTURE GAMES</h5>
             <div id="games">
@@ -658,7 +659,7 @@
             else if (a.W != b.W)
                 return b.W - a.W;
             else if (a.NRR != b.NRR) { 
-                //A tweek, is to add a large constant such that the negative values become positive, preserving the absolute difference.
+                //Add a large constant such that the negative values become positive, preserving the absolute difference.
 
                 var tempA = a.NRR*1 + 10.0; 
                 var tempB = b.NRR*1 + 10.0;
