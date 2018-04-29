@@ -65,6 +65,14 @@ namespace cricpredict.Controllers
             return View();
         }
 
+        public ActionResult Graph()
+        {
+            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
+            ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
+            ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            return View();
+        }
+
         public ActionResult Data()
         {
             return View();

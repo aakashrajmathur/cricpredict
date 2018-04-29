@@ -43,6 +43,15 @@ namespace cricpredict.Controllers
 
         private string GetWeek(string when)
         {
+            //There may be a mid time time reported as  Apr 29-30
+            //Remove the second day. 
+
+            if (when.Contains("-"))
+            {
+                when = when.Split('-')[0];                
+            }
+
+
             DateTime date = DateTime.Parse(when);
             if ((date >= DateTime.Parse("4/7/2018")) && (date <= DateTime.Parse("4/15/2018")))
                 return "1";
@@ -124,7 +133,7 @@ namespace cricpredict.Controllers
 
                         // when is in line: results[i + 2];         
                         //- May 5, 2018
-                        string when = results[i + 2].Substring(2, results[i+2].Length-8);
+                        string when = results[i + 2].Substring(2, results[i+2].Length-8);                        
                         string week = GetWeek(when);
 
                         // IsGameComplete, Result, winner is in line: results[i + 3];  

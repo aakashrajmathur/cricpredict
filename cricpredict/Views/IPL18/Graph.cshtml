@@ -13,3 +13,82 @@
         </div>
     </div>
 </nav>
+@{ 
+    string inputResults = (string)ViewData["Results"];
+    string inputStandings = (string)ViewData["Standings"];
+    string inputWeek = (string)ViewData["Defaults"];
+}
+
+
+<script type="text/javascript">
+    var origStandingsJS = [];
+    var gameInfoJS = [];
+
+    window.onload = function () {
+        
+        var standingsTokens = '@inputStandings'.split(',');
+        for (i = 0; i < standingsTokens.length; i = i + 8) {
+            origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7], "PlayoffPerc": 50.0 });
+        }
+        
+        var resultsTokens = '@inputResults'.split('|');
+        var gameCounter = 1;
+        for (i = 0; i < resultsTokens.length; i = i + 10) {
+            gameInfoJS.push({ "GameNo": gameCounter, "HomeTeamName": resultsTokens[i], "AwayTeamName": resultsTokens[i + 1], "Where": resultsTokens[i + 2], "When": resultsTokens[i + 3], "Week": resultsTokens[i + 4], "Completed": resultsTokens[i + 5], "WinnerTeamName": resultsTokens[i + 6], "WinnerScore": resultsTokens[i + 7], "HomeScore": resultsTokens[i + 8], "AwayScore": resultsTokens[i + 9] });
+            gameCounter++;
+        }
+
+        var homeTeams = [];
+        var awayTeams = [];
+        var origWinners = [];
+        for (i = 0; i < gameInfoJS.length; i++) {
+            homeTeams.push(gameInfoJS[i].HomeTeamName);
+            awayTeams.push(gameInfoJS[i].AwayTeamName);
+            if (gameInfoJS[i].Completed == "false")
+            {
+                origWinners.push(gameInfoJS[i].WinnerTeamName);
+            }
+            else {
+                alert(gameInfoJS[i].WinnerTeamName);
+                origWinners.push("NoSelection");
+            }
+        }
+
+
+
+
+    }
+
+    function SortStandings(standings) {
+        standings.sort(function (a, b) {
+            if (a.pts != b.pts)
+                return b.pts - a.pts;
+            else if (a.W != b.W)
+                return b.W - a.W;
+            else if (a.NRR != b.NRR) {
+                //Add a large constant such that the negative values become positive, preserving the absolute difference.
+
+                var tempA = a.NRR * 1 + 10.0;
+                var tempB = b.NRR * 1 + 10.0;
+                //alert(a.NRR + " = " + tempA + " compared to " + b.NRR + " = " + tempB);
+                return tempB - tempA;
+            }
+            else {
+                if (a.TeamName == b.TeamName) return 0;
+                if (a.TeamName > b.TeamName) return 1;
+                if (a.TeamName < b.TeamName) return -1;
+            }
+        });
+    }
+
+    function FindObjectByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key].localeCompare(value) == 0) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value + " not found!");
+        return null;
+    }
+
+</script>
