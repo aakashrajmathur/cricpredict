@@ -12,5 +12,10 @@ namespace cricpredict.Controllers
         {
             return RedirectToAction("Predictions", "IPL18");
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }
