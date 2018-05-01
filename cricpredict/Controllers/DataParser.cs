@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace cricpredict.Controllers
 {
@@ -26,16 +27,15 @@ namespace cricpredict.Controllers
                 for (int i = 0; i < 8; i++)
                 {
                     //MessageBox.Show("# " + standings[10 + 12 * i]);
-                    toBeWritten.Add(standings[10 + 12 * i + 1]);
-                    toBeWritten.Add(standings[10 + 12 * i + 2]);
-                    toBeWritten.Add(standings[10 + 12 * i + 3]);
-                    toBeWritten.Add(standings[10 + 12 * i + 4]);
-                    toBeWritten.Add(standings[10 + 12 * i + 5]);
-                    toBeWritten.Add(standings[10 + 12 * i + 6]);
-                    toBeWritten.Add(standings[10 + 12 * i + 8]);
-                    toBeWritten.Add(standings[10 + 12 * i + 9]);
+                    toBeWritten.Add(standings[10 + 12 * i + 1]);//LongTeamName
+                    toBeWritten.Add(standings[10 + 12 * i + 2]);//ShortTeamName
+                    toBeWritten.Add(standings[10 + 12 * i + 3]);//P
+                    toBeWritten.Add(standings[10 + 12 * i + 4]);//W
+                    toBeWritten.Add(standings[10 + 12 * i + 5]);//L
+                    toBeWritten.Add(standings[10 + 12 * i + 6]);//T
+                    toBeWritten.Add(standings[10 + 12 * i + 8]);//Pts
+                    toBeWritten.Add(standings[10 + 12 * i + 9]);//NRR                    
                 }
-
                 string newStandings = string.Join(",", toBeWritten.ToArray());
                 System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Standings.txt"), newStandings);
             }
@@ -48,7 +48,7 @@ namespace cricpredict.Controllers
 
             if (when.Contains("-"))
             {
-                when = when.Split('-')[0];                
+                when = when.Split('-')[0];
             }
 
 
@@ -133,7 +133,7 @@ namespace cricpredict.Controllers
 
                         // when is in line: results[i + 2];         
                         //- May 5, 2018
-                        string when = results[i + 2].Substring(2, results[i+2].Length-8);                        
+                        string when = results[i + 2].Substring(2, results[i + 2].Length - 8);
                         string week = GetWeek(when);
 
                         // IsGameComplete, Result, winner is in line: results[i + 3];  
@@ -196,5 +196,132 @@ namespace cricpredict.Controllers
                 System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Defaults.txt"), toBeWrittenDefaults);
             }
         }
+
+        internal void RefreshPlayoffPercentages(IPL18Controller iPL18Controller)
+        {
+            //Get Results and standings 
+            string results = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"));
+
+            List<string> homeTeam = new List<string>();
+            List<string> awayTeam = new List<string>();
+
+            string[] tokens = results.Split('|');
+            for (int i = 0; i < tokens.Length; i = i + 10)
+            {
+                if (tokens[i + 5] == "true") {
+                    homeTeam.Add(tokens[i]);
+                    awayTeam.Add(tokens[i + 1]);
+                }
+            }
+
+            string standingsInput = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Standings.txt"));
+            string[] tokensStandings = standingsInput.Split(',');
+            List<TeamStandings> standings = new List<TeamStandings>();
+
+            for(int i = 0; i < tokensStandings.Length; i = i + 8)
+            {
+                standings.Add(new TeamStandings(tokensStandings[i], int.Parse(tokensStandings[i + 3]), double.Parse(tokensStandings[i + 7])));
+            }
+            standings.Sort();
+            standings.Reverse();
+            Dictionary<string, int> playoffCount = GetPlayoffCount(standings, homeTeam, awayTeam, 0);
+
+            List<KeyValuePair<string, int>> sorted = (from kv in playoffCount orderby kv.Value select kv).ToList();
+            sorted.Reverse();
+
+            List<string> toBeWritten = new List<string>();
+            List<string> raw = new List<string>();
+            raw.Add(count.ToString());
+            //toBeWritten.Add(count.ToString());
+            foreach (KeyValuePair<string, int> pair in sorted)
+            {
+                raw.Add(pair.Key);
+                toBeWritten.Add(pair.Key);
+                raw.Add(pair.Value.ToString());
+                toBeWritten.Add(Math.Round((double)(pair.Value*100.0 / count), 2).ToString());
+            }
+
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", toBeWritten.ToArray()));
+        }
+
+        private static int count = 0;
+
+        Dictionary<string, int> GetPlayoffCount(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
+        {
+            if(homeTeam.Count == pointer)
+            {
+                count++;
+                Dictionary<string, int> res = new Dictionary<string, int>(); 
+                for(int i = 0; i < 4; i++)
+                {
+                    res.Add(standings[i].teamFullName, 1);
+                }
+                for(int i = 4; i < 8; i++)
+                {
+                    res.Add(standings[i].teamFullName, 0);
+                }
+                return res;
+            }
+            else
+            {
+                string home = homeTeam[pointer];
+                //homeTeam.RemoveAt(0);
+                List<TeamStandings> homeStandings = GetStandingsForWinner(standings, home);
+
+                string away = awayTeam[pointer];
+                //awayTeam.RemoveAt(0);
+                List<TeamStandings> awayStandings = GetStandingsForWinner(standings, away);
+
+                Dictionary<string, int> homeRes = GetPlayoffCount(homeStandings, homeTeam, awayTeam, pointer+1);
+                Dictionary<string, int> awayRes = GetPlayoffCount(awayStandings, homeTeam, awayTeam, pointer+1);
+
+                Dictionary<string, int> mergedRes = new Dictionary<string, int>();
+                foreach(string team in homeRes.Keys)
+                {
+                    mergedRes.Add(team, homeRes[team] + awayRes[team]);
+                }
+                return mergedRes;
+            }
+        }
+
+        List<TeamStandings> GetStandingsForWinner(List<TeamStandings> standings, string winner)
+        {
+            List<TeamStandings> dup = new List<TeamStandings>(); 
+            foreach(TeamStandings team in standings)
+            {
+                if (team.teamFullName == winner)
+                    dup.Add(new TeamStandings(team.teamFullName, team.W + 1, team.NRR));
+                else
+                    dup.Add(new TeamStandings(team.teamFullName, team.W, team.NRR));
+            }
+            dup.Sort();
+            dup.Reverse();
+            return dup;
+        }
+
     }
+
+    class TeamStandings : IComparable<TeamStandings>
+    {
+        public string teamFullName;
+        public int W;
+        public double NRR;
+
+        public int CompareTo(TeamStandings other)
+        {
+            if (this.W != other.W)
+                return this.W - other.W;
+            else if (this.NRR != other.NRR)
+                return (int)Math.Round(this.NRR * 10000 - other.NRR * 10000);
+            else
+                return this.teamFullName.CompareTo(other.teamFullName);            
+        }
+        public TeamStandings(string teamFullName, int W, double NRR)
+        {
+            this.teamFullName = teamFullName; this.W = W; this.NRR = NRR; 
+        }
+    }
+
+
 }

@@ -62,6 +62,7 @@ namespace cricpredict.Controllers
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
             ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
             ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            ViewData["PlayoffPerc"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));
             return View();
         }
 
@@ -86,6 +87,7 @@ namespace cricpredict.Controllers
                 //Scrap the website and update the text files.
                 new DataParser().RefreshStandings(this);
                 new DataParser().RefreshResults(this);
+                new DataParser().RefreshPlayoffPercentages(this);
                 ViewData["status"] = "Standings and Results refreshed at " + DateTime.Now.ToLocalTime().ToLongDateString() + " " + DateTime.Now.ToLocalTime().ToLongTimeString();
             }
             else

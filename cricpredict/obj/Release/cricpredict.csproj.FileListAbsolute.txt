@@ -57,9 +57,7 @@ C:\src\cricpredict\cricpredict\bin\System.Web.WebPages.Deployment.xml
 C:\src\cricpredict\cricpredict\bin\System.Web.WebPages.Razor.xml
 C:\src\cricpredict\cricpredict\bin\Antlr3.Runtime.pdb
 C:\src\cricpredict\cricpredict\bin\Newtonsoft.Json.xml
-C:\src\cricpredict\cricpredict\bin\Microsoft.ApplicationInsights.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AI.DependencyCollector.xml
-C:\src\cricpredict\cricpredict\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AI.WindowsServer.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AI.Web.xml
 C:\src\cricpredict\cricpredict\obj\Release\cricpredict.csprojResolveAssemblyReference.cache
@@ -68,3 +66,8 @@ C:\src\cricpredict\cricpredict\obj\Release\cricpredict.pdb
 C:\src\cricpredict\cricpredict\bin\HtmlAgilityPack.dll
 C:\src\cricpredict\cricpredict\bin\HtmlAgilityPack.pdb
 C:\src\cricpredict\cricpredict\bin\HtmlAgilityPack.xml
+C:\src\cricpredict\cricpredict\bin\Microsoft.ApplicationInsights.TraceListener.dll
+C:\src\cricpredict\cricpredict\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\src\cricpredict\cricpredict\bin\System.Diagnostics.DiagnosticSource.dll
+C:\src\cricpredict\cricpredict\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\src\cricpredict\cricpredict\bin\System.Diagnostics.DiagnosticSource.xml

@@ -13,6 +13,8 @@
         </div>
     </div>
 </nav>
+
+<div id="output"></div>
 @{ 
     string inputResults = (string)ViewData["Results"];
     string inputStandings = (string)ViewData["Standings"];
@@ -23,6 +25,8 @@
 <script type="text/javascript">
     var origStandingsJS = [];
     var gameInfoJS = [];
+    var count = [0];
+    var countTest = [0];
 
     window.onload = function () {
         
@@ -37,28 +41,85 @@
             gameInfoJS.push({ "GameNo": gameCounter, "HomeTeamName": resultsTokens[i], "AwayTeamName": resultsTokens[i + 1], "Where": resultsTokens[i + 2], "When": resultsTokens[i + 3], "Week": resultsTokens[i + 4], "Completed": resultsTokens[i + 5], "WinnerTeamName": resultsTokens[i + 6], "WinnerScore": resultsTokens[i + 7], "HomeScore": resultsTokens[i + 8], "AwayScore": resultsTokens[i + 9] });
             gameCounter++;
         }
-
+        
+        //For future games, build out the 3 arrays, homeTeams, awayTeams & winners
+        
         var homeTeams = [];
         var awayTeams = [];
-        var origWinners = [];
+        var winners = [];
         for (i = 0; i < gameInfoJS.length; i++) {
-            homeTeams.push(gameInfoJS[i].HomeTeamName);
-            awayTeams.push(gameInfoJS[i].AwayTeamName);
-            if (gameInfoJS[i].Completed == "false")
-            {
-                origWinners.push(gameInfoJS[i].WinnerTeamName);
-            }
-            else {
-                alert(gameInfoJS[i].WinnerTeamName);
-                origWinners.push("NoSelection");
+            if (gameInfoJS[i].Completed == "true")
+            {                
+                homeTeams.push(gameInfoJS[i].HomeTeamName);
+                awayTeams.push(gameInfoJS[i].AwayTeamName);
+                winners.push("NoSelection");
             }
         }
 
-
-
-
+        var countForEachTeam = GetCountForEachTeam(origStandingsJS, homeTeams, awayTeams, winners, count);
+        var content = "<br />";
+        for (i = 0; i < countForEachTeam.length; i++) {
+            content += countForEachTeam[i].TeamName + " " + countForEachTeam[i].count;
+        }
+        document.getElementById("output").innerHTML += content;        
     }
 
+    function GetCountForEachTeam(origStandingsJS, homeTeams, awayTeams, winners) {        
+        if (winners.length == 0) {
+            count[0]++;
+            document.getElementById("output").innerHTML += "<br /> " + count[0];
+        }
+        else {
+            var currentHomeTeam = homeTeams.splice(0, 1);
+            var currentAwayTeam = awayTeams.splice(0, 1);
+            var currentWinner = winners.splice(0, 1);
+            //alert("1");
+            var homeStandings = GetStandingsAfterGame(origStandingsJS, currentHomeTeam, currentAwayTeam, currentHomeTeam);
+            var awayStandings = GetStandingsAfterGame(origStandingsJS, currentHomeTeam, currentAwayTeam, currentAwayTeam);
+            return Merge(GetCountForEachTeam(homeStandings, homeTeams, awayTeams, winners), GetCountForEachTeam(awayStandings, homeTeams, awayTeams, winners));            
+        }
+    }
+
+    function Merge(list1, list2) {
+        alert("From Merge");
+        var res = [];
+        for (i = 0; i < list1.length; i++) {
+            var teamName = list1[i].TeamName; 
+            var count1 = list1[i].count;
+            var objList2 = FindObjectByKey(list2, "TeamName", teamName);
+            var count2 = objList2.count;
+            res.push({ "TeamName": teamName, "Count": count1 * 1 + count2 * 1 });
+        }
+        return res;
+    }
+
+    function GetStandingsAfterGame(inputStandings, home, away, winner) {
+        var duplicateStandings = [];
+        for (i = 0; i < inputStandings.length; i++) {
+            duplicateStandings.push( { "LongTeamName": inputStandings[i].LongTeamName, "ShortTeamName": inputStandings[i].ShortTeamName, "P": inputStandings[i].P, "W": inputStandings[i].W, "L": inputStandings[i].L, "T": inputStandings[i].T, "Pts": inputStandings[i].Pts, "NRR": inputStandings[i].NRR, "PlayoffPerc": inputStandings[i].PlayoffPerc });
+        }
+        
+        var homeObj = FindObjectByKey(duplicateStandings, "LongTeamName", home);
+        var awayObj = FindObjectByKey(duplicateStandings, "LongTeamName", away);
+
+        homeObj.P++;
+        awayObj.P++;         
+
+        if (winner == home) {
+            homeObj.W++; 
+            homeObj.Pts += 2;
+            awayObj.L++;
+        }
+        else {
+            awayObj.W++;
+            awayObj.Pts += 2;
+            homeObj.L++;
+        }
+
+        SortStandings(duplicateStandings);
+        return duplicateStandings;
+    }
+    
     function SortStandings(standings) {
         standings.sort(function (a, b) {
             if (a.pts != b.pts)
