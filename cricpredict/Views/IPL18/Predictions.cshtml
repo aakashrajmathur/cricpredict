@@ -82,6 +82,9 @@
             <div id="results">
                 
             </div>
+            <div id="weeklySelectionBottom">
+
+            </div>
         </div>
     </div>
 </div>
@@ -106,21 +109,20 @@
         currentWeek[0] = '@inputWeek';
 
         var playoffPercTokens = '@inputPlayoffPrec'.split(',');
-        for (i = 0; i < playoffPercTokens.length; i = i + 2) {
-            alert(playoffPercTokens[i] + " = " + playoffPercTokens[i + 1]);
+        for (i = 0; i < playoffPercTokens.length; i = i + 2) {            
             origPlayoffPercJS.push({ "TeamName": playoffPercTokens[i], "Perc": playoffPercTokens[i + 1] });
         }
 
 
         document.getElementById('weeklySelection').innerHTML = GetWeeklySelectionContent();
+        document.getElementById('weeklySelectionBottom').innerHTML = GetWeeklySelectionBottomContent();
         document.getElementById('teamsLogos').innerHTML = "";
 
         document.getElementById('radioButtonViewByDate').checked = true;
         
         var standingsTokens = '@inputStandings'.split(',');
         for (i = 0; i < standingsTokens.length; i = i + 8) {
-            var percTemp = FindObjectByKey(origPlayoffPercJS, "TeamName", standingsTokens[i]).Perc;
-            alert("Looking for " + standingsTokens[i]);
+            var percTemp = FindObjectByKey(origPlayoffPercJS, "TeamName", standingsTokens[i]).Perc;            
             origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp});
             predictStandingJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": 0, "W": 0, "L": 0, "T": 0, "Pts": 0, "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp });
         }
@@ -192,6 +194,15 @@
         content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align blue-grey-text\" onclick=\"NextClicked()\">chevron_right</i></a>";
         return content;
     }
+
+    function GetWeeklySelectionBottomContent() {
+        var content = "";
+        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons blue-grey-text\" onclick=\"PrevClicked()\">chevron_left</i></a>";
+        content += "<div class=\"col s8 center-align hide-on-med-and-up\"><h5 id=\"TitleSmallBottom\">Apr 16 - Apr 23</h5></div>";
+        content += "<div class=\"col m8 center-align hide-on-small-and-down\"><h5 id=\"TitleFullBottom\">Week 1 (Apr 16 - Apr 23)</h5></div>";
+        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align blue-grey-text\" onclick=\"NextClicked()\">chevron_right</i></a>";
+        return content;
+    }
         
     function TeamSelectionChanged(id) {
         currentTeamIndex[0] = id;
@@ -231,11 +242,13 @@
             viewType[0] = "Date";
 
             document.getElementById('weeklySelection').innerHTML = GetWeeklySelectionContent();
+            document.getElementById('weeklySelectionBottom').innerHTML = GetWeeklySelectionBottomContent();
             document.getElementById('teamsLogos').innerHTML = "";
         } else if (id == "radioButtonViewByTeam") {
             viewType[0] = "Team";
 
             document.getElementById('weeklySelection').innerHTML = "";
+            document.getElementById('weeklySelectionBottom').innerHTML = "";
             document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
         }
 
@@ -588,11 +601,15 @@
         //alert("from update games and results");
         //Update title
         if (viewType[0] == "Date") {
-            document.getElementById("TitleSmall").innerHTML = weekShortTitle[currentWeek[0]-1];
-            document.getElementById("TitleFull").innerHTML = weekFullTitle[currentWeek[0]-1];
+            document.getElementById("TitleSmall").innerHTML = weekShortTitle[currentWeek[0] - 1];
+            document.getElementById("TitleFull").innerHTML = weekFullTitle[currentWeek[0] - 1];
+            document.getElementById("TitleSmallBottom").innerHTML = weekShortTitle[currentWeek[0] - 1];
+            document.getElementById("TitleFullBottom").innerHTML = weekFullTitle[currentWeek[0] - 1];
         } else if (viewType[0] == "Team") {
             document.getElementById("TitleSmall").innerHTML = teamFullNames[currentTeamIndex[0]];
             document.getElementById("TitleFull").innerHTML = teamFullNames[currentTeamIndex[0]];
+            document.getElementById("TitleSmallBottom").innerHTML = teamFullNames[currentTeamIndex[0]];
+            document.getElementById("TitleFullBottom").innerHTML = teamFullNames[currentTeamIndex[0]];
         }
         //Update Games
         document.getElementById("games").innerHTML = GetGamesContent();
