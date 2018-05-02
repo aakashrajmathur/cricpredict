@@ -1,0 +1,8 @@
+Sunrisers Hyderabad,97.57,
+Chennai Super Kings,97.57,
+Kings XI Punjab,91.38,
+Kolkata Knight Riders,59.87,
+Rajasthan Royals,26.15,
+Mumbai Indians,13.82,
+Royal Challengers Bangalore,10.03,
+Delhi Daredevils,3.61

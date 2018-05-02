@@ -177,6 +177,8 @@
     <Content Include="Content\IPL\Data\Defaults.txt" />
     <Content Include="Content\IPL\Data\DefaultWinner.txt" />
     <Content Include="Content\IPL\Data\PlayerInfo.txt" />
+    <Content Include="Content\IPL\Data\PlayoffPerc_After_Game31.txt" />
+    <Content Include="Content\IPL\Data\PlayoffPerc_After_Game30.txt" />
     <Content Include="Content\IPL\Data\PlayoffPerc.txt" />
     <Content Include="Content\IPL\Data\PlayoffPercRaw.txt" />
     <Content Include="Content\IPL\Data\Standings.txt" />

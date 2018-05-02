@@ -50,6 +50,9 @@
         <div class="container">
             <div class="nav-wrapper">
                 @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
+                <ul class="right" style="padding-right:125px">
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+                </ul>
                 <ul class="left">
                     <li class="active">@Html.ActionLink("Indian Premier League", "Predictions", "IPL18", new { area = "" }, new { })</li>
                 </ul>

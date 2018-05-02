@@ -242,7 +242,7 @@ namespace cricpredict.Controllers
             }
 
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", raw.ToArray()));
         }
 
         private static int count = 0;
