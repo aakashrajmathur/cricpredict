@@ -15,33 +15,112 @@
 </nav>
 
 @{
-
     string inputGamesWisePlayoffPercentages = (string)ViewData["GamesWisePlayoffPercentages"];
     string inputResults = (string)ViewData["Results"];
 }
+
 <p>@inputGamesWisePlayoffPercentages</p>
-
-
+<p>@inputResults</p>
 
 <div class="container">
     <div class="row">
         <div id="curve_chart" class="col s12" style="height:500px"></div>
+
+        <div id="teamStats" class="col s12"></div>
     </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+    var gameInfoJS = [];
+    var playoffPercJS = [];
+    var gameData = [];
+    var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
+
+    window.onload = function () {
+        var resultsTokens = '@inputResults'.split('|');
+        var gameCounter = 1;
+        for (i = 0; i < resultsTokens.length; i = i + 10) {
+            gameInfoJS.push({ "GameNo":gameCounter, "HomeTeamName": resultsTokens[i], "AwayTeamName": resultsTokens[i + 1], "Where": resultsTokens[i + 2], "When": resultsTokens[i + 3], "Week": resultsTokens[i + 4], "Completed": resultsTokens[i + 5], "WinnerTeamName": resultsTokens[i + 6], "WinnerScore": resultsTokens[i + 7], "HomeScore": resultsTokens[i + 8], "AwayScore": resultsTokens[i + 9] });
+            gameCounter++;
+        }
+
+        var playoffPercTokens = '@inputGamesWisePlayoffPercentages'.split('|');
+        for (i = 0; i < playoffPercTokens.length; i++) {
+            var tokens = playoffPercTokens[i].split(',');
+            for (j = 1; j < playoffPercTokens.length; j = j + 3) {
+                playoffPercJS.push({"GameNo": playoffPercTokens[0], "TeamShortName": GetShortTeamName(playoffPercTokens[j]), "playoffPerc": playoffPercTokens[j + 1], "status": playoffPercTokens[j + 2]});
+            }
+        }
+        gameData = GenerateGameData(playoffPercJS);
+    }
+
+    function GenerateGameData(playoffPercJS) {
+        //var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
+
+        //['Year', 'Sales', 'Expenses'],
+        //    ['2004', 1000, 400],
+        //    ['2005', 1170, 460],
+        //    ['2006', 660, 1120],
+        //    ['2007', 1030, 540]
+        var result = [];
+        result.push("After Game", teamShortNames);
+        for (i = 0; i < playoffPercJS.length; i++) {
+            var temp = [];
+            temp.push(playoffPercJS["GameNo"]);
+            for (j = 0; j < teamShortNames; j++) {
+                var o = FindObjectByKey(playoffPercJS[i], "TeamShortName", teamShortNames[j]);
+                temp.push(o.playoffPerc);
+            }
+            result.push(temp);
+        }
+    }
+
+    function GetShortTeamName(longTeamName) {
+        if (longTeamName == "Kings XI Punjab") return "KXIP";
+        if (longTeamName == "Chennai Super Kings") return "CSK";
+        if (longTeamName == "Kolkata Knight Riders") return "KKR";
+        if (longTeamName == "Sunrisers Hyderabad") return "SRH";
+        if (longTeamName == "Royal Challengers Bangalore") return "RCB";
+        if (longTeamName == "Rajasthan Royals") return "RR";
+        if (longTeamName == "Mumbai Indians") return "MI";
+        if (longTeamName == "Delhi Daredevils") return "DD";
+    }
+
+    function FindObjectByTwoKeys(array, key1, value1, key2, value2) {
+        for (var i = 0; i < array.length; i++) {
+            if ((array[i][key1].localeCompare(value1) == 0) && (array[i][key2].localeCompare(value2) == 0)) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value1 + " & " + value2 + " not found!");
+        return null;
+    }
+
+    function FindObjectByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key].localeCompare(value) == 0) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value + " not found!");
+        return null;
+    }
+
+
+
+
+
+
+
+
+
     google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart);   
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Game', 'CSK', 'MI', 'RR', 'RCB', 'SRH', 'DD', 'KXIP', 'KKR'],
-            ['25', 80, 50, 20, 50, 30, 70, 65, 35 ],
-            ['26', 80, 50, 20, 50, 30, 70, 65, 35],
-            ['27', 80, 50, 20, 50, 30, 70, 65, 35],
-            ['28', 80, 50, 20, 50, 30, 70, 65, 35]
-        ]);
+        var data = google.visualization.arrayToDataTable(gameData);
 
         var options = {
             title: 'Predicitons Graph',
