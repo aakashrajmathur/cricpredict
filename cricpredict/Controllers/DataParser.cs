@@ -262,9 +262,9 @@ namespace cricpredict.Controllers
             }
 
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_Game" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", raw.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_Game" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
         }
 
         private Dictionary<string, double> GetPrevPerc(string[] tokensPP)

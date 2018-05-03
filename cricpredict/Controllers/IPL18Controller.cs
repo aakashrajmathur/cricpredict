@@ -14,6 +14,7 @@ namespace cricpredict.Controllers
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
             ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
             ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            ViewData["PlayoffPerc"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));            
             return View("Predictions");
         }
 
@@ -68,9 +69,24 @@ namespace cricpredict.Controllers
 
         public ActionResult Graph()
         {
-            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
-            ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
-            ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            int startingGameIndex = 30;
+            int gameIndex = startingGameIndex;
+            List<string> playoffPerc = new List<string>();
+            while (true)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + gameIndex + ".txt")))
+                {
+                     playoffPerc.Add( gameIndex + "," + System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + gameIndex + ".txt")));
+                }
+                else
+                {
+                    break;
+                }
+                gameIndex++;
+            }
+
+            ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
+            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));            
             return View();
         }
 
