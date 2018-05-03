@@ -30,7 +30,7 @@
                 <table class="centered">
                     <thead>
                         <tr>
-                            <th></th> <th>P</th> <th>W</th> <th>L</th> <th>Pts</th> <th>NRR</th> <th>%</th>
+                            <th></th> <th>P</th> <th>W</th> <th>L</th> <th>Pts</th> <th>NRR</th> <th>%</th><th></th>
                         </tr>
                     </thead>
                     <tbody id="standingsTableBody"></tbody>
@@ -109,8 +109,8 @@
         currentWeek[0] = '@inputWeek';
 
         var playoffPercTokens = '@inputPlayoffPrec'.split(',');
-        for (i = 0; i < playoffPercTokens.length; i = i + 2) {            
-            origPlayoffPercJS.push({ "TeamName": playoffPercTokens[i], "Perc": playoffPercTokens[i + 1] });
+        for (i = 0; i < playoffPercTokens.length; i = i + 3) {            
+            origPlayoffPercJS.push({ "TeamName": playoffPercTokens[i], "Perc": playoffPercTokens[i + 1], "Change":playoffPercTokens[i+2] });
         }
 
 
@@ -121,10 +121,13 @@
         document.getElementById('radioButtonViewByDate').checked = true;
         
         var standingsTokens = '@inputStandings'.split(',');
-        for (i = 0; i < standingsTokens.length; i = i + 8) {
-            var percTemp = FindObjectByKey(origPlayoffPercJS, "TeamName", standingsTokens[i]).Perc;            
-            origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp});
-            predictStandingJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": 0, "W": 0, "L": 0, "T": 0, "Pts": 0, "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp });
+        for (i = 0; i < standingsTokens.length; i = i + 8) {           
+            var objPerc = FindObjectByKey(origPlayoffPercJS, "TeamName", standingsTokens[i]);
+            var percTemp = objPerc.Perc;
+            var changeTemp = objPerc.Change;
+
+            origStandingsJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": standingsTokens[i + 2], "W": standingsTokens[i + 3], "L": standingsTokens[i + 4], "T": standingsTokens[i + 5], "Pts": standingsTokens[i + 6], "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp, "PlayoffChange": changeTemp });
+            predictStandingJS.push({ "LongTeamName": standingsTokens[i], "ShortTeamName": standingsTokens[i + 1], "P": 0, "W": 0, "L": 0, "T": 0, "Pts": 0, "NRR": standingsTokens[i + 7], "PlayoffPerc": percTemp, "PlayoffChange": changeTemp  });
         }
         var resultsTokens = '@inputResults'.split('|');
         var gameCounter = 1;
@@ -654,7 +657,13 @@
             content += "<td>" + origStandingsJS[i].L + "</td>";
             content += "<td>" + origStandingsJS[i].Pts + "</td>";
             content += "<td>" + origStandingsJS[i].NRR + "</td>";
-            content += "<td>" + origStandingsJS[i].PlayoffPerc + "</td>"; 
+            content += "<td>" + origStandingsJS[i].PlayoffPerc + "</td>";
+            if (origStandingsJS[i].PlayoffChange == "UP")
+                content += "<td><i class=\"tiny material-icons green-text\">arrow_upward</i></td>";
+            else if (origStandingsJS[i].PlayoffChange == "DOWN")
+                content += "<td><i class=\"tiny material-icons red-text\">arrow_downward</i></td>";
+            else
+                content += "<td></td>"
             content += "</tr> ";
         }
         return content;

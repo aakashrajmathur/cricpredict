@@ -201,16 +201,27 @@ namespace cricpredict.Controllers
         {
             //Get Results and standings 
             string results = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"));
+            string prevPlayOffPerc = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));
+
+            string[] tokensPP = prevPlayOffPerc.Split(',');
+            Dictionary<string, double> prevPerc = GetPrevPerc(tokensPP);
+
+
 
             List<string> homeTeam = new List<string>();
             List<string> awayTeam = new List<string>();
 
             string[] tokens = results.Split('|');
+            var completedGamesCount = 0; 
             for (int i = 0; i < tokens.Length; i = i + 10)
             {
                 if (tokens[i + 5] == "true") {
                     homeTeam.Add(tokens[i]);
                     awayTeam.Add(tokens[i + 1]);
+                }
+                else
+                {
+                    completedGamesCount++;
                 }
             }
 
@@ -238,11 +249,36 @@ namespace cricpredict.Controllers
                 raw.Add(pair.Key);
                 toBeWritten.Add(pair.Key);
                 raw.Add(pair.Value.ToString());
-                toBeWritten.Add(Math.Round((double)(pair.Value*100.0 / count), 2).ToString());
+                double value = Math.Round((double)(pair.Value * 100.0 / count), 2);
+                toBeWritten.Add(value.ToString());
+                double prevValue = prevPerc[pair.Key];
+
+                if (prevValue < value)
+                    toBeWritten.Add("UP");
+                else if (prevValue > value)
+                    toBeWritten.Add("DOWN");
+                else
+                    toBeWritten.Add("SAME");
             }
 
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", raw.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
+        }
+
+        private Dictionary<string, double> GetPrevPerc(string[] tokensPP)
+        {
+            //Chennai Super Kings,97.42,Sunrisers Hyderabad,97.29,Kings XI Punjab,91.42,Kolkata Knight Riders,60.09,Rajasthan Royals,26.46,Royal Challengers Bangalore,16.64,Mumbai Indians,6.96,Delhi Daredevils,3.73
+            Dictionary<string, double> prev = new Dictionary<string, double>(); 
+            for(int i =0; i< tokensPP.Length; i++)
+            {
+                if((tokensPP[i] == "Chennai Super Kings") || (tokensPP[i] == "Sunrisers Hyderabad") || (tokensPP[i] == "Kings XI Punjab") || (tokensPP[i] == "Kolkata Knight Riders") || (tokensPP[i] == "Rajasthan Royals") || (tokensPP[i] == "Royal Challengers Bangalore") || (tokensPP[i] == "Mumbai Indians") || (tokensPP[i] == "Delhi Daredevils"))
+                {
+                    prev.Add(tokensPP[i], double.Parse(tokensPP[i + 1]));
+                }
+            }
+            return prev;
         }
 
         private static int count = 0;
