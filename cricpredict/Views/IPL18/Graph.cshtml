@@ -19,9 +19,6 @@
     string inputResults = (string)ViewData["Results"];
 }
 
-<p>@inputGamesWisePlayoffPercentages</p>
-<p>@inputResults</p>
-
 <div class="container">
     <div class="row">
         <div id="curve_chart" class="col s12" style="height:500px"></div>
@@ -53,6 +50,7 @@
                 playoffPercJS.push({"GameNo": playoffPercTokens[0], "TeamShortName": GetShortTeamName(playoffPercTokens[j]), "playoffPerc": playoffPercTokens[j + 1], "status": playoffPercTokens[j + 2]});
             }
         }
+
         gameData = GenerateGameData(playoffPercJS);
     }
 
@@ -64,17 +62,20 @@
         //    ['2005', 1170, 460],
         //    ['2006', 660, 1120],
         //    ['2007', 1030, 540]
+
         var result = [];
         result.push("After Game", teamShortNames);
         for (i = 0; i < playoffPercJS.length; i++) {
-            var temp = [];
-            temp.push(playoffPercJS["GameNo"]);
+            var temp = [];           
+            temp.push(playoffPercJS["GameNo"]);            
             for (j = 0; j < teamShortNames; j++) {
                 var o = FindObjectByKey(playoffPercJS[i], "TeamShortName", teamShortNames[j]);
                 temp.push(o.playoffPerc);
             }
             result.push(temp);
         }
+        alert(result.length);
+        return result;
     }
 
     function GetShortTeamName(longTeamName) {
