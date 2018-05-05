@@ -146,7 +146,7 @@ namespace cricpredict.Controllers
                         string homeTeamScore = "";
                         string awayTeamScore = "";
 
-                        if (results[i + 3].Contains("Match scheduled to begin"))
+                        if ((results[i + 3].Contains("Match scheduled to begin")) || (results[i + 4].Contains("Live")) || (results[i + 5].Contains("Live")))
                         {
                             futureGame = "true";
                             winner = homeTeamFullName;
@@ -249,8 +249,8 @@ namespace cricpredict.Controllers
                 raw.Add(pair.Key);
                 toBeWritten.Add(pair.Key);
                 raw.Add(pair.Value.ToString());
-                double value = Math.Round((double)(pair.Value * 100.0 / count), 2);
-                toBeWritten.Add(value.ToString());
+                double value = (pair.Value * 100.0) / count;
+                toBeWritten.Add(value.ToString("0.00"));
                 double prevValue = prevPerc[pair.Key];
 
                 if (prevValue < value)
@@ -262,9 +262,9 @@ namespace cricpredict.Controllers
             }
 
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_Game" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", raw.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_Game" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
         }
 
         private Dictionary<string, double> GetPrevPerc(string[] tokensPP)
@@ -281,7 +281,7 @@ namespace cricpredict.Controllers
             return prev;
         }
 
-        private static int count = 0;
+        private int count = 0;
 
         Dictionary<string, int> GetPlayoffCount(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
         {
@@ -358,6 +358,4 @@ namespace cricpredict.Controllers
             this.teamFullName = teamFullName; this.W = W; this.NRR = NRR; 
         }
     }
-
-
 }
