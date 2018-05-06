@@ -201,8 +201,7 @@ namespace cricpredict.Controllers
         {
             //Get Results and standings 
             string results = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"));                       
-
-
+            
             List<string> homeTeam = new List<string>();
             List<string> awayTeam = new List<string>();
 
@@ -223,8 +222,7 @@ namespace cricpredict.Controllers
             string prevPlayOffPerc = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + (completedGamesCount - 1) + ".txt"));
             string[] tokensPP = prevPlayOffPerc.Split(',');
             Dictionary<string, double> prevPerc = GetPrevPerc(tokensPP);
-
-
+            
             string standingsInput = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Standings.txt"));
             string[] tokensStandings = standingsInput.Split(',');
             List<TeamStandings> standings = new List<TeamStandings>();

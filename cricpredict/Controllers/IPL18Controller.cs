@@ -85,9 +85,62 @@ namespace cricpredict.Controllers
                 gameIndex++;
             }
 
-            ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
+            ViewData["GraphData"] = GetGraphData(playoffPerc);
+
+            //ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));            
             return View();
+        }
+
+        private string GetGraphData(List<string> playoffPerc)
+        {
+            List<string> result = new List<string>();
+            string[] teamOrder = { "CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH" };
+            
+            //List<string> rows = new List<string>();
+            //List<string> header = new List<string>();
+            result.Add("'Game'");
+            foreach(string team in teamOrder)
+            {
+                result.Add("'" + team + "'");
+            }
+            
+            foreach (string gameInfo in playoffPerc)
+            {
+                string[] tokens = gameInfo.Split(',');
+                result.Add(tokens[0]);
+
+                foreach(string team in teamOrder)
+                {
+                    result.Add(GetPercForTeam(team, tokens));
+                }                
+            }
+            return string.Join(",", result);
+        }
+
+        private string GetPercForTeam(string team, string[] tokens)
+        {
+            for(int i =0; i < tokens.Length;i++)
+            {
+                if(tokens[i] == GetLongTeamName(team))
+                {
+                    return tokens[i + 1];
+                }
+            }
+            throw new Exception("Could not find percentage for " + team);
+        }
+
+        private string GetLongTeamName(string longTeamName)
+        {
+            if (longTeamName == "KXIP") return "Kings XI Punjab";
+            if (longTeamName == "CSK") return "Chennai Super Kings";
+            if (longTeamName == "KKR") return "Kolkata Knight Riders";
+            if (longTeamName == "SRH") return "Sunrisers Hyderabad";
+            if (longTeamName == "RCB") return "Royal Challengers Bangalore";
+            if (longTeamName == "RR") return "Rajasthan Royals";
+            if (longTeamName == "MI") return "Mumbai Indians";
+            if (longTeamName == "DD") return "Delhi Daredevils";
+            throw new Exception("Team not found!");
         }
 
         public ActionResult Data()
