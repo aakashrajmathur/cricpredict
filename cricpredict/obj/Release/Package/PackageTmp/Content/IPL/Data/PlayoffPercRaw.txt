@@ -1,1 +1,1 @@
-2097152,Chennai Super Kings,2086964,Sunrisers Hyderabad,2053633,Kings XI Punjab,1796862,Kolkata Knight Riders,1698292,Rajasthan Royals,297497,Mumbai Indians,209772,Royal Challengers Bangalore,132312,Delhi Daredevils,113276
+262144,Chennai Super Kings,261802,Sunrisers Hyderabad,261708,Kings XI Punjab,253554,Kolkata Knight Riders,187604,Mumbai Indians,45612,Rajasthan Royals,18710,Royal Challengers Bangalore,15498,Delhi Daredevils,4088

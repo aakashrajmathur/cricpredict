@@ -87,7 +87,7 @@ namespace cricpredict.Controllers
 
             ViewData["GraphData"] = GetGraphData(playoffPerc);
 
-            //ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
+            ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));            
             return View();
         }
@@ -154,6 +154,7 @@ namespace cricpredict.Controllers
             if (password == "123")
             {
                 //Scrap the website and update the text files.
+                new DataParser().RefreshStats(this);
                 new DataParser().RefreshStandings(this);
                 new DataParser().RefreshResults(this);
                 new DataParser().RefreshPlayoffPercentages(this);
@@ -163,6 +164,13 @@ namespace cricpredict.Controllers
             {
                 ViewData["status"] = "Password was incorrect.";
             }
+            return View();
+        }
+
+        public ActionResult Caps()
+        {
+            ViewData["BatsmenStats"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/BatsmenStats.txt"));        
+            ViewData["BowlersStats"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/BowlersStats.txt"));
             return View();
         }
 

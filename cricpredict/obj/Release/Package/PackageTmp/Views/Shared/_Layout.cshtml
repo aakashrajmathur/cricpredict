@@ -33,6 +33,7 @@
                 font-size: 1.6rem;
             }
     </style>
+    
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -50,9 +51,7 @@
         <div class="container">
             <div class="nav-wrapper">
                 @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
-                <ul class="right" style="padding-right:125px">
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
-                </ul>
+                
                 <ul class="left">
                     <li class="active">@Html.ActionLink("Indian Premier League", "Predictions", "IPL18", new { area = "" }, new { })</li>
                 </ul>
@@ -62,7 +61,36 @@
     <div class="body-content">
         @RenderBody()
     </div>
+    <footer class="page-footer blue-grey darken-1 white-text">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Cric Predict - Pick your IPL Winner!</h5>
+                    
+                    <p class="grey-text text-lighten-4">CricPredict is a mathematically driven platform where users can explore the playoff scenarios of each team. We analyze all possible combinations and compute the probability of each team to qualify for the playoffs.</p>
+                    <p class="grey-text text-lighten-4">Users can use their intuition about future games and check out each team's playoff chances.</p>
+                    <p class="grey-text text-lighten-4">To use this platform, you can select either of the playing team to win a future game. Our algorithm uses the current standings and the user selection of future games to come up with the projected standings. The projected standings will indicate which teams may qualify for the playoffs.</p>
 
+
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text"></h5>
+                    <ul>
+                        <li class="white-text">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("Suggestion", "Contact", "Home", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { })</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © @DateTime.Now.Year Copyright Text
+                <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>

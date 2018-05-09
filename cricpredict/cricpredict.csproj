@@ -173,7 +173,9 @@
     <Content Include="Content\IPL\Auction\Rajasthan Royals.txt" />
     <Content Include="Content\IPL\Auction\Royal Challengers Bangalore.txt" />
     <Content Include="Content\IPL\Auction\Sunrisers Hyderabad.txt" />
+    <Content Include="Content\IPL\Data\BatsmenStats.txt" />
     <Content Include="Content\IPL\Data\BeforeGame1.txt" />
+    <Content Include="Content\IPL\Data\BowlersStats.txt" />
     <Content Include="Content\IPL\Data\Defaults.txt" />
     <Content Include="Content\IPL\Data\DefaultWinner.txt" />
     <Content Include="Content\IPL\Data\PlayerInfo.txt" />
@@ -250,6 +252,9 @@
     <Content Include="Views\IPL18\Teams.cshtml" />
     <Content Include="Views\IPL18\Predictions.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\IPL18\Caps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

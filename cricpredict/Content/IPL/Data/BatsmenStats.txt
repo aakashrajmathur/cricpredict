@@ -1,0 +1,1 @@
+AT Rayudu,10,423,82,42.30,151.61,Chennai Super Kings,SA Yadav,10,399,72,39.90,132.11,Mumbai Indians,RR Pant,10,393,85,39.30,173.12,Delhi Daredevils,KL Rahul,9,376,84*,47.00,162.77,Kings XI Punjab,MS Dhoni,10,360,79*,90.00,165.89,Chennai Super Kings

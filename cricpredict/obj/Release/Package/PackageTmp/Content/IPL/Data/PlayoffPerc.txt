@@ -1,1 +1,1 @@
-Chennai Super Kings,99.51,UP,Sunrisers Hyderabad,97.92,UP,Kings XI Punjab,85.68,UP,Kolkata Knight Riders,80.98,UP,Rajasthan Royals,14.19,UP,Mumbai Indians,10.00,UP,Royal Challengers Bangalore,6.31,DOWN,Delhi Daredevils,5.40,UP
+Chennai Super Kings,99.87,UP,Sunrisers Hyderabad,99.83,DOWN,Kings XI Punjab,96.72,UP,Kolkata Knight Riders,71.57,UP,Mumbai Indians,17.40,DOWN,Rajasthan Royals,7.14,DOWN,Royal Challengers Bangalore,5.91,DOWN,Delhi Daredevils,1.56,DOWN

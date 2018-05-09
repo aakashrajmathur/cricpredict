@@ -200,16 +200,17 @@ namespace cricpredict.Controllers
         internal void RefreshPlayoffPercentages(IPL18Controller iPL18Controller)
         {
             //Get Results and standings 
-            string results = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"));                       
-            
+            string results = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Results.txt"));
+
             List<string> homeTeam = new List<string>();
             List<string> awayTeam = new List<string>();
 
             string[] tokens = results.Split('|');
-            var completedGamesCount = 0; 
+            var completedGamesCount = 0;
             for (int i = 0; i < tokens.Length; i = i + 10)
             {
-                if (tokens[i + 5] == "true") {
+                if (tokens[i + 5] == "true")
+                {
                     homeTeam.Add(tokens[i]);
                     awayTeam.Add(tokens[i + 1]);
                 }
@@ -218,16 +219,23 @@ namespace cricpredict.Controllers
                     completedGamesCount++;
                 }
             }
-
-            string prevPlayOffPerc = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + (completedGamesCount - 1) + ".txt"));
+            string prevPlayOffPerc = "";
+            try
+            {
+                prevPlayOffPerc = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + (completedGamesCount - 1) + ".txt"));
+            }
+            catch
+            {
+                prevPlayOffPerc = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));
+            }
             string[] tokensPP = prevPlayOffPerc.Split(',');
             Dictionary<string, double> prevPerc = GetPrevPerc(tokensPP);
-            
+
             string standingsInput = System.IO.File.ReadAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/Standings.txt"));
             string[] tokensStandings = standingsInput.Split(',');
             List<TeamStandings> standings = new List<TeamStandings>();
 
-            for(int i = 0; i < tokensStandings.Length; i = i + 8)
+            for (int i = 0; i < tokensStandings.Length; i = i + 8)
             {
                 standings.Add(new TeamStandings(tokensStandings[i], int.Parse(tokensStandings[i + 3]), double.Parse(tokensStandings[i + 7])));
             }
@@ -258,20 +266,20 @@ namespace cricpredict.Controllers
                 else
                     toBeWritten.Add("SAME");
             }
-            
+
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"), string.Join(",", toBeWritten.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + completedGamesCount + ".txt"), string.Join(",", toBeWritten.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + (completedGamesCount) + ".txt"), string.Join(",", toBeWritten.ToArray()));
             System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw.txt"), string.Join(",", raw.ToArray()));
-            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_" + completedGamesCount + ".txt"), string.Join(",", raw.ToArray()));
+            System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/PlayoffPercRaw_After_" + (completedGamesCount) + ".txt"), string.Join(",", raw.ToArray()));
         }
 
         private Dictionary<string, double> GetPrevPerc(string[] tokensPP)
         {
             //Chennai Super Kings,97.42,Sunrisers Hyderabad,97.29,Kings XI Punjab,91.42,Kolkata Knight Riders,60.09,Rajasthan Royals,26.46,Royal Challengers Bangalore,16.64,Mumbai Indians,6.96,Delhi Daredevils,3.73
-            Dictionary<string, double> prev = new Dictionary<string, double>(); 
-            for(int i =0; i< tokensPP.Length; i++)
+            Dictionary<string, double> prev = new Dictionary<string, double>();
+            for (int i = 0; i < tokensPP.Length; i++)
             {
-                if((tokensPP[i] == "Chennai Super Kings") || (tokensPP[i] == "Sunrisers Hyderabad") || (tokensPP[i] == "Kings XI Punjab") || (tokensPP[i] == "Kolkata Knight Riders") || (tokensPP[i] == "Rajasthan Royals") || (tokensPP[i] == "Royal Challengers Bangalore") || (tokensPP[i] == "Mumbai Indians") || (tokensPP[i] == "Delhi Daredevils"))
+                if ((tokensPP[i] == "Chennai Super Kings") || (tokensPP[i] == "Sunrisers Hyderabad") || (tokensPP[i] == "Kings XI Punjab") || (tokensPP[i] == "Kolkata Knight Riders") || (tokensPP[i] == "Rajasthan Royals") || (tokensPP[i] == "Royal Challengers Bangalore") || (tokensPP[i] == "Mumbai Indians") || (tokensPP[i] == "Delhi Daredevils"))
                 {
                     prev.Add(tokensPP[i], double.Parse(tokensPP[i + 1]));
                 }
@@ -283,15 +291,15 @@ namespace cricpredict.Controllers
 
         Dictionary<string, int> GetPlayoffCount(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
         {
-            if(homeTeam.Count == pointer)
+            if (homeTeam.Count == pointer)
             {
                 count++;
-                Dictionary<string, int> res = new Dictionary<string, int>(); 
-                for(int i = 0; i < 4; i++)
+                Dictionary<string, int> res = new Dictionary<string, int>();
+                for (int i = 0; i < 4; i++)
                 {
                     res.Add(standings[i].teamFullName, 1);
                 }
-                for(int i = 4; i < 8; i++)
+                for (int i = 4; i < 8; i++)
                 {
                     res.Add(standings[i].teamFullName, 0);
                 }
@@ -307,11 +315,11 @@ namespace cricpredict.Controllers
                 //awayTeam.RemoveAt(0);
                 List<TeamStandings> awayStandings = GetStandingsForWinner(standings, away);
 
-                Dictionary<string, int> homeRes = GetPlayoffCount(homeStandings, homeTeam, awayTeam, pointer+1);
-                Dictionary<string, int> awayRes = GetPlayoffCount(awayStandings, homeTeam, awayTeam, pointer+1);
+                Dictionary<string, int> homeRes = GetPlayoffCount(homeStandings, homeTeam, awayTeam, pointer + 1);
+                Dictionary<string, int> awayRes = GetPlayoffCount(awayStandings, homeTeam, awayTeam, pointer + 1);
 
                 Dictionary<string, int> mergedRes = new Dictionary<string, int>();
-                foreach(string team in homeRes.Keys)
+                foreach (string team in homeRes.Keys)
                 {
                     mergedRes.Add(team, homeRes[team] + awayRes[team]);
                 }
@@ -321,8 +329,8 @@ namespace cricpredict.Controllers
 
         List<TeamStandings> GetStandingsForWinner(List<TeamStandings> standings, string winner)
         {
-            List<TeamStandings> dup = new List<TeamStandings>(); 
-            foreach(TeamStandings team in standings)
+            List<TeamStandings> dup = new List<TeamStandings>();
+            foreach (TeamStandings team in standings)
             {
                 if (team.teamFullName == winner)
                     dup.Add(new TeamStandings(team.teamFullName, team.W + 1, team.NRR));
@@ -333,7 +341,93 @@ namespace cricpredict.Controllers
             dup.Reverse();
             return dup;
         }
+        
 
+        internal void RefreshStats(IPL18Controller iPL18Controller)
+        {
+            RefreshBatsmenStats(iPL18Controller);
+            RefreshBowlersStats(iPL18Controller);            
+        }
+
+        private void RefreshBowlersStats(IPL18Controller iPL18Controller)
+        {
+            //Bowling stats:
+            var url = @"http://stats.espncricinfo.com/ci/engine/records/averages/bowling.html?id=12210;type=tournament";
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+            var nodes = doc.DocumentNode.SelectNodes("//table[contains(@class, 'engineTable')]");
+
+            if (nodes.Count > 0)
+            {
+                string inputText = nodes[0].InnerHtml;
+                List<string> stats = GetInnerTextFromHTML(inputText);
+
+                List<PlayerBowlersStats> BowlersStats = new List<PlayerBowlersStats>();
+                /*1- 15 are headers     Player = 0, Mat , Inns = 2, Overs, Mdns, Runs, Wkts = 6, BBI = 7, Ave = 8, Econ = 9, SR = 10, 4, 5, Ct, St, team = 15*/
+
+                for (int i = 16; i < stats.Count; i = i + 16)
+                {
+                    BowlersStats.Add(new PlayerBowlersStats(stats[i + 0], stats[i + 2], stats[i + 6], stats[i + 7], stats[i + 8], stats[i + 9], stats[i + 10], stats[i + 15]));
+                }
+
+                BowlersStats.Sort();
+                BowlersStats.Reverse();
+
+                List<string> toBeWritten = new List<string>();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    toBeWritten.Add(BowlersStats[i].name);
+                    toBeWritten.Add(BowlersStats[i].matches);
+                    toBeWritten.Add(BowlersStats[i].wickets);
+                    toBeWritten.Add(BowlersStats[i].best);
+                    toBeWritten.Add(BowlersStats[i].avg);
+                    toBeWritten.Add(BowlersStats[i].econ);
+                    toBeWritten.Add(BowlersStats[i].strikeRate);
+                    toBeWritten.Add(BowlersStats[i].team);
+                }
+                System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/BowlersStats.txt"), string.Join(",", toBeWritten.ToArray()));
+                
+            }
+        }
+
+        private void RefreshBatsmenStats(IPL18Controller iPL18Controller)
+        {
+            var url = @"http://stats.espncricinfo.com/ci/engine/records/averages/batting.html?id=12210;type=tournament";
+            var web = new HtmlWeb();
+            var doc = web.Load(url);
+            var nodes = doc.DocumentNode.SelectNodes("//table[contains(@class, 'engineTable')]");
+
+            if (nodes.Count > 0)
+            {
+                string inputText = nodes[0].InnerHtml;
+                List<string> stats = GetInnerTextFromHTML(inputText);
+
+                List<PlayerBattingStats> batsmenStats = new List<PlayerBattingStats>();
+                /*1- 14 are headers     0 = name, 2 = innings, 4 = runs, 5 = HS, 6 = Avg, 8 = SR, 14= Team*/
+                for (int i = 15; i < stats.Count; i = i + 15)
+                {
+                    batsmenStats.Add(new PlayerBattingStats(stats[i + 0], stats[i + 2], stats[i + 4], stats[i + 5], stats[i + 6], stats[i + 8], stats[i + 14]));
+                }
+
+                batsmenStats.Sort();
+                batsmenStats.Reverse();
+
+                List<string> toBeWritten = new List<string>();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    toBeWritten.Add(batsmenStats[i].name);
+                    toBeWritten.Add(batsmenStats[i].innings);
+                    toBeWritten.Add(batsmenStats[i].runs);
+                    toBeWritten.Add(batsmenStats[i].highScore);
+                    toBeWritten.Add(batsmenStats[i].avg);
+                    toBeWritten.Add(batsmenStats[i].strikeRate);
+                    toBeWritten.Add(batsmenStats[i].team);
+                }
+                System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/BatsmenStats.txt"), string.Join(",", toBeWritten.ToArray()));
+            }
+        }
     }
 
     class TeamStandings : IComparable<TeamStandings>
@@ -356,4 +450,125 @@ namespace cricpredict.Controllers
             this.teamFullName = teamFullName; this.W = W; this.NRR = NRR; 
         }
     }
+
+    class PlayerBattingStats : IComparable<PlayerBattingStats>
+    {
+        public string name;
+        public string innings;
+        public string runs;
+        public string highScore;
+        public string avg; 
+        public string strikeRate; 
+        public string team;
+
+        public PlayerBattingStats(string name, string innings, string runs, string highScore, string avg, string strikeRate, string team)
+        {
+            this.name = name;
+            this.innings = innings;
+            this.runs = runs;
+            this.highScore = highScore;
+            this.avg = avg;
+            this.strikeRate = strikeRate;
+            this.team = team.Substring(1,team.Length-2);
+        }
+
+        public int CompareTo(PlayerBattingStats other)
+        {
+            bool isThisInt; bool isOtherInt;
+
+            try { int t = int.Parse(this.runs); isThisInt = true; } catch{ isThisInt = false; }
+            try { int t = int.Parse(other.runs); isOtherInt = true; } catch { isOtherInt = false; }
+
+            if (isThisInt && isOtherInt)
+                return int.Parse(this.runs) - int.Parse(other.runs);
+            else if (isThisInt)
+                return +1;
+            else if (isOtherInt)
+                return -1;
+            else
+                return this.name.CompareTo(other.name);
+        }
+    }
+
+    class PlayerBowlersStats : IComparable<PlayerBowlersStats>
+    {
+        public string name;
+        public string matches;
+        public string wickets;
+        public string best;
+        public string avg;
+        public string econ;
+        public string strikeRate;
+        public string team;
+
+        public PlayerBowlersStats(string name, string matches, string wickets, string best, string avg, string econ, string strikeRate, string team)
+        {
+            this.name = name;
+            this.matches = matches;
+            this.wickets = wickets;
+            this.best = best;
+            this.avg = avg;
+            this.econ = econ;
+            this.strikeRate = strikeRate;
+            this.team = team.Substring(1, team.Length - 2);
+        }
+
+        public int CompareTo(PlayerBowlersStats other)
+        {
+            bool thisWicketInt; bool otherWicketInt;
+            try { int w = int.Parse(this.wickets); thisWicketInt = true; } catch { thisWicketInt = false; }
+            try { int w = int.Parse(other.wickets); otherWicketInt = true; } catch { otherWicketInt = false; }
+
+            if(thisWicketInt && otherWicketInt)
+            {
+                if (int.Parse(this.wickets) != int.Parse(other.wickets))
+                {
+                    return int.Parse(this.wickets) - int.Parse(other.wickets);
+                }
+                else
+                {
+                    //if wickets are same, compare the econ.
+                    bool thisEconFloat; bool otherEconFloat;
+                    try { double a = double.Parse(this.econ); thisEconFloat = true; } catch { thisEconFloat = false; }
+                    try { double a = double.Parse(other.econ); otherEconFloat = true; } catch { otherEconFloat = false; }
+
+                    if (thisEconFloat && otherEconFloat)
+                    {
+                        if (double.Parse(this.econ) != double.Parse(other.econ))
+                        {
+                            if ((double.Parse(other.econ) - double.Parse(this.econ)) > 0)
+                                return 1;
+                            else if (double.Parse(other.econ) == double.Parse(this.econ))
+                                return 0;
+                            else
+                                return -1;
+                        }
+                        else
+                        {
+                            return this.name.CompareTo(other.name);
+                        }
+                    }
+                    else if (thisEconFloat)
+                        return 1;
+                    else if (otherEconFloat)
+                        return -1; 
+                    else
+                        return this.name.CompareTo(other.name);
+                }
+            }
+            else if (thisWicketInt)
+            {
+                return +1;
+            }
+            else if (otherWicketInt)
+            {
+                return -1; 
+            }
+            else
+            {
+                return this.name.CompareTo(other.name);
+            }
+        }
+    }
+
 }
