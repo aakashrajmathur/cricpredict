@@ -3,7 +3,7 @@
     ViewBag.Title = "Predictions";
 }
 
-<nav class="teal">
+<nav class="blue darken-1">
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col s12 m6">
             <div class="card grey lighten-5 z-depth-5">
-                <h5 class="center-align teal-text text" style="padding-top:10px">PRESENT STANDINGS</h5>
+                <h5 class="center-align" style="padding-top:10px; color:#1e88e5">PRESENT STANDINGS</h5>
                 <table class="centered">
                     <thead>
                         <tr>
@@ -48,7 +48,7 @@
         <div class="col s12 m6">
             <div id="predictions">
                 <div class="card grey lighten-5 z-depth-5">
-                    <h5 class="center-align teal-text" style="padding-top:10px">PROJECTED STANDINGS</h5>
+                    <h5 class="center-align" style="padding-top:10px;color:#1e88e5">PROJECTED STANDINGS</h5>
                     <table class="centered">
                         <thead>
                             <tr>
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="col s12 teal-text card grey lighten-5 z-depth-2">
+        <div class="col s12 card grey lighten-5 z-depth-2" style="color:#1e88e5">
             <div id="weeklySelection">
 
             </div>
@@ -76,21 +76,21 @@
             <p class="col s4 m8 l8 small left-align grey-text"></p>
             <p class="col s8 m4 l4">
                 <label style="padding-right:20px">
-                    <input name="group1" type="radio" class="with-gap" id="radioButtonViewByDate" checked onchange="ViewByChanged(id)" />
+                    <input name="group1" type="radio" class="with-gap class="blue darken-4"" id="radioButtonViewByDate" checked onchange="ViewByChanged(id)" />
                     <span>Date</span>
                 </label>
                 <label>
-                    <input name="group1" type="radio" class="with-gap" id="radioButtonViewByTeam" onchange="ViewByChanged(id)" />
+                    <input name="group1" type="radio" class="with-gap class="blue darken-4"" id="radioButtonViewByTeam" onchange="ViewByChanged(id)" />
                     <span>Team</span>
                 </label>
             </p>
             <p class="col s12 center-align">Pick your IPL Winners in Future Games and check out the Projected Standings</p>
 
-            <h5 class="col s12 center-align teal-text" style="padding-top:10px">FUTURE GAMES</h5>
+            <h5 class="col s12 center-align" style="padding-top:10px;color:#1e88e5">FUTURE GAMES</h5>
             <div id="games">
 
             </div>
-            <h5 class="col s12 center-align teal-text" style="padding-top:10px">RESULTS</h5>
+            <h5 class="col s12 center-align" style="padding-top:10px;color:#1e88e5">RESULTS</h5>
             <div id="results">
 
             </div>
@@ -203,19 +203,19 @@
 
     function GetWeeklySelectionContent() {
         var content = "";
-        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons blue-grey-text\" onclick=\"PrevClicked()\">chevron_left</i></a>";
+        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons\" style=\"color:#1e88e5\" onclick=\"PrevClicked()\">chevron_left</i></a>";
         content += "<div class=\"col s8 center-align hide-on-med-and-up\"><h5 id=\"TitleSmall\">Apr 16 - Apr 23</h5></div>";
         content += "<div class=\"col m8 center-align hide-on-small-and-down\"><h5 id=\"TitleFull\">Week 1 (Apr 16 - Apr 23)</h5></div>";
-        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align blue-grey-text\" onclick=\"NextClicked()\">chevron_right</i></a>";
+        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align\" style=\"color:#1e88e5\" onclick=\"NextClicked()\">chevron_right</i></a>";
         return content;
     }
 
     function GetWeeklySelectionBottomContent() {
         var content = "";
-        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons blue-grey-text\" onclick=\"PrevClicked()\">chevron_left</i></a>";
+        content += "<a class=\"col s2 center-align\" href=\"#\"> <i class=\"center-align medium material-icons\" style=\"color:#1e88e5\" onclick=\"PrevClicked()\">chevron_left</i></a>";
         content += "<div class=\"col s8 center-align hide-on-med-and-up\"><h5 id=\"TitleSmallBottom\">Apr 16 - Apr 23</h5></div>";
         content += "<div class=\"col m8 center-align hide-on-small-and-down\"><h5 id=\"TitleFullBottom\">Week 1 (Apr 16 - Apr 23)</h5></div>";
-        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align blue-grey-text\" onclick=\"NextClicked()\">chevron_right</i></a>";
+        content += "<a href=\"#\" class=\"col s2 center-align\"> <i class=\"medium material-icons center-align\" style=\"color:#1e88e5\" onclick=\"NextClicked()\">chevron_right</i></a>";
         return content;
     }
 
@@ -395,8 +395,8 @@
                         content += "            </div>                            ";
                         content += "        </div>";
                         content += "    </a>";
-
-                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
+                        
+                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align\" style=\"padding-top:18px;color:#1e88e5\">VS</h6></div>";
 
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].AwayTeamName)+" \">";
                         content += "        <div class=\"row\">";
@@ -418,9 +418,9 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px;color:#1e88e5\" class=\"right-align\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px;color:#1e88e5\" class=\"left-align\" >" + gameInfoJS[i].Where + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -453,7 +453,7 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
+                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align\" style=\"padding-top:18px;color:#1e88e5\">VS</h6></div>";
 
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large hoverable " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
                         content += "        <div class=\"row\">";
@@ -475,9 +475,9 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px;color:#1e88e5\" class=\"right-align\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0; padding-top:10px\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0; padding-top:10px;color:#1e88e5\" class=\"left-align\" >" + gameInfoJS[i].Where + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -503,7 +503,7 @@
                         content += "            <div class=\"col s8 m4  center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
                         content += "            </div>";
-                        content += "            <div class=\"col m6 hide-on-small-only right-align blue-grey-text\" style=\"font-weight: bold\">" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
+                        content += "            <div class=\"col m6 hide-on-small-only right-align\" style=\"font-weight: bold;color:#1e88e5\">" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
 
@@ -519,7 +519,7 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
+                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align\" style=\"padding-top:18px;color:#1e88e5\">VS</h6></div>";
 
 
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
@@ -535,19 +535,19 @@
                         content += "                    <span></span>";
                         content += "                </label>";
                         content += "            </div>";
-                        content += "            <div class=\"col m6 hide-on-small-only left-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
+                        content += "            <div class=\"col m6 hide-on-small-only left-align\" style=\"font-weight: bold;color:#1e88e5\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
                         content += "            <div class=\"col s8 m4  center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].AwayTeamName + ".png\" height=\"50\">";
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"right-align\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"left-align\" >" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"right-align\">" + gameInfoJS[i].HomeScore + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\">" + gameInfoJS[i].AwayScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"left-align\">" + gameInfoJS[i].AwayScore + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -564,7 +564,7 @@
                         content += "            <div class=\"col s8 m4  center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
                         content += "            </div>";
-                        content += "            <div class=\"col m6 hide-on-small-only right-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
+                        content += "            <div class=\"col m6 hide-on-small-only right-align\" style=\"font-weight: bold;color:#1e88e5\" >" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
                         content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
                         content += "                <label>";
 
@@ -580,7 +580,7 @@
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
+                        content += "    <div style=\"float:left;width:8%;color:#1e88e5;padding-top:18px\"><h6 class=\"center-align\">VS</h6></div>";
 
                         content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
                         content += "        <div class=\"row\">";
@@ -595,20 +595,20 @@
                         content += "                    <span></span>";
                         content += "                </label>";
                         content += "            </div>";
-                        content += "            <div class=\"col m6 hide-on-small-only left-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
+                        content += "            <div class=\"col m6 hide-on-small-only left-align\" style=\"font-weight: bold;color:#1e88e5\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
                         content += "            <div class=\"col s8 m4  center-align\">";
                         content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].AwayTeamName + ".png\" height=\"50\">";
                         content += "            </div>";
                         content += "        </div>";
                         content += "    </a>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"right-align\" >" + gameInfoJS[i].When + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"left-align\" >" + gameInfoJS[i].Where + "</p>";
 
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\">" + gameInfoJS[i].HomeScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"right-align\">" + gameInfoJS[i].HomeScore + "</p>";
                         content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
-                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\">" + gameInfoJS[i].AwayScore + "</p>";
+                        content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0;color:#1e88e5\" class=\"left-align\">" + gameInfoJS[i].AwayScore + "</p>";
 
                         content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
                     }
@@ -626,8 +626,8 @@
             document.getElementById("TitleSmallBottom").innerHTML = weekShortTitle[currentWeek[0] - 1];
             document.getElementById("TitleFullBottom").innerHTML = weekFullTitle[currentWeek[0] - 1];
         } else if (viewType[0] == "Team") {
-            document.getElementById("TitleSmall").innerHTML = teamFullNames[currentTeamIndex[0]];
-            document.getElementById("TitleFull").innerHTML = teamFullNames[currentTeamIndex[0]];
+            document.getElementById("TitleSmall").innerHTML = "<span style=\"color:#1e88e5\">" + teamFullNames[currentTeamIndex[0]] + "</span>";
+            document.getElementById("TitleFull").innerHTML = "<span style=\"color:#1e88e5\">" + teamFullNames[currentTeamIndex[0]] + "</span>";
         }
         //Update Games
         document.getElementById("games").innerHTML = GetGamesContent();

@@ -4,6 +4,16 @@
     <meta charset="utf-8" />
     <meta name="description" content="Using CricPredict users can explore the playoff scenarios of each teaem in the VIVO IPL 2017, a Club Cricket tournament. In cricket club tournaments, teams play each other in the Round Robin league stage, users can use their intuition about future games and check out each team's playoff chances. Our algorithm uses the current standings and the user selection of future games to come up with the projected standings. The projected standings will indicate which teams may qualify for the playoffs." />
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118970136-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-118970136-1');
+    </script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="~/css/materialize.min.css" media="screen,projection" />
@@ -13,6 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - CricPredict</title>
     
+
+
     <style type="text/css">
         nav {
             height: 40px;
@@ -47,7 +59,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="blue-grey darken-1">
+    <nav class="blue darken-4">
         <div class="container">
             <div class="nav-wrapper">
                 @Html.ActionLink("CricPredict", "Index", "Home", new { area = "" }, new { @class = "brand-logo right" })
@@ -61,7 +73,7 @@
     <div class="body-content">
         @RenderBody()
     </div>
-    <footer class="page-footer blue-grey darken-1 white-text">
+    <footer class="page-footer blue darken-1 white-text">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -76,17 +88,17 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text"></h5>
                     <ul>
-                        <li class="white-text">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
-                        <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { })</li>
-                        <li>@Html.ActionLink("Suggestion", "Contact", "Home", new { area = "" }, new { })</li>
-                        <li>@Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { })</li>
+                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "white-text" })</li>
+                        <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, new { @class = "white-text" })</li>
+                        <li>@Html.ActionLink("Suggestion", "Contact", "Home", new { area = "" }, new { @class = "white-text" })</li>
+                        <li>@Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "white-text" })</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
+        <div class="footer-copyright blue darken-4">
             <div class="container">
-                © @DateTime.Now.Year Copyright Text
+                © @DateTime.Now.Year Copyright
                 <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
             </div>
         </div>

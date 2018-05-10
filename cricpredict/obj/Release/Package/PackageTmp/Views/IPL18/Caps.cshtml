@@ -1,98 +1,88 @@
 ﻿
 @{
     ViewBag.Title = "Caps";
+
+    string batsmen = (string)ViewData["BatsmenStats"];
+    string bowlers = (string)ViewData["BowlersStats"];
 }
 
-<h2>Caps</h2>
-
 <div class="container">
+
+
+
     <dic class="row">
         <div class="col s12 m6">
             <div class="card-panel orange center-align">
-                <h6>ORANGE CAP</h6>
+                <h5>ORANGE CAP</h5>
             </div>
-            <ul class="collection">
-                <li class="collection-item avatar">
-                    <img src="images/yuna.jpg" alt="" class="circle">
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">folder</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle green">insert_chart</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle red">play_arrow</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
+            <ul class="collection" id="batsmenContent">
+                
             </ul>
         </div>
 
         <div class="col s12 m6">
             <div class="card-panel deep-purple center-align">
-                <h6>PURPLE CAP</h6>
+                <h5 class="white-text">PURPLE CAP</h5>
             </div>
-            <ul class="collection">
-                <li class="collection-item avatar">
-                    <img src="images/yuna.jpg" alt="" class="circle">
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">folder</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle green">insert_chart</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <i class="material-icons circle red">play_arrow</i>
-                    <span class="title">Title</span>
-                    <p>
-                        First Line <br>
-                        Second Line
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
+            <ul class="collection" id="bowlersContent">                
             </ul>
         </div>
     </dic>
 </div>
+
+
+<script type="text/javascript">
+    var batsmenJS = [];
+    var bowlersJS = [];
+
+    window.onload = function () {
+        batsmenJS = '@batsmen'.split(",");
+        bowlersJS = '@bowlers'.split(",");
+        document.getElementById("batsmenContent").innerHTML = GetBatsmenContent();       
+        document.getElementById("bowlersContent").innerHTML = GetBowlersContent();       
+    }
+
+    function GetBatsmenContent() {
+        var content = "";
+
+        content += "<li class=\"collection-item avatar\">";
+        content += "<img src=\"images/yuna.jpg\" alt=\"\" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+        content += "</li>";
+        return content;
+    }
+
+    function GetBowlersContent() {
+        var content = "";
+
+        content += "<li class=\"collection-item avatar\">";
+        content += "<img src=\"images/yuna.jpg\" alt=\"\" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+        content += "</li>"
+
+        return content;
+    }
+        @*
+        var content = "";
+
+        content += "<img src=\"images/yuna.jpg\" alt="" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+
+        return content;
+    }*@
+</script>

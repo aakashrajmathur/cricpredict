@@ -241,7 +241,7 @@ namespace cricpredict.Controllers
             }
             standings.Sort();
             standings.Reverse();
-            Dictionary<string, int> playoffCount = GetPlayoffCount(standings, homeTeam, awayTeam, 0);
+            Dictionary<string, int> playoffCount = GetPlayoffCount_Definite(standings, homeTeam, awayTeam, 0);
 
             List<KeyValuePair<string, int>> sorted = (from kv in playoffCount orderby kv.Value select kv).ToList();
             sorted.Reverse();
@@ -325,6 +325,84 @@ namespace cricpredict.Controllers
                 }
                 return mergedRes;
             }
+        }
+
+        Dictionary<string, int> GetPlayoffCount_Definite(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
+        {
+            if (homeTeam.Count == pointer)
+            {
+                count++;
+                Dictionary<string, int> res = new Dictionary<string, int>();
+
+                //Determine reverse ranking, 
+                //Add teams with Rank 1 to 4.
+                HashSet<string> topFour = GetTopFour(standings);                
+
+                for(int i=0; i < standings.Count; i++)
+                {
+                    if (topFour.Contains(standings[i].teamFullName))
+                    {
+                        res.Add(standings[i].teamFullName, 1);
+                    }
+                    else
+                    {
+                        res.Add(standings[i].teamFullName, 0);
+                    }
+                }
+                return res;
+            }
+            else
+            {
+                string home = homeTeam[pointer];
+                //homeTeam.RemoveAt(0);
+                List<TeamStandings> homeStandings = GetStandingsForWinner(standings, home);
+
+                string away = awayTeam[pointer];
+                //awayTeam.RemoveAt(0);
+                List<TeamStandings> awayStandings = GetStandingsForWinner(standings, away);
+
+                Dictionary<string, int> homeRes = GetPlayoffCount_Definite(homeStandings, homeTeam, awayTeam, pointer + 1);
+                Dictionary<string, int> awayRes = GetPlayoffCount_Definite(awayStandings, homeTeam, awayTeam, pointer + 1);
+
+                Dictionary<string, int> mergedRes = new Dictionary<string, int>();
+                foreach (string team in homeRes.Keys)
+                {
+                    mergedRes.Add(team, homeRes[team] + awayRes[team]);
+                }
+                return mergedRes;
+            }
+        }
+
+        private HashSet<string> GetTopFour(List<TeamStandings> standings)
+        {
+            HashSet<string> topFour = new HashSet<string>();
+            standings.Reverse();
+
+            Dictionary<string, int> rank = new Dictionary<string, int>();
+
+            int prevPoints = -1;
+            int prevRank = -1;
+            for(int i = 0; i < standings.Count; i++)
+            {
+                if(standings[i].W*2 != prevPoints)
+                {
+                    prevPoints = standings[i].W * 2;
+                    prevRank = standings.Count - i;
+                    rank.Add(standings[i].teamFullName, prevRank);                    
+                }
+                else
+                {
+                    rank.Add(standings[i].teamFullName, prevRank);
+                }
+            }
+
+            foreach(string team in rank.Keys)
+            {
+                if (rank[team] <= 4)
+                    topFour.Add(team);
+            }
+
+            return topFour;
         }
 
         List<TeamStandings> GetStandingsForWinner(List<TeamStandings> standings, string winner)
