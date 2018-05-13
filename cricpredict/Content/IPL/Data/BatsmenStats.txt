@@ -1,1 +1,1 @@
-KL Rahul,10,471,95*,58.87,156.47,Kings XI Punjab,SA Yadav,11,435,72,39.54,130.23,Mumbai Indians,AT Rayudu,10,423,82,42.30,151.61,Chennai Super Kings,KS Williamson,10,410,84,51.25,131.83,Sunrisers Hyderabad,V Kohli,10,396,92*,49.50,135.15,Royal Challengers Bangalore
+RR Pant,12,582,128*,52.90,179.62,Delhi Daredevils,KL Rahul,11,537,95*,59.66,162.72,Kings XI Punjab,KS Williamson,11,493,84,61.62,135.43,Sunrisers Hyderabad,V Kohli,11,466,92*,51.77,139.93,Royal Challengers Bangalore,SA Yadav,11,435,72,39.54,130.23,Mumbai Indians

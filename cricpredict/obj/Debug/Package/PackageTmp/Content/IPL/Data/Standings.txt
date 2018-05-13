@@ -1,1 +1,0 @@
-Sunrisers Hyderabad,SRH,9,7,2,0,14,0.471,Chennai Super Kings,CSK,10,7,3,0,14,0.421,Kolkata Knight Riders,KKR,10,5,5,0,10,0.145,Kings XI Punjab,KXIP,8,5,3,0,10,0.130,Mumbai Indians,MI,10,4,6,0,8,0.070,Royal Challengers Bangalore,RCB,9,3,6,0,6,-0.376,Delhi Daredevils,DD,10,3,7,0,6,-0.411,Rajasthan Royals,RR,8,3,5,0,6,-0.726

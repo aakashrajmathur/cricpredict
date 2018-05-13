@@ -336,9 +336,9 @@ namespace cricpredict.Controllers
 
                 //Determine reverse ranking, 
                 //Add teams with Rank 1 to 4.
-                HashSet<string> topFour = GetTopFour(standings);                
+                HashSet<string> topFour = GetTopFour(standings);
 
-                for(int i=0; i < standings.Count; i++)
+                for (int i = 0; i < standings.Count; i++)
                 {
                     if (topFour.Contains(standings[i].teamFullName))
                     {
@@ -382,13 +382,13 @@ namespace cricpredict.Controllers
 
             int prevPoints = -1;
             int prevRank = -1;
-            for(int i = 0; i < standings.Count; i++)
+            for (int i = 0; i < standings.Count; i++)
             {
-                if(standings[i].W*2 != prevPoints)
+                if (standings[i].W * 2 != prevPoints)
                 {
                     prevPoints = standings[i].W * 2;
                     prevRank = standings.Count - i;
-                    rank.Add(standings[i].teamFullName, prevRank);                    
+                    rank.Add(standings[i].teamFullName, prevRank);
                 }
                 else
                 {
@@ -396,7 +396,7 @@ namespace cricpredict.Controllers
                 }
             }
 
-            foreach(string team in rank.Keys)
+            foreach (string team in rank.Keys)
             {
                 if (rank[team] <= 4)
                     topFour.Add(team);
@@ -419,12 +419,12 @@ namespace cricpredict.Controllers
             dup.Reverse();
             return dup;
         }
-        
+
 
         internal void RefreshStats(IPL18Controller iPL18Controller)
         {
             RefreshBatsmenStats(iPL18Controller);
-            RefreshBowlersStats(iPL18Controller);            
+            RefreshBowlersStats(iPL18Controller);
         }
 
         private void RefreshBowlersStats(IPL18Controller iPL18Controller)
@@ -465,7 +465,7 @@ namespace cricpredict.Controllers
                     toBeWritten.Add(BowlersStats[i].team);
                 }
                 System.IO.File.WriteAllText(iPL18Controller.Server.MapPath("~/Content/IPL/Data/BowlersStats.txt"), string.Join(",", toBeWritten.ToArray()));
-                
+
             }
         }
 
@@ -521,11 +521,11 @@ namespace cricpredict.Controllers
             else if (this.NRR != other.NRR)
                 return (int)Math.Round(this.NRR * 10000 - other.NRR * 10000);
             else
-                return this.teamFullName.CompareTo(other.teamFullName);            
+                return this.teamFullName.CompareTo(other.teamFullName);
         }
         public TeamStandings(string teamFullName, int W, double NRR)
         {
-            this.teamFullName = teamFullName; this.W = W; this.NRR = NRR; 
+            this.teamFullName = teamFullName; this.W = W; this.NRR = NRR;
         }
     }
 
@@ -535,8 +535,8 @@ namespace cricpredict.Controllers
         public string innings;
         public string runs;
         public string highScore;
-        public string avg; 
-        public string strikeRate; 
+        public string avg;
+        public string strikeRate;
         public string team;
 
         public PlayerBattingStats(string name, string innings, string runs, string highScore, string avg, string strikeRate, string team)
@@ -547,14 +547,14 @@ namespace cricpredict.Controllers
             this.highScore = highScore;
             this.avg = avg;
             this.strikeRate = strikeRate;
-            this.team = team.Substring(1,team.Length-2);
+            this.team = team.Substring(1, team.Length - 2);
         }
 
         public int CompareTo(PlayerBattingStats other)
         {
             bool isThisInt; bool isOtherInt;
 
-            try { int t = int.Parse(this.runs); isThisInt = true; } catch{ isThisInt = false; }
+            try { int t = int.Parse(this.runs); isThisInt = true; } catch { isThisInt = false; }
             try { int t = int.Parse(other.runs); isOtherInt = true; } catch { isOtherInt = false; }
 
             if (isThisInt && isOtherInt)
@@ -597,7 +597,7 @@ namespace cricpredict.Controllers
             try { int w = int.Parse(this.wickets); thisWicketInt = true; } catch { thisWicketInt = false; }
             try { int w = int.Parse(other.wickets); otherWicketInt = true; } catch { otherWicketInt = false; }
 
-            if(thisWicketInt && otherWicketInt)
+            if (thisWicketInt && otherWicketInt)
             {
                 if (int.Parse(this.wickets) != int.Parse(other.wickets))
                 {
@@ -629,7 +629,7 @@ namespace cricpredict.Controllers
                     else if (thisEconFloat)
                         return 1;
                     else if (otherEconFloat)
-                        return -1; 
+                        return -1;
                     else
                         return this.name.CompareTo(other.name);
                 }
@@ -640,7 +640,7 @@ namespace cricpredict.Controllers
             }
             else if (otherWicketInt)
             {
-                return -1; 
+                return -1;
             }
             else
             {
