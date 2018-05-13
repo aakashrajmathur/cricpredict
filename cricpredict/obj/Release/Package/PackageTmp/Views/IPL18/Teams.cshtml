@@ -2,12 +2,15 @@
     ViewBag.Title = "Team";
 }
 
+
 <nav class="blue darken-1">
     <div class="container">
         <div class="nav-wrapper">
             <ul class="left">
                 <li><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
                 <li class="active"><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+                <li><a href='@Url.Action("Graph", "IPL18")'>Graph</a></li>
+                <li><a href='@Url.Action("Caps", "IPL18")'>Caps</a></li>
             </ul>
         </div>
     </div>
@@ -316,7 +319,7 @@
 <div id="modal3" class="modal">
     <div class="modal-content">
         <h4>Frequently Asked Questions</h4>
-        <p>A bunch of text</p>
+        <p>Content under development</p>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -723,7 +726,7 @@
                 if (currentTeamIndex[0]*1 == i*4+j*1) {
                     content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
                 } else {
-                    content += "<div class=\"col s3 z-depth-2 center hoverable \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                    content += "<div class=\"col s3 z-depth-2 center hoverable white \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
                 }
                 content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\" style=\"font-weight: bold\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
                 content += "</div>";

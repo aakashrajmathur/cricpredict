@@ -21,7 +21,7 @@ namespace cricpredict.Controllers
             try
             {
                 await SendEmail("aakashrajmathur@gmail.com", htmlContent);
-                //SendEmail("ursdevesh@gmail.com");
+                await SendEmail("ursdevesh@gmail.com", htmlContent);
                 return true;
             }
             catch {

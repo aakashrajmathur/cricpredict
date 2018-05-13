@@ -119,7 +119,7 @@
     var gameInfoJS = [];
     var playoffPercJS = [];
     var gameData = [];
-    var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
+    var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
     var inputGraphDataJS = []; 
 
     window.onload = function () {
@@ -192,7 +192,7 @@
     }
 
     function GetShortTeamName(longTeamName) {
-        if (longTeamName == "Kings XI Punjab") return "KXIP";
+        if (longTeamName == "Kings XI Punjab") return "KP";
         if (longTeamName == "Chennai Super Kings") return "CSK";
         if (longTeamName == "Kolkata Knight Riders") return "KKR";
         if (longTeamName == "Sunrisers Hyderabad") return "SRH";
@@ -232,7 +232,7 @@
         data.addColumn('number', 'Game');
         data.addColumn('number', 'CSK');
         data.addColumn('number', 'DD');
-        data.addColumn('number', 'KXIP');
+        data.addColumn('number', 'KP');
         data.addColumn('number', 'KKR');
         data.addColumn('number', 'MI');
         data.addColumn('number', 'RR');

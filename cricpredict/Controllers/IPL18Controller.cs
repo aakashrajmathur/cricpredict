@@ -186,7 +186,7 @@ namespace cricpredict.Controllers
         private string GetGraphData(List<string> playoffPerc)
         {
             List<string> result = new List<string>();
-            string[] teamOrder = { "CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH" };
+            string[] teamOrder = { "CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH" };
             
             //List<string> rows = new List<string>();
             //List<string> header = new List<string>();
@@ -223,7 +223,7 @@ namespace cricpredict.Controllers
 
         private string GetLongTeamName(string longTeamName)
         {
-            if (longTeamName == "KXIP") return "Kings XI Punjab";
+            if (longTeamName == "KP") return "Kings XI Punjab";
             if (longTeamName == "CSK") return "Chennai Super Kings";
             if (longTeamName == "KKR") return "Kolkata Knight Riders";
             if (longTeamName == "SRH") return "Sunrisers Hyderabad";

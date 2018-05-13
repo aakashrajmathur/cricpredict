@@ -188,7 +188,7 @@
     var origPlayoffPercJS = [];
 
     var teamFullNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "MUMBAI INDIANS", "RAJASTHAN ROYALS", "ROYAL CHALLENGERS BANGALORE", "SUNRISERS HYDERABAD"];
-    var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
+    var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
     var weekShortTitle = ["Apr 7 - Apr 15","Apr 16 - Apr 22","Apr 23 - Apr 29","Apr 30 - May 6","May 7 - May 13","May 14 - May 20"];
     var weekFullTitle = ["WEEK 1 (Apr 7 - Apr 15)","WEEK 2 (Apr 16 - Apr 22)","WEEK 3 (Apr 23 - Apr 29)","WEEK 4 (Apr 30 - May 6)","WEEK 5 (May 7 - May 13)","WEEK 6 (May 14 - May 20)"];
     var backgroundColor = ["yellow", "red lighten-2", "red", "deep purple lighten-1", "light blue", "indigo lighten-2", "red accent-4", "deep orange"];
@@ -717,7 +717,7 @@
     }
 
     function GetLongTeamName(shortTeamName) {
-        if (shortTeamName == "KXIP") return "Kings XI Punjab";
+        if (shortTeamName == "KP") return "Kings XI Punjab";
         if (shortTeamName == "CSK") return "Chennai Super Kings";
         if (shortTeamName == "KKR") return "Kolkata Knight Riders";
         if (shortTeamName == "SRH") return "Sunrisers Hyderabad";
@@ -728,7 +728,7 @@
     }
 
     function GetShortTeamName(longTeamName) {
-        if (longTeamName == "Kings XI Punjab") return "KXIP";
+        if (longTeamName == "Kings XI Punjab") return "KP";
         if (longTeamName == "Chennai Super Kings") return "CSK";
         if (longTeamName == "Kolkata Knight Riders") return "KKR";
         if (longTeamName == "Sunrisers Hyderabad") return "SRH";
