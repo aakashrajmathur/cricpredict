@@ -43,6 +43,29 @@ namespace cricpredict.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Teams(string suggestions)
+        {
+            if (suggestions != null)
+            {
+                if (suggestions.Length > 0)
+                {
+                    string filePath = Server.MapPath("~/Content/SuggestionsAndComments.txt");
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, true))
+                    {
+                        //write to the file
+                        sw.WriteLine(suggestions);
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("");
+
+                        new EmailActions().SendEmailsAsync(suggestions);
+                    }
+                }
+            }
+            if (RouteData.Values["id"] != null) { ViewData["id"] = RouteData.Values["id"].ToString(); } else { ViewData["id"] = -1; }
+            ViewData["PlayerInfo"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayerInfo.txt"));
+            return View();
+        }
 
         public ActionResult Auction()
         {
@@ -94,8 +117,6 @@ namespace cricpredict.Controllers
             return View();
         }
 
-
-
         public ActionResult Graph()
         {
             int startingGameIndex = 30;
@@ -113,11 +134,52 @@ namespace cricpredict.Controllers
                 }
                 gameIndex++;
             }
-
+            playoffPerc.Reverse();
             ViewData["GraphData"] = GetGraphData(playoffPerc);
 
             ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
             ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));            
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Graph(string suggestions)
+        {
+            if (suggestions != null)
+            {
+                if (suggestions.Length > 0)
+                {
+                    string filePath = Server.MapPath("~/Content/SuggestionsAndComments.txt");
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, true))
+                    {
+                        //write to the file
+                        sw.WriteLine(suggestions);
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("");
+
+                        new EmailActions().SendEmailsAsync(suggestions);
+                    }
+                }
+            }
+
+            int startingGameIndex = 30;
+            int gameIndex = startingGameIndex;
+            List<string> playoffPerc = new List<string>();
+            while (true)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + gameIndex + ".txt")))
+                {
+                    playoffPerc.Add(gameIndex + "," + System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc_After_" + gameIndex + ".txt")));
+                }
+                else
+                {
+                    break;
+                }
+                gameIndex++;
+            }
+            ViewData["GraphData"] = GetGraphData(playoffPerc);
+            ViewData["GamesWisePlayoffPercentages"] = string.Join("|", playoffPerc.ToArray());
+            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
             return View();
         }
 
@@ -203,5 +265,29 @@ namespace cricpredict.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Caps(string suggestions)
+        {
+            if (suggestions != null)
+            {
+                if (suggestions.Length > 0)
+                {
+                    string filePath = Server.MapPath("~/Content/SuggestionsAndComments.txt");
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, true))
+                    {
+                        //write to the file
+                        sw.WriteLine(suggestions);
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("");
+
+                        new EmailActions().SendEmailsAsync(suggestions);
+                    }
+                }
+            }
+
+            ViewData["BatsmenStats"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/BatsmenStats.txt"));
+            ViewData["BowlersStats"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/BowlersStats.txt"));
+            return View();
+        }
     }
 }

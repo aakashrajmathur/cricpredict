@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Graph";
+}
+<nav class="teal">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul class="left">                
+                <li><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
+                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+                <li class="active"><a href='@Url.Action("Graph", "IPL18")'>Graph</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@{
+    string inputGamesWisePlayoffPercentages = (string)ViewData["GamesWisePlayoffPercentages"];
+    string inputGraphData = (string)ViewData["GraphData"];
+    string inputResults = (string)ViewData["Results"];
+}
+
+<div class="container">
+    <div class="row">
+        <div id="curve_chart" class="col s12 center-align" style="height:500px"></div>
+        <div id="graphDataTable" class="col s12"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    var elem = document.querySelector('.collapsible.expandable.gamePercs');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+
+    var gameInfoJS = [];
+    var playoffPercJS = [];
+    var gameData = [];
+    var teamShortNames = ["CSK", "DD", "KXIP", "KKR", "MI", "RR", "RCB", "SRH"];
+    var inputGraphDataJS = []; 
+
+    window.onload = function () {
+        var resultsTokens = '@inputResults'.split('|');
+        var gameCounter = 1;
+        for (i = 0; i < resultsTokens.length; i = i + 10) {
+            gameInfoJS.push({ "GameNo": gameCounter, "HomeTeamName": resultsTokens[i], "AwayTeamName": resultsTokens[i + 1], "Where": resultsTokens[i + 2], "When": resultsTokens[i + 3], "Week": resultsTokens[i + 4], "Completed": resultsTokens[i + 5], "WinnerTeamName": resultsTokens[i + 6], "WinnerScore": resultsTokens[i + 7], "HomeScore": resultsTokens[i + 8], "AwayScore": resultsTokens[i + 9] });
+            gameCounter++;
+        }
+
+        var playoffPercTokens = '@inputGamesWisePlayoffPercentages'.split('|');
+        //alert(playoffPercTokens[0]);
+        for (i = 0; i < playoffPercTokens.length; i++) {
+            var tokens = playoffPercTokens[i].split(',');
+            for (j = 1; j < playoffPercTokens.length; j = j + 3) {
+                playoffPercJS.push({ "GameNo": playoffPercTokens[0], "TeamShortName": GetShortTeamName(playoffPercTokens[j]), "playoffPerc": playoffPercTokens[j + 1], "status": playoffPercTokens[j + 2] });
+            }
+        }
+
+        inputGraphDataJS = '@inputGraphData'.split(",");
+        //alert(playoffPercJS.length);
+        document.getElementById('graphDataTable').innerHTML = GetGraphDataTable();
+    }
+
+    function GetGraphDataTable() {
+
+        var content = "";
+
+        content += "<table>";
+        content += "  <thead>";
+        content += "    <tr>";
+        content += "        <th>Game</th>";
+
+        for (i = 0; i < teamShortNames.length; i++) {
+            content += "        <th>" + teamShortNames[i] + "</th>";
+        }
+        content += "    </tr>";
+        content += "  </thead>";
+
+        content += "  <tbody>";
+
+
+        //alert(playoffPercJS.length);
+        for (gameIndex = 9; gameIndex < inputGraphDataJS.length; gameIndex += 9) {
+            
+            content += "<tr>";
+            content += "<td>" + inputGraphDataJS[gameIndex] + "</td>";
+            for (teamIndex = 0; teamIndex < teamShortNames.length; teamIndex++) {
+                content += "<td>" + inputGraphDataJS[gameIndex+1 + teamIndex] + "</td>";
+            }
+            content += "</tr>";
+        }
+
+        //for (row = 0; row < inputGamesWisePlayoffPercentages.length; row = i + 9) {
+        //    for (j = i; j < 9; j++) {
+        //        content += "    <tr>";
+        //        content += "      <td>" + inputGamesWisePlayoffPercentages[row + j]+"</td>";
+        //        content += "    </tr>";
+        //    }
+        //}
+
+        content += "  </tbody>";
+        content += "</table>";
+
+        return content;
+    }
+
+    function GetShortTeamName(longTeamName) {
+        if (longTeamName == "Kings XI Punjab") return "KXIP";
+        if (longTeamName == "Chennai Super Kings") return "CSK";
+        if (longTeamName == "Kolkata Knight Riders") return "KKR";
+        if (longTeamName == "Sunrisers Hyderabad") return "SRH";
+        if (longTeamName == "Royal Challengers Bangalore") return "RCB";
+        if (longTeamName == "Rajasthan Royals") return "RR";
+        if (longTeamName == "Mumbai Indians") return "MI";
+        if (longTeamName == "Delhi Daredevils") return "DD";
+    }
+
+    function FindObjectByTwoKeys(array, key1, value1, key2, value2) {
+        for (var i = 0; i < array.length; i++) {
+            if ((array[i][key1].localeCompare(value1) == 0) && (array[i][key2].localeCompare(value2) == 0)) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value1 + " & " + value2 + " not found!");
+        return null;
+    }
+
+    function FindObjectByKey(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][key].localeCompare(value) == 0) {
+                return array[i];
+            }
+        }
+        alert("Error: " + value + " not found!");
+        return null;
+    }
+
+    google.charts.load('current', { 'packages': ['line'] });
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Game');
+        data.addColumn('number', 'CSK');
+        data.addColumn('number', 'DD');
+        data.addColumn('number', 'KXIP');
+        data.addColumn('number', 'KKR');
+        data.addColumn('number', 'MI');
+        data.addColumn('number', 'RR');
+        data.addColumn('number', 'RCB');
+        data.addColumn('number', 'SRH');
+
+        var dataG = [];
+        for (i = 9; i < inputGraphDataJS.length; i = i + 9) {
+            var temp = [parseFloat(inputGraphDataJS[i]), parseFloat(inputGraphDataJS[i + 1]), parseFloat(inputGraphDataJS[i + 2]), parseFloat(inputGraphDataJS[i + 3]), parseFloat(inputGraphDataJS[i + 4]), parseFloat(inputGraphDataJS[i + 5]), parseFloat(inputGraphDataJS[i + 6]), parseFloat(inputGraphDataJS[i + 7]), parseFloat(inputGraphDataJS[i + 8])];
+            dataG.push(temp);
+        }
+        data.addRows(dataG);
+
+        var options = {
+            chart: {
+                title: 'Percentage change of each team making the playoffs',
+                subtitle: 'charted from Game 30 onwards'
+            },
+            height: 500
+        };
+        var chart = new google.charts.Line(document.getElementById('curve_chart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    function GetResultsContentForGame(i) {
+        var content = "";
+        if (gameInfoJS[i].Completed == "false") {
+
+            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].HomeTeamName) + "\">";
+            content += "        <div class=\"row\">";
+            content += "            <div class=\"col m4 hide-on-small-only center-align\">";
+            content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].HomeTeamName + ".png\" height=\"50\" >";
+            content += "            </div>";
+            content += "            <div class=\"col s6 right-align blue-grey-text\" style=\"font-weight: bold\">" + GetShortTeamName(gameInfoJS[i].HomeTeamName) + "</div>";
+            content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
+            content += "                <label>";
+
+            if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].HomeTeamName) {
+                content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Home\" checked=\"checked\" onclick=\"ChangeSelection(id)\" />";
+            }
+            else {
+                content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Home\" onclick=\"ChangeSelection(id)\" />";
+            }
+            content += "                    <span></span>";
+            content += "                </label>";
+            content += "            </div>                            ";
+            content += "        </div>";
+            content += "    </a>";
+
+            content += "    <div style=\"float:left;width:8%;\"><h6 class=\"center-align blue-grey-text\" style=\"padding-top:18px\">VS</h6></div>";
+
+
+            content += "    <a style=\"float:left;width:46%; padding-top:10px; padding-bottom:10px; height:75px \" class=\"waves-effect waves-light btn-large z-depth-5 disabled " + GetBackgroundColor(gameInfoJS[i].AwayTeamName) + " \">";
+            content += "        <div class=\"row\">";
+            content += "            <div class=\"col s4 m2\" style=\"padding-top:8px\">";
+            content += "                <label>";
+            if (gameInfoJS[i].WinnerTeamName == gameInfoJS[i].AwayTeamName) {
+                content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Away\" checked=\"checked\" onclick=\"ChangeSelection(id)\" />";
+            }
+            else {
+                content += "                    <input type=\"checkbox\" id = \"game_" + gameInfoJS[i].GameNo + "_Away\" onclick=\"ChangeSelection(id)\" />";
+            }
+            content += "                    <span></span>";
+            content += "                </label>";
+            content += "            </div>";
+            content += "            <div class=\"col s6 left-align blue-grey-text\" style=\"font-weight: bold\" >" + GetShortTeamName(gameInfoJS[i].AwayTeamName) + "</div>";
+            content += "            <div class=\"col m4 hide-on-small-only center-align\">";
+            content += "                <img src=\"/Content/IPL/Logos/" + gameInfoJS[i].AwayTeamName + ".png\" height=\"50\">";
+            content += "            </div>";
+            content += "        </div>";
+            content += "    </a>";
+            content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\" >" + gameInfoJS[i].When + "</p>";
+            content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+            content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\" >" + gameInfoJS[i].Where + "</p>";
+
+            content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"right-align blue-grey-text\">" + gameInfoJS[i].HomeScore + "</p>";
+            content += "    <p style=\"float:left; width:5%; margin: 0; padding: 0\" class=\"right-align white-text\">.</p>";
+            content += "    <p style=\"float:left; width:47.5%; margin: 0; padding: 0\" class=\"left-align blue-grey-text\">" + gameInfoJS[i].AwayScore + "</p>";
+
+            content += "    <hr style=\"float:left; width:100%\" class=\"left\" />";
+            return content;
+        }
+    }
+
+
+</script>

@@ -1,0 +1,803 @@
+﻿@{
+    ViewBag.Title = "Team";
+}
+
+<nav class="blue darken-1">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a href='@Url.Action("Predictions", "IPL18")'>Predictions</a></li>
+                <li class="active"><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br />
+
+<div class="container">
+    <div id="teamsLogos">
+
+    </div>
+   
+    <div class="row">
+        <div class="col s4">
+            <h6 class="left-align black-text" id="playerCountLabel">0 players selected</h6>
+        </div>
+        <div class="col s8 right-align">
+            <a class="waves-effect waves-light btn modal-trigger blue darken-1" href="#modal1"><i class="material-icons left">share</i>Share your team</a>
+        </div>
+    </div>
+    <div class="center-align" id="teamName"></div>
+    <div class="row" id="players">
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" style="margin-top:-335px" />  Batsmen</h5>
+            <ul class="collapsible expandable batsmen" id="batsmen"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/bat.png" height="24" /><img src="~/Content/IPL/Logos/ball.png" height="24" />  All Rounders</h5>
+            <ul class="collapsible expandable allrounders" id="allrounders"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/wk.png" height="24" />  Wicket Keepers</h5>
+            <ul class="collapsible expandable wicketkeepers" id="wicketkeepers"></ul>
+        </div>
+        <div class="col s12 m6 l3">
+            <h5><img src="~/Content/IPL/Logos/ball.png" height="24" />  Bowlers</h5>
+            <ul class="collapsible expandable bowlers" id="bowlers"></ul>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn direction-top" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons right">share</i></a>
+</div>
+
+<p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
+<input type="text" value="" id="inputCopyText" style="height:0px; border:0px">
+
+@{
+    string id = ViewData["id"].ToString();
+    string playerInfo = (string)ViewData["PlayerInfo"];
+
+    List<string> CSK_Bat = new List<string>();
+    List<string> CSK_AR = new List<string>();
+    List<string> CSK_WK = new List<string>();
+    List<string> CSK_Bowl = new List<string>();
+
+    List<string> KP_Bat = new List<string>();
+    List<string> KP_AR = new List<string>();
+    List<string> KP_WK = new List<string>();
+    List<string> KP_Bowl = new List<string>();
+
+    List<string> KKR_Bat = new List<string>();
+    List<string> KKR_AR = new List<string>();
+    List<string> KKR_WK = new List<string>();
+    List<string> KKR_Bowl = new List<string>();
+
+    List<string> MI_Bat = new List<string>();
+    List<string> MI_AR = new List<string>();
+    List<string> MI_WK = new List<string>();
+    List<string> MI_Bowl = new List<string>();
+
+    List<string> DD_Bat = new List<string>();
+    List<string> DD_AR = new List<string>();
+    List<string> DD_WK = new List<string>();
+    List<string> DD_Bowl = new List<string>();
+
+    List<string> SRH_Bat = new List<string>();
+    List<string> SRH_AR = new List<string>();
+    List<string> SRH_WK = new List<string>();
+    List<string> SRH_Bowl = new List<string>();
+
+    List<string> RR_Bat = new List<string>();
+    List<string> RR_AR = new List<string>();
+    List<string> RR_WK = new List<string>();
+    List<string> RR_Bowl = new List<string>();
+
+    List<string> RCB_Bat = new List<string>();
+    List<string> RCB_AR = new List<string>();
+    List<string> RCB_WK = new List<string>();
+    List<string> RCB_Bowl = new List<string>();
+
+    string[] tokens = playerInfo.Split('|');
+    for (int i = 0; i < tokens.Length; i = i + 8)
+    {
+        if (tokens[i] == "Royal Challengers Bangalore")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                RCB_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                RCB_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                RCB_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                RCB_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Delhi Daredevils")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                DD_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                DD_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                DD_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                DD_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Sunrisers Hyderabad")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                SRH_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                SRH_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                SRH_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                SRH_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Kings XI Punjab")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                KP_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                KP_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                KP_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                KP_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Rajasthan Royals")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                RR_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                RR_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                RR_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                RR_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Kolkata Knight Riders")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                KKR_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                KKR_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                KKR_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                KKR_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Mumbai Indians")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                MI_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                MI_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                MI_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                MI_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+        else if (tokens[i] == "Chennai Super Kings")
+        {
+            if (tokens[i + 1] == "batsman")
+            {
+                CSK_Bat.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "allrounder")
+            {
+                CSK_AR.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "wicketkeeper")
+            {
+                CSK_WK.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+            else if (tokens[i + 1] == "bowler")
+            {
+                CSK_Bowl.Add(tokens[i + 2] + "|" + tokens[i + 3] + "|" + tokens[i + 4] + "|" + tokens[i + 5] + "|" + tokens[i + 6] + "|" + tokens[i + 7]);
+            }
+        }
+    }
+}
+
+<!-- Modal Trigger -->
+<div style="background-color:#1e88e5;padding:20px">
+    <div class="container">
+        <div class="row">
+
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal2">Privacy</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal3">FAQ</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal4">About</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal5">Suggestions</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="container">
+            <h5>SHARE WITH OTHERS</h5>
+            <br />
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input value="" id="sharableLink" type="text" readonly>
+                    <label class="active" for="first_name2">Sharable Link</label>
+                </div>
+
+
+                <div class="col s12 center">
+                    <a id="facebookButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Facebook</a>
+                    <a id="twitterButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Twitter</a>
+                    <a id="whatsappButton" class="btn-small blue darken-1" style="margin:10px" href="" data-action="share/whatsapp/share" target="_blank">Share via Whatsapp</a>
+
+                </div>
+            </div>
+            <span class="helper-text blue-grey-text">Our app never tracks or saves your social media account information.</span>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">DONE</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h4>Privacy Policy</h4>
+        <p>Content under development</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <h4>Frequently Asked Questions</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <h4>About</h4>
+        <p>CricPredict is a sports analysis platform. We analyze possible outcomes of future games in a tournament and compute the mathematical percentage chance for each team to make it to the playoffs.</p>
+        <p>Additionally, users can check out how the standings change when a team wins an upcoming game. The user can select either team to win an upcoming game, and as the winner of an upcoming game changes we refresh the projected standings to reflect the change.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <h4>Suggestions & Comments</h4>
+        <div class="row">
+            <form class="col s12" method="post">
+                <div class="row">
+                    <div class="input-field col s10">
+                        <i class="material-icons prefix" style="color:#1e88e5">mode_edit</i>
+                        <textarea name="suggestions" id="icon_prefix2" class="materialize-textarea"></textarea>
+                        <label for="icon_prefix2">Suggestions & Comments</label>
+                    </div>
+                    <div class="col s2">
+                        <button class="btn-large waves-effect waves-light white" type="submit" name="action" style="margin-top:10px">
+                            <i class="material-icons large" style="color:#1e88e5">send</i>
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+    //ab CDe fgh i j K l M n opq rst uvw xyz
+    var teamNames = ["CHENNAI SUPER KINGS", "DELHI DAREDEVILS", "KINGS XI PUNJAB", "KOLKATA KNIGHT RIDERS", "MUMBAI INDIANS", "RAJASTHAN ROYALS", "ROYAL CHALLENGERS BANGALORE", "SUNRISERS HYDERABAD"];
+    //var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad"];
+    var teamShortNames = ["CSK", "DD", "KP", "KKR", "MI", "RR", "RCB", "SRH"];
+    var currentTeamIndex = [0];
+
+    var counter = 0;
+
+    var elemsModal = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elemsModal, {});
+
+
+    var elem = document.querySelector('.collapsible.expandable.batsmen');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+    var elem = document.querySelector('.collapsible.expandable.allrounders');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+    var elem = document.querySelector('.collapsible.expandable.wicketkeepers');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+    var elem = document.querySelector('.collapsible.expandable.bowlers');
+    var instance = M.Collapsible.init(elem, {
+        accordion: false
+    });
+
+    document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+
+    function GenerateLinks() {
+        document.getElementById("sharableLink").value = GetLink();
+        document.getElementById("whatsappButton").setAttribute("href", "whatsapp://send?text=CricPredict - Check out my IPL playing eleven http%3A%2F%2Fcricpredict.online%2FIPL18%2FTeams%2F" + GetTeamAndPlayerSelection());
+        document.getElementById("twitterButton").setAttribute("href", "http://twitter.com/share?text=CricPredict - Check out my IPL playing eleven&url=" + GetLink() + "&hashtags=VIVOIPL,IPLT20CricPredict,IPL,IPLCricket");
+        document.getElementById("facebookButton").setAttribute("href", "https://www.facebook.com/sharer/sharer.php?quote=CricPredict - Check out my IPL playing eleven&u=" + GetLink() +"&picture=http://cricpredict.online/content/logos/CricPredictLogo128.png");
+    }
+
+    function PlayerSelectionChanged() {
+        var total = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        M.toast({ html: total + ' players selected.', displayLength: 2000 });
+        if(total == 1)
+            document.getElementById("playerCountLabel").innerHTML = total + " player selected";
+        else
+            document.getElementById("playerCountLabel").innerHTML = total + " players selected";
+
+        GenerateLinks();
+    }
+
+    function TeamSelectionChanged(id) {
+        currentTeamIndex[0] = id;
+        document.getElementById('teamsLogos').innerHTML = GetTeamsLogosContent();
+
+        document.getElementById("teamName").innerHTML = "<h5 class=\"black-text\">" + teamNames[id] + "</h5>";
+        document.getElementById("batsmen").innerHTML = GetBatsmenInnerHTML(teamShortNames[id]);
+        document.getElementById("allrounders").innerHTML = GetAllRoundersInnerHTML(teamShortNames[id]);
+        document.getElementById("wicketkeepers").innerHTML = GetWicketKeepersInnerHTML(teamShortNames[id]);
+        document.getElementById("bowlers").innerHTML = GetBowlersInnerHTML(teamShortNames[id]);
+
+        GenerateLinks();
+    }
+
+    function GetBatsmenInnerHTML(teamShortName) {
+        counter = 0;
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
+            var arJS = '@string.Join("|", CSK_AR.ToArray())';
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var batJS = '@string.Join("|", DD_Bat.ToArray())';
+            var arJS = '@string.Join("|", DD_AR.ToArray())';
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var batJS = '@string.Join("|", KP_Bat.ToArray())';
+            var arJS = '@string.Join("|", KP_AR.ToArray())';
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
+            var arJS = '@string.Join("|", KKR_AR.ToArray())';
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var batJS = '@string.Join("|", MI_Bat.ToArray())';
+            var arJS = '@string.Join("|", MI_AR.ToArray())';
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var batJS = '@string.Join("|", RR_Bat.ToArray())';
+            var arJS = '@string.Join("|", RR_AR.ToArray())';
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
+            var arJS = '@string.Join("|", RCB_AR.ToArray())';
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
+            var arJS = '@string.Join("|", SRH_AR.ToArray())';
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var batsmen = batJS.split('|');
+        for (i = 0; i < batsmen.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + batsmen[i] + "</span>";
+            if (batsmen[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + batsmen[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetAllRoundersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var batJS = '@string.Join("|", CSK_Bat.ToArray())';
+            var arJS = '@string.Join("|", CSK_AR.ToArray())';
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var batJS = '@string.Join("|", DD_Bat.ToArray())';
+            var arJS = '@string.Join("|", DD_AR.ToArray())';
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var batJS = '@string.Join("|", KP_Bat.ToArray())';
+            var arJS = '@string.Join("|", KP_AR.ToArray())';
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var batJS = '@string.Join("|", KKR_Bat.ToArray())';
+            var arJS = '@string.Join("|", KKR_AR.ToArray())';
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var batJS = '@string.Join("|", MI_Bat.ToArray())';
+            var arJS = '@string.Join("|", MI_AR.ToArray())';
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var batJS = '@string.Join("|", RR_Bat.ToArray())';
+            var arJS = '@string.Join("|", RR_AR.ToArray())';
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var batJS = '@string.Join("|", RCB_Bat.ToArray())';
+            var arJS = '@string.Join("|", RCB_AR.ToArray())';
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var batJS = '@string.Join("|", SRH_Bat.ToArray())';
+            var arJS = '@string.Join("|", SRH_AR.ToArray())';
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var players = arJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetWicketKeepersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var wkJS = '@string.Join("|", CSK_WK.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var wkJS = '@string.Join("|", DD_WK.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var wkJS = '@string.Join("|", KP_WK.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var wkJS = '@string.Join("|", KKR_WK.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var wkJS = '@string.Join("|", MI_WK.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var wkJS = '@string.Join("|", RR_WK.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var wkJS = '@string.Join("|", RCB_WK.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var wkJS = '@string.Join("|", SRH_WK.ToArray())';
+        }
+
+        var players = wkJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetBowlersInnerHTML(teamShortName) {
+        var content = "";
+
+        if (teamShortName == "CSK") {
+            var bowlJS = '@string.Join("|", CSK_Bowl.ToArray())';
+        }
+        else if (teamShortName == "DD") {
+            var bowlJS = '@string.Join("|", DD_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KP") {
+            var bowlJS = '@string.Join("|", KP_Bowl.ToArray())';
+        }
+        else if (teamShortName == "KKR") {
+            var bowlJS = '@string.Join("|", KKR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "MI") {
+            var bowlJS = '@string.Join("|", MI_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RR") {
+            var bowlJS = '@string.Join("|", RR_Bowl.ToArray())';
+        }
+        else if (teamShortName == "RCB") {
+            var bowlJS = '@string.Join("|", RCB_Bowl.ToArray())';
+        }
+        else if (teamShortName == "SRH") {
+            var bowlJS = '@string.Join("|", SRH_Bowl.ToArray())';
+        }
+
+        var players = bowlJS.split('|');
+        for (i = 0; i < players.length; i = i + 6) {
+            content += "	    <li>";
+            content += "	        <div class=\"collapsible-header\">";
+            content += "	            <label><input type=\"checkbox\" id=" + GetPlayerId(counter++) + " onchange=\"PlayerSelectionChanged()\" /><span></span></label>";
+            content += "	            <span style=\"font-size:16px\">" + players[i] + "</span>";
+            if (players[i + 5] == "true") {
+                content += "	            <img src=\"/Content/IPL/Logos/plane.png\" height=\"18\" style=\"margin-top:5px; padding-left:10px\"/>";
+            }
+            content += "	        </div>";
+            content += "	        <div class=\"collapsible-body\"><span>";
+            content += "<div class=\"collection\">";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 2] + "</span>Bat</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 3] + "</span>Bowl</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 4] + "</span>Salary</a>";
+            content += "	<a href=\"#!\" class=\"collection-item\"><span class=\"badge\">" + players[i + 1] + "</span>Country</a>";
+            content += "</div>";
+            content += "             </span></div>";
+            content += "    	</li>";
+        }
+
+        return content;
+    }
+
+    function GetPlayerId(digit) {
+        var paddedNumber = ("0" + digit).slice(-2);
+        return paddedNumber;
+    }
+
+    function GetColor(i, j) {
+        if (i * 4 + j * 1 == 0)
+            return "yellow";
+        else if (i * 4 + j * 1 == 1)
+            return "red lighten-2";
+        else if (i * 4 + j * 1 == 2)
+            return "red";
+        else if (i * 4 + j * 1 == 3)
+            return "deep purple lighten-1";
+        else if (i * 4 + j * 1 == 4)
+            return "light blue";
+        else if (i * 4 + j * 1 == 5)
+            return "indigo lighten-2";
+        else if (i * 4 + j * 1 == 6)
+            return "red accent-4";
+        else if (i * 4 + j * 1 == 7)
+            return "deep orange";
+    }
+
+    function GetTeamsLogosContent()
+    {
+        //var teamNames = ["Chennai Super Kings", "Delhi Daredevils", "Kings XI Punjab", "Kolkata Knight Riders", "Mumbai Indians", "Rajasthan Royals", "Royal Challengers Bangalore", "SunRisers Hyderabad"];
+
+        var content = "";
+        content += "<div class=\"row\">";
+
+        for (i = 0; i < 2; i++)
+        {
+            content += "<div class=\"col s12 m6\">";
+            content += "<div class=\"row\">";
+            for (j = 0; j < 4; j++) {
+                if (currentTeamIndex[0]*1 == i*4+j*1) {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable " + GetColor(i, j) + " \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                } else {
+                    content += "<div class=\"col s3 z-depth-2 center hoverable white \" style=\"height:115px\" id = " + (i * 4 + j * 1) + " onclick=TeamSelectionChanged(id) >";
+                }
+                content += "<div><img src=\"/Content/IPL/Logos/" + teamNames[i * 4 + j * 1] + ".png\" style=\"max-width:100%; padding-top:20px\"> <p class=\"black-text\" style=\"font-weight: bold\">" + teamShortNames[i * 4 + j * 1] + "</p></div>";
+                content += "</div>";
+            }
+            content += "</div>";
+            content += "</div>";
+        }
+        content += "</div>";
+        return content;
+    }
+
+    //to start out with the first team.
+
+    if (@id  == -1) {
+        TeamSelectionChanged("0");
+    }
+    else {        
+        var id = '@id';
+
+        //First digit = team index.
+        TeamSelectionChanged(id.substr(0, 1));
+
+        var total = 0;
+        for (i = 1; i < id.length; i = i + 2) {
+            var token = id.substr(i, 2);
+            document.getElementById(token).checked = true;
+            total++;
+        }
+        //Update Player Selected count. 
+        if (total == 1)
+            document.getElementById("playerCountLabel").innerHTML = total + " player selected";
+        else
+            document.getElementById("playerCountLabel").innerHTML = total + " players selected";
+
+        GenerateLinks();
+    }
+
+    function GetTeamAndPlayerSelection() {
+        var selection = currentTeamIndex;
+        for (i = 0; i < 99; i++) {
+            if (document.getElementById(GetPlayerId(i))) {
+                if (document.getElementById(GetPlayerId(i)).checked) {
+                    selection += GetPlayerId(i);
+                }
+            }
+        }
+        return selection;
+    }
+
+    function GetLink() {        
+        var link = "http://cricpredict.online/ipl18/teams/";
+        link += GetTeamAndPlayerSelection();
+        return link;
+    }
+
+    function ShareClicked() {        
+        //Generate the URL 
+        var link = GetLink();
+
+        CopyToClipBoard(link);
+
+        //Display a toast 
+        M.toast({ html: 'Sharable link copied into clipboard.', displayLength: 4000 });
+    }
+
+    function CopyToClipBoard(link) {        
+        var copyText = document.getElementById("inputCopyText");
+        copyText.value = link;
+        /* Select the text field */
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("Copy");        
+    }
+
+</script>
+
