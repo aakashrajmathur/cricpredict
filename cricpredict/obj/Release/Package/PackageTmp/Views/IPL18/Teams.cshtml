@@ -53,36 +53,6 @@
     <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons right">share</i></a>
 </div>
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <div class="container">
-            <h5>SHARE WITH OTHERS</h5>
-            <br />
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">link</i>
-                    <input value="" id="sharableLink" type="text" readonly>
-                    <label class="active" for="first_name2">Sharable Link</label>
-                </div>
-
-
-                <div class="col s12 center">
-                    <a id="facebookButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Facebook</a>
-                    <a id="twitterButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Twitter</a>
-                    <a id="whatsappButton" class="btn-small blue darken-1" style="margin:10px" href="" data-action="share/whatsapp/share" target="_blank" >Share via Whatsapp</a>
-                    
-                </div>
-            </div>
-            <span class="helper-text blue-grey-text">Our app never tracks or saves your social media account information.</span>
-
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">DONE</a>
-        </div>
-    </div>
-</div>
-
 <p class="center-align grey-text" style="font-size:10px">Click on a player to view more info.  Click on logo to view player info.</p>
 <input type="text" value="" id="inputCopyText" style="height:0px; border:0px">
 
@@ -288,6 +258,108 @@
     }
 }
 
+<!-- Modal Trigger -->
+<div style="background-color:#1e88e5;padding:20px">
+    <div class="container">
+        <div class="row">
+
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal2">Privacy</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal3">FAQ</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal4">About</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal5">Suggestions</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="container">
+            <h5>SHARE WITH OTHERS</h5>
+            <br />
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input value="" id="sharableLink" type="text" readonly>
+                    <label class="active" for="first_name2">Sharable Link</label>
+                </div>
+
+
+                <div class="col s12 center">
+                    <a id="facebookButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Facebook</a>
+                    <a id="twitterButton" class="btn-small blue darken-1" style="margin:10px" href="" target="_blank">Share via Twitter</a>
+                    <a id="whatsappButton" class="btn-small blue darken-1" style="margin:10px" href="" data-action="share/whatsapp/share" target="_blank">Share via Whatsapp</a>
+
+                </div>
+            </div>
+            <span class="helper-text blue-grey-text">Our app never tracks or saves your social media account information.</span>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">DONE</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h4>Privacy Policy</h4>
+        <p>Content under development</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <h4>Frequently Asked Questions</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <h4>About</h4>
+        <p>CricPredict is a sports analysis platform. We analyze possible outcomes of future games in a tournament and compute the mathematical percentage chance for each team to make it to the playoffs.</p>
+        <p>Additionally, users can check out how the standings change when a team wins an upcoming game. The user can select either team to win an upcoming game, and as the winner of an upcoming game changes we refresh the projected standings to reflect the change.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <h4>Suggestions & Comments</h4>
+        <div class="row">
+            <form class="col s12" method="post">
+                <div class="row">
+                    <div class="input-field col s10">
+                        <i class="material-icons prefix" style="color:#1e88e5">mode_edit</i>
+                        <textarea name="suggestions" id="icon_prefix2" class="materialize-textarea"></textarea>
+                        <label for="icon_prefix2">Suggestions & Comments</label>
+                    </div>
+                    <div class="col s2">
+                        <button class="btn-large waves-effect waves-light white" type="submit" name="action" style="margin-top:10px">
+                            <i class="material-icons large" style="color:#1e88e5">send</i>
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">
@@ -301,12 +373,8 @@
 
     var counter = 0;
 
-   // var elem = document.querySelector('.fixed-action-btn');
-    //var instance = M.FloatingActionButton.init(elem, {});
-
-    //var instance = M.FloatingActionButton.getInstance(elem);
-    var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, {});
+    var elemsModal = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elemsModal, {});
 
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');

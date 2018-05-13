@@ -101,6 +101,80 @@
     </div>
 </div>
 
+<!-- Modal Trigger -->
+<div style="background-color:#1e88e5;padding:20px" >
+    <div class="container">
+        <div class="row">
+            
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal1">Privacy</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal2">FAQ</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal3">About</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal4">Suggestions</a></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Privacy Policy</h4><br />
+        <p>Content under development</p><br />
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h4>Frequently Asked Questions</h4><br /> 
+        <p>Content under development</p><br />
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <h4>About</h4><br />
+        <p>CricPredict is a sports analysis platform. We analyze possible outcomes of future games in a tournament and compute the mathematical percentage chance for each team to make it to the playoffs.</p>
+        <p>Additionally, users can check out how the standings change when a team wins an upcoming game. The user can select either team to win an upcoming game, and as the winner of an upcoming game changes we refresh the projected standings to reflect the change.</p>
+        <br />
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <h4>Suggestions & Comments</h4><br />
+        <div class="row">
+            <form class="col s12" method="post">
+                <div class="row">
+                    <div class="input-field col s10">
+                        <i class="material-icons prefix" style="color:#1e88e5">mode_edit</i>
+                        <textarea name="suggestions" id="icon_prefix2" class="materialize-textarea blue-grey-text"></textarea>
+                        <label for="icon_prefix2">Suggestions & Comments</label>
+                    </div>
+                    <div class="col s2">
+                            <button class="btn-large waves-effect waves-light white" type="submit" name="action" style="margin-top:10px">                                
+                                <i class="material-icons large" style="color:#1e88e5">send</i>
+                            </button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>        
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
 <script type="text/javascript">
     var currentWeek = [0];
     var currentTeamIndex = [0];
@@ -117,7 +191,12 @@
     var weekFullTitle = ["WEEK 1 (Apr 7 - Apr 15)","WEEK 2 (Apr 16 - Apr 22)","WEEK 3 (Apr 23 - Apr 29)","WEEK 4 (Apr 30 - May 6)","WEEK 5 (May 7 - May 13)","WEEK 6 (May 14 - May 20)"];
     var backgroundColor = ["yellow", "red lighten-2", "red", "deep purple lighten-1", "light blue", "indigo lighten-2", "red accent-4", "deep orange"];
 
+    
     window.onload = function () {
+        
+        var elemsModal = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elemsModal, {});
+        
         currentWeek[0] = '@inputWeek';
 
         var playoffPercTokens = '@inputPlayoffPrec'.split(',');

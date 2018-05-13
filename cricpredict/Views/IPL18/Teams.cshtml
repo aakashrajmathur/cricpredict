@@ -258,6 +258,19 @@
     }
 }
 
+<!-- Modal Trigger -->
+<div style="background-color:#1e88e5;padding:20px">
+    <div class="container">
+        <div class="row">
+
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal2">Privacy</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal3">FAQ</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal4">About</a></div>
+            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal5">Suggestions</a></div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -287,21 +300,6 @@
         </div>
     </div>
 </div>
-
-
-<!-- Modal Trigger -->
-<div style="background-color:#1e88e5;padding:20px">
-    <div class="container">
-        <div class="row">
-
-            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal2">Privacy</a></div>
-            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal3">FAQ</a></div>
-            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal4">About</a></div>
-            <div class="col s3 center-align"><a class="modal-trigger white-text" style="font-size:large" href="#modal5">Suggestions</a></div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Modal Structure -->
 <div id="modal2" class="modal">
@@ -375,12 +373,8 @@
 
     var counter = 0;
 
-   // var elem = document.querySelector('.fixed-action-btn');
-    //var instance = M.FloatingActionButton.init(elem, {});
-
-    //var instance = M.FloatingActionButton.getInstance(elem);
-    var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, {});
+    var elemsModal = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elemsModal, {});
 
 
     var elem = document.querySelector('.collapsible.expandable.batsmen');

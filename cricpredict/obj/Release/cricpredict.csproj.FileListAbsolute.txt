@@ -70,3 +70,6 @@ C:\src\cricpredict\cricpredict\bin\Antlr3.Runtime.pdb
 C:\src\cricpredict\cricpredict\bin\Newtonsoft.Json.xml
 C:\src\cricpredict\cricpredict\obj\Release\cricpredict.dll
 C:\src\cricpredict\cricpredict\obj\Release\cricpredict.pdb
+C:\src\cricpredict\cricpredict\bin\SendGrid.dll
+C:\src\cricpredict\cricpredict\bin\SendGrid.pdb
+C:\src\cricpredict\cricpredict\bin\SendGrid.xml
