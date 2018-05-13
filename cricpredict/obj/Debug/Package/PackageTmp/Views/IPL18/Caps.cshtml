@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Caps";
+
+    string batsmen = (string)ViewData["BatsmenStats"];
+    string bowlers = (string)ViewData["BowlersStats"];
+}
+
+<div class="container">
+
+
+
+    <dic class="row">
+        <div class="col s12 m6">
+            <div class="card-panel orange center-align">
+                <h5>ORANGE CAP</h5>
+            </div>
+            <ul class="collection" id="batsmenContent">
+                
+            </ul>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card-panel deep-purple center-align">
+                <h5 class="white-text">PURPLE CAP</h5>
+            </div>
+            <ul class="collection" id="bowlersContent">                
+            </ul>
+        </div>
+    </dic>
+</div>
+
+
+<script type="text/javascript">
+    var batsmenJS = [];
+    var bowlersJS = [];
+
+    window.onload = function () {
+        batsmenJS = '@batsmen'.split(",");
+        bowlersJS = '@bowlers'.split(",");
+        document.getElementById("batsmenContent").innerHTML = GetBatsmenContent();       
+        document.getElementById("bowlersContent").innerHTML = GetBowlersContent();       
+    }
+
+    function GetBatsmenContent() {
+        var content = "";
+
+        content += "<li class=\"collection-item avatar\">";
+        content += "<img src=\"images/yuna.jpg\" alt=\"\" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+        content += "</li>";
+        return content;
+    }
+
+    function GetBowlersContent() {
+        var content = "";
+
+        content += "<li class=\"collection-item avatar\">";
+        content += "<img src=\"images/yuna.jpg\" alt=\"\" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+        content += "</li>"
+
+        return content;
+    }
+        @*
+        var content = "";
+
+        content += "<img src=\"images/yuna.jpg\" alt="" class=\"circle\">";
+        content += "<span class=\"title\">Title</span>";
+        content += "<p>";
+        content += "    First Line <br>";
+        content += "    Second Line";
+        content += "</p>";
+        content += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">grade</i></a>";
+
+        return content;
+    }*@
+</script>
