@@ -1,1 +1,1 @@
-1024,Sunrisers Hyderabad,1024,Chennai Super Kings,1020,Kings XI Punjab,586,Kolkata Knight Riders,354,Rajasthan Royals,202,Mumbai Indians,174,Royal Challengers Bangalore,14,Delhi Daredevils,0
+512,Sunrisers Hyderabad,512,Chennai Super Kings,512,Kings XI Punjab,302,Kolkata Knight Riders,178,Rajasthan Royals,178,Mumbai Indians,10,Royal Challengers Bangalore,6,Delhi Daredevils,0

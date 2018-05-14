@@ -256,7 +256,7 @@ namespace cricpredict.Controllers
                 toBeWritten.Add(pair.Key);
                 raw.Add(pair.Value.ToString());
                 double value = (pair.Value * 100.0) / count;
-                toBeWritten.Add(value.ToString("0.00"));
+                toBeWritten.Add(value.ToString("0.0"));
                 double prevValue = prevPerc[pair.Key];
 
                 if (prevValue < value)
