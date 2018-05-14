@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Predictions";
 }
 
@@ -195,17 +194,17 @@
 
     
     window.onload = function () {
-        
         var elemsModal = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elemsModal, {});
         
         currentWeek[0] = '@inputWeek';
 
         var playoffPercTokens = '@inputPlayoffPrec'.split(',');
+
         for (i = 0; i < playoffPercTokens.length; i = i + 3) {
             origPlayoffPercJS.push({ "TeamName": playoffPercTokens[i], "Perc": playoffPercTokens[i + 1], "Change":playoffPercTokens[i+2] });
         }
-
+        
 
         document.getElementById('weeklySelection').innerHTML = GetWeeklySelectionContent();
         document.getElementById('weeklySelectionBottom').innerHTML = GetWeeklySelectionBottomContent();
@@ -250,8 +249,7 @@
         //Sort the predictStandingJS on pts, w, current RR
         SortStandings(predictStandingJS);
         document.getElementById("predictionsTableBody").innerHTML = GetPredictionsTableBody();
-
-        UpdateGamesAndResults();
+        UpdateGamesAndResults();        
     }
 
     function PrevClicked() {
