@@ -393,7 +393,7 @@
 
         //determine if this is user's first selection
         isFirstSelection = (gameInfoJS[tokens[1] * 1 - 1].WinnerTeamName == "");
-        alert("Is first selection? "+ isFirstSelection);
+        //alert("Is first selection? "+ isFirstSelection);
 
         //determine if the id was checked or unchecked:
         var checked = false;
@@ -440,18 +440,27 @@
 
         //
         var winnerObj = FindObjectByKey(predictStandingJS, "LongTeamName", winner);
-        winnerObj.W++;
-        winnerObj.L--;
-        winnerObj.Pts += 2;
-
         var loserObj = FindObjectByKey(predictStandingJS, "LongTeamName", loser);
-        loserObj.W--;
-        loserObj.L++;
-        loserObj.Pts -= 2;
+
+        
+        
 
         if (isFirstSelection) {
             winnerObj.P++;
+            winnerObj.W++; 
+            winnerObj.Pts += 2;
+
             loserObj.P++;
+            loserObj.L++;
+        }
+        else {
+            winnerObj.L--;
+            winnerObj.Pts += 2;
+            winnerObj.W++;
+
+            loserObj.W--;
+            loserObj.L++;
+            loserObj.Pts -= 2;
         }
 
         //Sort and Redraw standings
