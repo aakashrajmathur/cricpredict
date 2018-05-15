@@ -15,7 +15,7 @@ namespace cricpredict.Controllers
             ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
             ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
             ViewData["PlayoffPerc"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));            
-            return View("Predictions");
+            return View("RaceToPlayoffs");
         }
 
         public ActionResult Games()
@@ -80,6 +80,43 @@ namespace cricpredict.Controllers
             ViewData["SRH"] = System.IO.File.ReadAllLines(Server.MapPath("~/Content/IPL/Auction/Sunrisers Hyderabad.txt"));
             return View();
         }
+
+        public ActionResult RaceToPlayoffs()
+        {
+            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
+            ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
+            ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            ViewData["PlayoffPerc"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RaceToPlayoffs(string suggestions)
+        {
+            if (suggestions != null)
+            {
+                if (suggestions.Length > 0)
+                {
+                    string filePath = Server.MapPath("~/Content/SuggestionsAndComments.txt");
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, true))
+                    {
+                        //write to the file
+                        sw.WriteLine(suggestions);
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("");
+
+                        new EmailActions().SendEmailsAsync(suggestions);
+                    }
+                }
+            }
+
+            ViewData["Results"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Results.txt"));
+            ViewData["Standings"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Standings.txt"));
+            ViewData["Defaults"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/Defaults.txt"));
+            ViewData["PlayoffPerc"] = System.IO.File.ReadAllText(Server.MapPath("~/Content/IPL/Data/PlayoffPerc.txt"));
+            return View();
+        }
+
 
         public ActionResult Predictions()
         {            

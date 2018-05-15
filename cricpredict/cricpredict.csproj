@@ -260,6 +260,7 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\IPL18\Caps.cshtml" />
+    <Content Include="Views\IPL18\RaceToPlayoffs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

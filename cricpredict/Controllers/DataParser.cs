@@ -149,7 +149,7 @@ namespace cricpredict.Controllers
                         if ((!results[i + 3].ToUpper().Contains("WON BY")) && ((results[i + 3].Contains("Match scheduled to begin")) || (results[i + 4].Contains("Live")) || (results[i + 5].Contains("Live"))))
                         {
                             futureGame = "true";
-                            winner = homeTeamFullName;
+                            winner = "";//homeTeamFullName;
                         }
                         else
                         {
@@ -256,7 +256,10 @@ namespace cricpredict.Controllers
                 toBeWritten.Add(pair.Key);
                 raw.Add(pair.Value.ToString());
                 double value = (pair.Value * 100.0) / count;
-                toBeWritten.Add(value.ToString("0.0"));
+                if ((value > 99.95) && (value < 100.0))
+                    toBeWritten.Add(">99.9");
+                else
+                    toBeWritten.Add(value.ToString("0.0"));
                 double prevValue = prevPerc[pair.Key];
 
                 if (prevValue < value)
