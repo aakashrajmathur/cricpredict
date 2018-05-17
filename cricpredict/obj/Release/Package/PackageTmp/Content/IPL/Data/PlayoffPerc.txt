@@ -1,1 +1,1 @@
-Sunrisers Hyderabad,100,SAME,Chennai Super Kings,100,UP,Kings XI Punjab,58.984375,UP,Kolkata Knight Riders,34.765625,UP,Rajasthan Royals,34.765625,UP,Mumbai Indians,1.953125,DOWN,Royal Challengers Bangalore,1.171875,DOWN,Delhi Daredevils,0,SAME
+Sunrisers Hyderabad,100.0,SAME,Chennai Super Kings,100.0,SAME,Kings XI Punjab,36.7,DOWN,Kolkata Knight Riders,35.2,UP,Rajasthan Royals,35.2,UP,Mumbai Indians,3.9,UP,Royal Challengers Bangalore,2.3,UP,Delhi Daredevils,0.0,SAME

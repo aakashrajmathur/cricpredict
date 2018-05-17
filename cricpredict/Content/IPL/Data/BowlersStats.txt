@@ -1,1 +1,1 @@
-AJ Tye,12,20,4/34,19.25,8.02,14.4,Kings XI Punjab,HH Pandya,11,18,3/24,16.83,8.74,11.5,Mumbai Indians,UT Yadav,12,17,3/23,21.29,8.01,15.9,Royal Challengers Bangalore,TA Boult,12,15,2/21,27.53,9.24,17.8,Delhi Daredevils,Mujeeb Ur Rahman,11,14,3/27,20.64,6.99,17.7,Kings XI Punjab
+AJ Tye,13,24,4/16,16.70,7.71,13.0,Kings XI Punjab,HH Pandya,12,18,3/24,19.16,8.92,12.8,Mumbai Indians,UT Yadav,12,17,3/23,21.29,8.01,15.9,Royal Challengers Bangalore,JJ Bumrah,13,16,3/15,21.43,6.86,18.7,Mumbai Indians,SP Narine,13,15,3/18,25.40,7.77,19.6,Kolkata Knight Riders

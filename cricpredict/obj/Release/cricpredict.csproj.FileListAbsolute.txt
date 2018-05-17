@@ -73,3 +73,4 @@ C:\src\cricpredict\cricpredict\obj\Release\cricpredict.pdb
 C:\src\cricpredict\cricpredict\bin\SendGrid.dll
 C:\src\cricpredict\cricpredict\bin\SendGrid.pdb
 C:\src\cricpredict\cricpredict\bin\SendGrid.xml
+C:\src\cricpredict\cricpredict\obj\Release\cricpredict.csprojResolveAssemblyReference.cache
