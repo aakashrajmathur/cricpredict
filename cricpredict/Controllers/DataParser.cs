@@ -241,16 +241,16 @@ namespace cricpredict.Controllers
             }
             standings.Sort();
             standings.Reverse();
-            Dictionary<string, int> playoffCount = GetPlayoffCount_Definite(standings, homeTeam, awayTeam, 0);
+            Dictionary<string, double> playoffCount = GetPlayoffCount_Shared(standings, homeTeam, awayTeam, 0);
 
-            List<KeyValuePair<string, int>> sorted = (from kv in playoffCount orderby kv.Value select kv).ToList();
+            List<KeyValuePair<string, double>> sorted = (from kv in playoffCount orderby kv.Value select kv).ToList();
             sorted.Reverse();
 
             List<string> toBeWritten = new List<string>();
             List<string> raw = new List<string>();
             raw.Add(count.ToString());
             //toBeWritten.Add(count.ToString());
-            foreach (KeyValuePair<string, int> pair in sorted)
+            foreach (KeyValuePair<string, double> pair in sorted)
             {
                 raw.Add(pair.Key);
                 toBeWritten.Add(pair.Key);
@@ -329,7 +329,7 @@ namespace cricpredict.Controllers
                 return mergedRes;
             }
         }
-
+        /*
         Dictionary<string, int> GetPlayoffCount_Definite(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
         {
             if (homeTeam.Count == pointer)
@@ -339,7 +339,15 @@ namespace cricpredict.Controllers
 
                 //Determine reverse ranking, 
                 //Add teams with Rank 1 to 4.
-                HashSet<string> topFour = GetTopFour(standings);
+                Dictionary<string, int> reverseRank = GetReverseRanks(standings);
+
+                //Top 4
+                List<String> topFour = new List<string>();
+                foreach (string team in reverseRank.Keys)
+                {
+                    if (reverseRank[team] <= 4)
+                        topFour.Add(team);
+                }
 
                 for (int i = 0; i < standings.Count; i++)
                 {
@@ -375,10 +383,89 @@ namespace cricpredict.Controllers
                 return mergedRes;
             }
         }
-
-        private HashSet<string> GetTopFour(List<TeamStandings> standings)
+        */
+        Dictionary<string, double> GetPlayoffCount_Shared(List<TeamStandings> standings, List<string> homeTeam, List<string> awayTeam, int pointer)
         {
-            HashSet<string> topFour = new HashSet<string>();
+            if (homeTeam.Count == pointer)
+            {
+                count++;
+                Dictionary<string, double> res = new Dictionary<string, double>();
+
+                //Determine reverse ranking,
+                Dictionary<string, int> reverseRank = GetReverseRanks(standings);
+
+                //Top 4:
+                List<String> topFour = new List<string>();
+                foreach (string team in reverseRank.Keys)
+                {
+                    if (reverseRank[team] <= 4)
+                        topFour.Add(team);
+                }
+
+                //These teams are definetely in the top 4. 
+                for (int i = 0; i < standings.Count; i++)
+                {
+                    if (topFour.Contains(standings[i].teamFullName))
+                    {
+                        res.Add(standings[i].teamFullName, 1);
+                    }
+                    else
+                    {
+                        res.Add(standings[i].teamFullName, 0);
+                    }
+                }
+
+                if (topFour.Count < 4)
+                {
+                    int numberOfSpotsRemaining = (4 - topFour.Count);
+                    int fourthRank = reverseRank[reverseRank.Keys.ElementAt(3)];
+
+
+                    int count = 0;
+                    List<string> fourthRankedTeamNames = new List<string>();
+                    foreach(string team in reverseRank.Keys)
+                    {
+                        if (reverseRank[team] == fourthRank)
+                        {
+                            fourthRankedTeamNames.Add(team);
+                            count++;
+                        }
+                    }
+                    
+                    foreach(string team in fourthRankedTeamNames)
+                    {
+                        res[team] = (double)numberOfSpotsRemaining / count;                        
+                    }
+                }
+
+
+                return res;
+            }
+            else
+            {
+                string home = homeTeam[pointer];
+                //homeTeam.RemoveAt(0);
+                List<TeamStandings> homeStandings = GetStandingsForWinner(standings, home);
+
+                string away = awayTeam[pointer];
+                //awayTeam.RemoveAt(0);
+                List<TeamStandings> awayStandings = GetStandingsForWinner(standings, away);
+
+                Dictionary<string, double> homeRes = GetPlayoffCount_Shared(homeStandings, homeTeam, awayTeam, pointer + 1);
+                Dictionary<string, double> awayRes = GetPlayoffCount_Shared(awayStandings, homeTeam, awayTeam, pointer + 1);
+
+                Dictionary<string, double> mergedRes = new Dictionary<string, double>();
+                foreach (string team in homeRes.Keys)
+                {
+                    mergedRes.Add(team, homeRes[team] + awayRes[team]);
+                }
+                return mergedRes;
+            }
+        }
+
+
+        private Dictionary<string, int> GetReverseRanks(List<TeamStandings> standings)
+        {
             standings.Reverse();
 
             Dictionary<string, int> rank = new Dictionary<string, int>();
@@ -399,13 +486,7 @@ namespace cricpredict.Controllers
                 }
             }
 
-            foreach (string team in rank.Keys)
-            {
-                if (rank[team] <= 4)
-                    topFour.Add(team);
-            }
-
-            return topFour;
+            return rank;
         }
 
         List<TeamStandings> GetStandingsForWinner(List<TeamStandings> standings, string winner)

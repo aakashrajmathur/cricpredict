@@ -1,0 +1,33 @@
+﻿<nav class="blue darken-1">
+    <div class="container">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a href='@Url.Action("RaceToPlayoffs", "IPL18")'>RaceToPlayoffs</a></li>
+                <li><a href='@Url.Action("Teams", "IPL18")'>Teams</a></li>
+                <li><a href='@Url.Action("Graph", "IPL18")'>Graph</a></li>
+                <li><a href='@Url.Action("Caps", "IPL18")'>Caps</a></li>
+                <li class="active"><a href='@Url.Action("Data", "IPL18")'>Data</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h2>Data</h2>
+
+<form method="post">
+    <fieldset>
+        <div>
+            <input type="password" name="Password" value="" />
+        </div>
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="Submit" class="submit" />
+        </div>
+    </fieldset>
+</form>
+
+@{
+    if (IsPost)
+    {
+        @ViewData["status"]
+    }
+}
