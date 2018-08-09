@@ -1,1 +1,1 @@
-KL Rahul,13,652,95*,59.27,160.98,Kings XI Punjab,KS Williamson,13,625,84,62.50,140.44,Sunrisers Hyderabad,RR Pant,12,582,128*,52.90,179.62,Delhi Daredevils,JC Buttler,13,548,95*,54.80,155.24,Rajasthan Royals,AT Rayudu,12,535,100*,48.63,152.85,Chennai Super Kings
+KS Williamson,17,735,84,52.50,142.44,Sunrisers Hyderabad,RR Pant,14,684,128*,52.61,173.60,Delhi Daredevils,KL Rahul,14,659,95*,54.91,158.41,Kings XI Punjab,AT Rayudu,16,602,100*,43.00,149.75,Chennai Super Kings,SR Watson,15,555,117*,39.64,154.59,Chennai Super Kings

@@ -42,6 +42,7 @@ C:\src\cricpredict\cricpredict\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 C:\src\cricpredict\cricpredict\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\src\cricpredict\cricpredict\bin\Microsoft.Web.Infrastructure.dll
 C:\src\cricpredict\cricpredict\bin\Newtonsoft.Json.dll
+C:\src\cricpredict\cricpredict\bin\SendGrid.dll
 C:\src\cricpredict\cricpredict\bin\System.Diagnostics.DiagnosticSource.dll
 C:\src\cricpredict\cricpredict\bin\System.Web.Helpers.dll
 C:\src\cricpredict\cricpredict\bin\System.Web.Mvc.dll
@@ -58,6 +59,9 @@ C:\src\cricpredict\cricpredict\bin\Microsoft.AI.Web.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AI.WindowsServer.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\src\cricpredict\cricpredict\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\src\cricpredict\cricpredict\bin\Newtonsoft.Json.xml
+C:\src\cricpredict\cricpredict\bin\SendGrid.pdb
+C:\src\cricpredict\cricpredict\bin\SendGrid.xml
 C:\src\cricpredict\cricpredict\bin\System.Diagnostics.DiagnosticSource.xml
 C:\src\cricpredict\cricpredict\bin\System.Web.Helpers.xml
 C:\src\cricpredict\cricpredict\bin\System.Web.Mvc.xml
@@ -67,10 +71,8 @@ C:\src\cricpredict\cricpredict\bin\System.Web.WebPages.xml
 C:\src\cricpredict\cricpredict\bin\System.Web.WebPages.Deployment.xml
 C:\src\cricpredict\cricpredict\bin\System.Web.WebPages.Razor.xml
 C:\src\cricpredict\cricpredict\bin\Antlr3.Runtime.pdb
-C:\src\cricpredict\cricpredict\bin\Newtonsoft.Json.xml
 C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.dll
 C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.pdb
-C:\src\cricpredict\cricpredict\bin\SendGrid.dll
-C:\src\cricpredict\cricpredict\bin\SendGrid.pdb
-C:\src\cricpredict\cricpredict\bin\SendGrid.xml
-C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.csprojResolveAssemblyReference.cache
+C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.csprojAssemblyReference.cache
+C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.csproj.CoreCompileInputs.cache
+C:\src\cricpredict\cricpredict\obj\Debug\cricpredict.csproj.CopyComplete
